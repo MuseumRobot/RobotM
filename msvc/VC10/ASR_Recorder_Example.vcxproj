@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\background.bmp" />
+    <None Include="..\..\..\开始导航按钮.bmp" />
+    <None Include="..\..\..\开始讲解按钮.bmp" />
+    <None Include="..\..\..\机器人界面（1）\交互暂停.bmp" />
+    <None Include="..\..\..\机器人界面（1）\博物馆.bmp" />
+    <None Include="..\..\..\机器人界面（1）\博物馆2.bmp" />
+    <None Include="..\..\..\机器人界面（1）\开始说话.bmp" />
+    <None Include="..\..\..\机器人美化2.0\src\res\开始说话.bmp" />
+    <None Include="..\..\src\ASR_Recorder_Example.aps" />
+    <None Include="..\..\src\ReadMe.txt" />
+    <None Include="..\..\src\res\background.bmp" />
+    <None Include="..\..\src\res\eye.bmp" />
+    <None Include="..\..\src\res\HIT.bmp" />
+    <None Include="..\..\src\res\Recorder_Example.rc2" />
+    <None Include="..\..\src\res\robotHIT.ico" />
+    <None Include="..\..\src\res\shiyanshi.bmp" />
+    <None Include="..\..\src\res\Untitled.smf" />
+    <None Include="..\..\src\res\上.bmp" />
+    <None Include="..\..\src\res\下.bmp" />
+    <None Include="..\..\src\res\交互暂停.bmp" />
+    <None Include="..\..\src\res\介绍.bmp" />
+    <None Include="..\..\src\res\博物馆.bmp" />
+    <None Include="..\..\src\res\博物馆2.bmp" />
+    <None Include="..\..\src\res\右.bmp" />
+    <None Include="..\..\src\res\子界面暂停.bmp" />
+    <None Include="..\..\src\res\左.bmp" />
+    <None Include="..\..\src\res\开始说话.bmp" />
+    <None Include="..\..\src\res\播放.bmp" />
+    <None Include="..\..\src\res\暂停.bmp" />
+    <None Include="..\..\src\res\自动导航.bmp" />
+    <None Include="..\..\src\res\语音交互.bmp" />
+    <None Include="..\..\src\res\路线A.bmp" />
+    <None Include="..\..\src\res\路线B.bmp" />
+    <None Include="..\..\src\res\路线C.bmp" />
+    <None Include="..\..\src\res\返回.bmp" />
+    <None Include="..\..\src\res\退出.bmp" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ClassDiagram2.cd" />
+    <None Include="res\eye.bmp" />
+    <None Include="res\HIT.bmp" />
+    <None Include="res\shiyanshi.bmp" />
+    <None Include="res\介绍.bmp" />
+    <None Include="res\子界面暂停.bmp" />
+    <None Include="res\播放.bmp" />
+    <None Include="res\暂停.bmp" />
+    <None Include="res\自动导航.bmp" />
+    <None Include="res\语音交互.bmp" />
+    <None Include="res\路线A.bmp" />
+    <None Include="res\路线B.bmp" />
+    <None Include="res\路线C.bmp" />
+    <None Include="res\返回.bmp" />
+    <None Include="res\退出.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\..\src\ASR_Recorder_Example.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\src\ASR_Recorder_Example.cpp" />
+    <ClCompile Include="..\..\src\ASR_Recorder_ExampleDlg.cpp" />
+    <ClCompile Include="..\..\src\cJSON.cpp" />
+    <ClCompile Include="..\..\src\common\AccountInfo.cpp" />
+    <ClCompile Include="..\..\src\common\CommonTool.cpp" />
+    <ClCompile Include="..\..\src\common\FileReader.cpp" />
+    <ClCompile Include="..\..\src\Comm_data_motor3.cpp" />
+    <ClCompile Include="..\..\src\Comm_data_star.cpp" />
+    <ClCompile Include="..\..\src\Plan_Path_VFH.cpp" />
+    <ClCompile Include="..\..\src\SerialCom.cpp" />
+    <ClCompile Include="..\..\src\stdafx.cpp" />
+    <ClCompile Include="..\..\src\UPURG.cpp" />
+    <ClCompile Include="..\..\src\vfh_algorithm.cpp" />
+    <ClCompile Include="..\..\src\Voice.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\cJSON.h" />
+    <ClInclude Include="..\..\include\Comm_data_motor3.h" />
+    <ClInclude Include="..\..\include\Comm_data_star.h" />
+    <ClInclude Include="..\..\include\hci_micarray.h" />
+    <ClInclude Include="..\..\include\hci_tts.h" />
+    <ClInclude Include="..\..\include\Plan_Path_VFH.h" />
+    <ClInclude Include="..\..\include\SerialCom.h" />
+    <ClInclude Include="..\..\include\UPURG.h" />
+    <ClInclude Include="..\..\include\vfh_algorithm.h" />
+    <ClInclude Include="..\..\src\ASR_Recorder_Example.h" />
+    <ClInclude Include="..\..\src\ASR_Recorder_ExampleDlg.h" />
+    <ClInclude Include="..\..\src\common\AccountInfo.h" />
+    <ClInclude Include="..\..\src\common\CommonTool.h" />
+    <ClInclude Include="..\..\src\common\FileReader.h" />
+    <ClInclude Include="..\..\src\EasySize.h" />
+    <ClInclude Include="..\..\src\resource.h" />
+    <ClInclude Include="..\..\src\stdafx.h" />
+    <ClInclude Include="..\..\src\Voice.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D06FD20E-5764-47EA-BAE9-73DFC9D5EE16}</ProjectGuid>
+    <RootNamespace>ASR_Recorder_Example</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>../../bin/win_x86/</OutDir>
+    <IncludePath>D:\Program Files\OpenCV2.4.4\opencv\build\include;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv2\core;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv2;D:\Program Files\zbar\include;D:\Program Files\zbar\include\zbar;C:\curl-7.25.0\include;C:\curl-7.25.0\include\curl;$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;</IncludePath>
+    <LibraryPath>D:\Program Files\zbar\lib;C:\curl-7.25.0\lib;D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>../../bin/win_x64/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>../../bin/win_x86/</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>../../bin/win_x86/</OutDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include;C:\curl-7.25.0\include;</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../lib/win_x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hci_sys.lib;hci_asr_recorder.lib;hci_tts.lib;hci_tts_player.lib;hci_micarray.lib;opencv_calib3d244d.lib;opencv_contrib244d.lib;opencv_core244d.lib;opencv_features2d244d.lib;opencv_flann244d.lib;opencv_gpu244d.lib;opencv_highgui244d.lib;opencv_imgproc244d.lib;opencv_legacy244d.lib;opencv_ml244d.lib;opencv_nonfree244d.lib;opencv_objdetect244d.lib;opencv_photo244d.lib;opencv_stitching244d.lib;opencv_ts244d.lib;opencv_video244d.lib;opencv_videostab244d.lib;libzbar-0.lib;</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>SkinMagicTrial.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include</AdditionalIncludeDirectories>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>
+      </PrecompiledHeaderOutputFile>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>../../lib/win_x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hci_sys.lib;hci_asr_recorder.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../../lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hci_sys.lib;hci_asr_recorder.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../../include</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>../../lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>hci_sys.lib;hci_asr_recorder.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

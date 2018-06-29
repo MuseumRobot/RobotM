@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="21.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CMotor" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQiAAQAJAACwAGKUECAAEMAARQgAIQASUhYQgwIVCA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Comm_data_motor3.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Cstar" Collapsed="true">
+    <Position X="2.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAkACaUIAAAgEACEwREEBYAAoBIAAUuAACkQDAAACM=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Comm_data_star.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CPlan_Path_VFH" Collapsed="true">
+    <Position X="23.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>tfAFkEhyAr9g1yYEpUPgLBOb2GIaOQ/JbMDSFoJ7GhU=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CSerialCom" Collapsed="true">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAkAAAEAACQAAAAAEAAAAAQBAAAAEEQAgAIAADQAAI=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\SerialCom.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CUPURG" Collapsed="true">
+    <Position X="5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAiAEBAJABDhAACEAIEqAIQKQAAAEAgAQgAIQgZECA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\UPURG.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VFH_Algorithm" Collapsed="true">
+    <Position X="25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>iFZmGCRDRQIiRAECkABkZLiAEEEANAgKytgTDjoUGyU=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\vfh_algorithm.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRecorder_ExampleApp" Collapsed="true">
+    <Position X="25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_Example.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CRecorder_ExampleDlg" Collapsed="true">
+    <Position X="19.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EACAgAGQACEAKAAJBPCgJHAQDGwQQBRCBAQOAEgUGAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccountInfo" Collapsed="true">
+    <Position X="19.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEABIrAAGBAAAACAAAgQQAAABABAAIAAABAAAUAAMAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\common\AccountInfo.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CVoice" Collapsed="true">
+    <Position X="21.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACIAAEAAAQAAAAQBBAAAQAAAAAAAACAAAAIAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\Voice.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HciExampleComon::FileReader" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAgAAAAAABAAAAAAAAAAACAAAAAAAAAAAQAAAAAAI=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\common\FileReader.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="StarMark" Collapsed="true">
+    <Position X="19.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAQAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="threadInfo_laser_data" Collapsed="true">
+    <Position X="21.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="threadInfo_laser_data_postpro" Collapsed="true">
+    <Position X="23.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEACAAAAAAAAIAgAAQAAAAAAAAAAAQAAABgAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="object" Collapsed="true">
+    <Position X="21.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABBAAABAAAAACAAAJAAAAAAAAAACAAAAAAAAAAAhA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\Plan_Path_VFH.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_000c_2" Collapsed="true">
+    <Position X="19.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="__unnamed_struct_000e_1" Collapsed="true">
+    <Position X="17.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\cJSON.cpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="cJSON" Collapsed="true">
+    <Position X="23.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAABAAAAEAACAAAAAAAABgAAAAABAAAIAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\cJSON.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="cJSON_Hooks" Collapsed="true">
+    <Position X="25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\cJSON.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="robotinfo" Collapsed="true">
+    <Position X="25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BSAACAAAAAAEAAIAIAAAGgIAiAACAAQBAAAAAAICAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Comm_data_motor3.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="MICARRAY_WAKE_RESULT_T" Collapsed="true">
+    <Position X="13.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAEACAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_tag_TTS_SYNTH_MARK" Collapsed="true">
+    <Position X="13.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_tts.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="_tag_TTS_SYNTH_RESULT" Collapsed="true">
+    <Position X="9.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAABACAAABEAAAAAAAAAAAAAAABAAAQAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_tts.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="position" Collapsed="true">
+    <Position X="23.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAACAAAAAAAAAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="player_pose" Collapsed="true">
+    <Position X="5.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAACAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="player_position2d_cmd_pos" Collapsed="true">
+    <Position X="9.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAIAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="player_position2d_data" Collapsed="true">
+    <Position X="1.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAIAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="player_position2d_cmd_vel" Collapsed="true">
+    <Position X="9.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAAAAAAEAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="CMDBUF" Collapsed="true">
+    <Position X="19.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\SerialCom.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Beam" Collapsed="true">
+    <Position X="21.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAQAAAAAGAAAAAgAAIAAABAAAAAQA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\UPURG.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="printbuffer" Collapsed="true">
+    <Position X="17.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\cJSON.cpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MicArrayHandle" Collapsed="true">
+    <Position X="21.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MicArraySession" Collapsed="true">
+    <Position X="25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MicArrayParamValue" Collapsed="true">
+    <Position X="23.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_AUDIO_FORMAT_E" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_SAMPLE_RATE_E" Collapsed="true">
+    <Position X="13.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_WAKECHECK_MODE_E" Collapsed="true">
+    <Position X="9.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_WAKESTATUS_E" Collapsed="true">
+    <Position X="5.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_EVENT_E" Collapsed="true">
+    <Position X="1.25" Y="17.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_PARAM_E" Collapsed="true">
+    <Position X="13.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="MICARRAY_WAKE_RESULT" Collapsed="true">
+    <Position X="13.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="hci_micarray_statechange_func" Collapsed="true">
+    <Position X="21.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="hci_micarray_wakeup_func" Collapsed="true">
+    <Position X="19.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="hci_micarray_wakedirection_func" Collapsed="true">
+    <Position X="25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="hci_micarray_voiceready_func" Collapsed="true">
+    <Position X="23.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TTS_SYNTH_MARK" Collapsed="true">
+    <Position X="13.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_tts.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="TTS_SYNTH_RESULT" Collapsed="true">
+    <Position X="9.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_tts.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="Callback_TtsSynth" Collapsed="true">
+    <Position X="19.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_tts.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="player_pose_t" Collapsed="true">
+    <Position X="5.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="player_position2d_cmd_pos_t" Collapsed="true">
+    <Position X="9.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="player_position2d_data_t" Collapsed="true">
+    <Position X="1.25" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="player_position2d_cmd_vel_t" Collapsed="true">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\Plan_Path_VFH.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="AsrRecogType" Collapsed="true">
+    <Position X="5.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Typedef Name="AsrRecogMode" Collapsed="true">
+    <Position X="1.25" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.h</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Enum Name="__unnamed_enum_0004_1" Collapsed="true">
+    <Position X="17.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAACAAAAAAAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0004_2" Collapsed="true">
+    <Position X="13.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0004_3" Collapsed="true">
+    <Position X="9.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAQAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0004_4" Collapsed="true">
+    <Position X="5.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAIABAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="__unnamed_enum_0004_5" Collapsed="true">
+    <Position X="1.25" Y="15.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAwAAAAECAAAAAAAAAQAAAAAgAAhUAEAAAAAAAAEQA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="MICARRAY_PARAM" Collapsed="true">
+    <Position X="13.25" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAQAAAACABABAAAAEgAEACAQUCAAgAAAAoAAAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\include\hci_micarray.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_tag_AsrRecogType" Collapsed="true">
+    <Position X="5.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAEAAAA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="_tag_AsrRecogMode" Collapsed="true">
+    <Position X="1.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAgAAAAAIAAQA=</HashCode>
+      <FileName>F:\机器人\机器人美化2.0\src\ASR_Recorder_ExampleDlg.h</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>
