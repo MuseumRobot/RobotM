@@ -793,11 +793,12 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 	if(isok==0)
 	{
 		++starmust;
+		starnew=0;
 	}
 	else
 	{
 		starmust=0;
-		starnew=0;
+		
 	}
 	if(starmust>6)
 	{
@@ -807,10 +808,10 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 			Info_robot.pointrox = pointrox_stargazerchange;
 			Info_robot.pointroy = pointroy_stargazerchange;
 			Info_robot.pianzhuan = pointroy_jiaoduchange*PIf/180;
-			if(isone==0)
-			{
-				plan.SERVEMODE=4;//机器人停止,已处于未知地址
-			}
+		}
+		else
+		{
+			plan.SERVEMODE=4;//机器人停止,已处于未知地址
 		}
 
 	}

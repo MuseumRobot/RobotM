@@ -861,9 +861,9 @@ if(motor.open_com_motor(COMM_MOTOR)){
 	plan.danger = false;
 	vfh_Scene_scale_x = 20.0;
 	vfh_Scene_scale_y = 20.0;
-	Obstacle_Distance_init = 1000;/////////////////////////初始避障距离设定
+	Obstacle_Distance_init = 1200;/////////////////////////初始避障距离设定
 	delt_Obstacle_Distance_init = 200;
-	free_Obstacle_Distance_init = 1500;
+	free_Obstacle_Distance_init = 1600;
 	dataexchange_key = true;
 	vfh_key = true;
 	motor_key = false;
@@ -2073,13 +2073,13 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 	CString str1;
 	CString strTemp;
 	p_DR->GetDlgItem(IDC_COMBO1)->GetWindowText(str1);
-	if(str1==("世事难料")){
-		strTemp.Format(_T("没有哦"));
+	if(str1==("黑龙江省博物馆开闭馆时间")){
+		strTemp.Format(_T("每周二至周日开馆，周一全天闭馆，节假日除外。冬令时：10月8日-3月31日，9:00至16:00，15:00停止发票。夏令时：4月1日-10月7日，9:00至16:30，15:30停止发票。"));
 	 p = (char*)(LPCTSTR)strTemp;
 	
 	}
-	if(str1==("人间无常")){
-		strTemp.Format(_T("生气了吗"));
+	if(str1==("黑龙江省博物馆有几层，都有哪些展厅")){
+		strTemp.Format(_T("黑龙江省博物馆共有3层。二层展厅主要有“自然陈列”、“黑龙江历史文物陈列”；一层为“黑龙江俄侨文化文物展”、“邓散木艺术专题陈列”、“每月一星”；负一层为“寒暑假特展”、“民俗展览”、“每月一县”三个临时展厅。"));
 		p = (char*)(LPCTSTR)strTemp;
 
 	}

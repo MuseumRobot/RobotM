@@ -1,0 +1,160 @@
+struct StarMark MARK[100]={ //LED定位标签数组
+
+	MARK[0].markID = 2,
+	MARK[0].mark_angle = 0.00,
+	MARK[0].mark_x = 118,
+	MARK[0].mark_y = 183,
+
+
+	MARK[1].markID = 16,
+	MARK[1].mark_angle = 0.00,
+	MARK[1].mark_x = 283,
+	MARK[1].mark_y = 243,
+
+	MARK[2].markID = 32, 
+	MARK[2].mark_angle = 0.00,
+	MARK[2].mark_x = 463,
+	MARK[2].mark_y = 243,
+
+	MARK[3].markID = 18,
+	MARK[3].mark_angle = 0.00,
+	MARK[3].mark_x = 658,
+	MARK[3].mark_y = 168,
+
+	MARK[4].markID = 624,
+	MARK[4].mark_angle = 0.00,
+	MARK[4].mark_x = 193,
+	MARK[4].mark_y = 363,
+
+	MARK[5].markID = 626,
+	MARK[5].mark_angle = 0.00,
+	MARK[5].mark_x = 388,
+	MARK[5].mark_y = 363,
+
+
+	MARK[6].markID = 34,
+	MARK[6].mark_angle = 0.00,
+	MARK[6].mark_x = 598,
+	MARK[6].mark_y = 333,
+
+	MARK[7].markID = 610,
+	MARK[7].mark_angle = 0.00,
+	MARK[7].mark_x = 178,
+	MARK[7].mark_y = 528,
+
+	MARK[8].markID = 608,
+	MARK[8].mark_angle = 0.00,
+	MARK[8].mark_x = 418,
+	MARK[8].mark_y = 513,
+
+	MARK[9].markID = 594,
+	MARK[9].mark_angle = 0.00,
+	MARK[9].mark_x = 658,
+	MARK[9].mark_y = 498,
+
+	MARK[10].markID = 578,
+	MARK[10].mark_angle = 0.00,
+	MARK[10].mark_x = 268,
+	MARK[10].mark_y = 648,
+
+	MARK[11].markID = 592,
+	MARK[11].mark_angle = 0.00,
+	MARK[11].mark_x = 523,
+	MARK[11].mark_y = 618,
+
+	MARK[12].markID = 576,
+	MARK[12].mark_angle = 0.00,
+	MARK[12].mark_x = 178,
+	MARK[12].mark_y = 783,
+
+	MARK[13].markID = 50,
+	MARK[13].mark_angle = 0.00,
+	MARK[13].mark_x = 403,
+	MARK[13].mark_y = 738,
+
+	MARK[14].markID = 562,
+	MARK[14].mark_angle = 0.00,
+	MARK[14].mark_x = 673,
+	MARK[14].mark_y = 768,
+
+	MARK[15].markID = 546,
+	MARK[15].mark_angle = 0.00,
+	MARK[15].mark_x = 283,
+	MARK[15].mark_y = 888,
+
+	MARK[16].markID = 560,
+	MARK[16].mark_angle = 0.00,
+	MARK[16].mark_x = 523,
+	MARK[16].mark_y = 858,
+
+	MARK[17].markID = 528,
+	MARK[17].mark_angle = 0.00,
+	MARK[17].mark_x = 178,
+	MARK[17].mark_y = 963,
+
+	MARK[18].markID = 544,
+	MARK[18].mark_angle = 0.00,
+	MARK[18].mark_x = 422.5,
+	MARK[18].mark_y = 1008,
+
+	MARK[19].markID = 530,
+	MARK[19].mark_angle = 0.00,
+	MARK[19].mark_x = 673,
+	MARK[19].mark_y = 1008,
+
+	MARK[20].markID = 514,
+	MARK[20].mark_angle = 0.00,
+	MARK[20].mark_x = 283,
+	MARK[20].mark_y = 1083,
+
+	MARK[21].markID = 512,
+	MARK[21].mark_angle = 0.00,
+	MARK[21].mark_x = 487,
+	MARK[21].mark_y = 1083,
+
+	MARK[22].markID = 80,
+	MARK[22].mark_angle = 0.00,
+	MARK[22].mark_x = 178,
+	MARK[22].mark_y = 1218,
+
+	MARK[23].markID = 68,
+	MARK[23].mark_angle = 0.00,
+	MARK[23].mark_x = 418,
+	MARK[23].mark_y = 1188,
+
+	MARK[24].markID = 114,
+	MARK[24].mark_angle = 0.00,
+	MARK[24].mark_x = 688,
+	MARK[24].mark_y = 1203,
+
+	MARK[25].markID = 82,
+	MARK[25].mark_angle = 0.00,
+	MARK[25].mark_x = 268,
+	MARK[25].mark_y = 1338,
+
+	MARK[26].markID = 112,
+	MARK[26].mark_angle = 0.00,
+	MARK[26].mark_x = 568,
+	MARK[26].mark_y = 1353,
+
+	MARK[27].markID = 96,
+	MARK[27].mark_angle = 0.00,
+	MARK[27].mark_x = 178,
+	MARK[27].mark_y = 1473,
+
+	MARK[28].markID = 48,
+	MARK[28].mark_angle = 0.00,
+	MARK[28].mark_x = 273,
+	MARK[28].mark_y = 1473,
+
+	MARK[29].markID = 98,
+	MARK[29].mark_angle = 0.00,
+	MARK[29].mark_x = 568,
+	MARK[29].mark_y = 1473,
+
+	MARK[30].markID = 64,
+	MARK[30].mark_angle = 0.00,
+	MARK[30].mark_x = 740.5,
+	MARK[30].mark_y = 1503,
+
+};

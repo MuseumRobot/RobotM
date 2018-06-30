@@ -106,8 +106,8 @@ BOOL CVoice::OnInitDialog()
 	m_btn2.SetFaceColor(RGB(195,209,216));
 	m_btn3.SetFaceColor(RGB(195,209,216));
 	((CComboBox*)GetDlgItem(IDC_COMBO1))->ResetContent();
-	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("世事难料"));
-	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("人间无常"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆开闭馆时间"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆有几层，都有哪些展厅"));
 	// TODO:  在此添加额外的初始化
 
 	//////////////////xhy
