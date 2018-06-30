@@ -1,7 +1,3 @@
-
-// Recorder_ExampleDlg.h : 头文件
-//
-
 #pragma once
 #include "resource.h"
 #include "common/FileReader.h"
@@ -9,42 +5,30 @@
 #include <string>
 #include "afxwin.h"
 #include "hci_tts_player.h"
-
 using std::string;
-
-
-typedef enum _tag_AsrRecogType
-{
+typedef enum _tag_AsrRecogType{
     kRecogTypeUnkown = -1,      //未知类型
     kRecogTypeCloud = 0,        //云端识别
     kRecogTypeLocal,            //本地识别
 }AsrRecogType;
-
-typedef enum _tag_AsrRecogMode
-{
+typedef enum _tag_AsrRecogMode{
     kRecogModeUnkown = -1,      //未知类型
     kRecogModeFreetalk = 0,     //自由说
 	kRecogModeDialog = 2,        //对话
     kRecogModeGrammar,          //语法识别
 }AsrRecogMode;
-
 // CRecorder_ExampleDlg 对话框
-class CRecorder_ExampleDlg : public CDialog
-{
-
+class CRecorder_ExampleDlg : public CDialog{
 // 构造
 public:
 	CRecorder_ExampleDlg(CWnd* pParent = NULL);	// 标准构造函数
-	~CRecorder_ExampleDlg()
-	{ 
+	~CRecorder_ExampleDlg(){ 
 		// 由于在录音机的回调中，使用了Windows窗口，不能在析构函数中反初始化
 		// 必须在窗口有效时，进行反初始化
 		//Uninit(); 
 	}
-
 // 对话框数据
 	enum { IDD = IDD_RECORDER_EXAMPLE_DIALOG };
-
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
 
@@ -64,72 +48,56 @@ public:
 	bool Init();
 	bool Uninit(void);
 	afx_msg void OnBnClickedOk();
-//	CBrush m_Brush;
-//	COLORREF m_TextColor, m_DownColor,m_UpColor;
 	void CRecorder_ExampleDlg::DrawItem(int nIDCtl,LPDRAWITEMSTRUCT lpDrawItemStruct);
 	void  CRecorder_ExampleDlg::ChangeSize(CWnd * pWnd, int cx, int cy);
-	
-	
 public:
     void EchoGrammarData(const string &grammarFile);
-
     static void HCIAPI RecordEventChange(RECORDER_EVENT eRecorderEvent, void *pUsrParam);
-
     static void HCIAPI RecorderRecogFinish(
         RECORDER_EVENT eRecorderEvent,
         ASR_RECOG_RESULT *psAsrRecogResult,
         void *pUsrParam);
-
     static void HCIAPI RecorderRecogProcess(
         RECORDER_EVENT eRecorderEvent,
         ASR_RECOG_RESULT *psAsrRecogResult,
         void *pUsrParam);
-
     static void HCIAPI RecorderErr(
         RECORDER_EVENT eRecorderEvent,
         HCI_ERR_CODE eErrorCode,
         void *pUsrParam);
-
     static void HCIAPI RecorderRecordingCallback(
         unsigned char * pVoiceData,
         unsigned int uiVoiceLen,
         void * pUsrParam
         );
-
 public:
 	void AppendMessage(CString &strMsg);
 	void RecorderRecording(unsigned char * pVoiceData, unsigned int uiVoiceLen);
 	void PostRecorderEventAndMsg(RECORDER_EVENT eRecorderEvent, const CString & strMessage);
-
 private:
     AsrRecogType m_RecogType;
     AsrRecogMode m_RecogMode;
     unsigned int m_GrammarId;
-
 	BOOL m_recordingFlag;
 	FILE * m_recordingFile;
 	CString m_recordingFileName;
 public:
 	afx_msg void OnBnClickedBtnBrowser();
 	afx_msg void OnBnClickedSaveRecording();
-
 	clock_t m_startClock;
 	afx_msg void OnEnChangeEditStatus();
 	afx_msg void OnBnClickedOnlyRecording();
 	afx_msg void OnBnClickedContinue();
 	afx_msg void OnEnChangeEditSaveRecordingFile();
-
 protected:
     static void HCIAPI CB_EventChange(
         _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,
         _OPT_ _IN_ void * pUsrParam);
-
     static void HCIAPI CB_ProgressChange (
         _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,
         _MUST_ _IN_ int nStart,
         _MUST_ _IN_ int nStop,
         _OPT_ _IN_ void * pUsrParam);
-
     static void HCIAPI CB_SdkErr( _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,
         _MUST_ _IN_ HCI_ERR_CODE eErrorCode,
         _OPT_ _IN_ void * pUsrParam );
@@ -143,20 +111,11 @@ public:
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 	afx_msg void OnBnClickedButton7();
 	afx_msg void OnBnClickedButton8();
-//	CButton m_btn_NAV;
-//	CButton m_btn_INDRO;
 	afx_msg void OnEnChangeEditWordlist();
 	afx_msg HBRUSH OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor);
 	afx_msg void OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct);
-//	CFont font;
-//	CButton addr_;
-//	CButton dir_;
-//	CButton m_Button;
 	afx_msg void OnSize(UINT nType, int cx, int cy);
-//	CButton m_IconBtn_up;
 	CMFCButton m_btn1;
-//	CButton m_btn2;
-//	CMFCButton m_btn2;
 	CMFCButton m_btn3;
 	CMFCButton m_btn4;
 	CStatic m_pic1;
@@ -168,13 +127,9 @@ public:
 	afx_msg void OnBnClickedMfcbutton1();
 	afx_msg void OnBnClickedMfcbutton3();
 	afx_msg void OnBnClickedMfcbutton5();
-	
-//	CMFCButton m_btn2;
 	afx_msg void OnBnClickedMfcbutton6();
 	afx_msg void OnBnClickedMfcbutton7();
-//	CButton m_mfcbtn7;
 	afx_msg void OnBnClickedMfccolorbutton1();
-//	virtual INT_PTR DoModal();
 	CMFCButton m_mfcbtn1;
 	CMFCButton m_mfcbtn2;
 	CMFCButton m_mfcbtn3;
@@ -182,14 +137,8 @@ public:
 	CMFCButton m_mfcbtn5;
 	CMFCButton m_mfcbtn6;
 	afx_msg void OnBnClickedMfccolorbutton4();
-//	CMFCColorButton m_colbtn;
-
-
 	afx_msg void OnBnClickedMfcbutton2();
-
 	afx_msg void OnSizing(UINT fwSide, LPRECT pRect);
-//	CButton m_btn7;
-	
 	CMFCButton m_mfcbtn7;
 	CButton m_btn10;
 	CEdit m_edit_status;

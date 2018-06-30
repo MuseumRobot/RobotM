@@ -135,7 +135,7 @@ void CVoice::OnBnClickedMfcbutton3()
 
 void CVoice::OnBnClickedMfcbutton2()
 {
-	// TODO: Add your control notification handler code here
+	
 	if(p_CR!=NULL)
 	{
 		p_CR->OnBnClickedButton9();
@@ -143,7 +143,7 @@ void CVoice::OnBnClickedMfcbutton2()
 }
 void CVoice::OnBnClickedMfcbutton4()
 {
-	// TODO: Add your control notification handler code here
+	
 	if(p_CR!=NULL)
 	{
 		p_CR->OnBnClickedButton11();
