@@ -343,9 +343,9 @@ struct object zhanpin[100]={
 	zhanpin[11].objectnum_x=500,
 	zhanpin[11].objectnum_y=500,
 	zhanpin[11].direct=45,
-	zhanpin[11].time=5000,
+	zhanpin[11].time=42000,
 	zhanpin[11].mode=1,
-	zhanpin[11].contect1="",
+	zhanpin[11].contect1="公元十二世纪初，继渤海国之后，靺鞨后裔女真人再度兴起，定居在阿什河畔的女真完颜部，在首领阿骨打的带领下统一了女真各部,并于1115年建立金朝，定都上京会宁府（今黑龙江省哈尔滨市阿城区白城），成为白山黑水的主宰。进而灭辽和北宋，统治中华大地半壁江山达百余年。金朝最强盛时所辖疆域北至外兴安岭，东北至鄂霍次克海及日本海，东南抵鸭绿江与高丽为邻，西达陕西西北地域与西夏交界，南与南宋以淮河为界，肃慎族系首次入主中原。",
 	zhanpin[11].contect2="",
 	zhanpin[11].contect3="",
 
@@ -363,9 +363,9 @@ struct object zhanpin[100]={
 	zhanpin[13].objectnum_x=500,
 	zhanpin[13].objectnum_y=450,
 	zhanpin[13].direct=180,
-	zhanpin[13].time=5000,
+	zhanpin[13].time=30000,
 	zhanpin[13].mode=1,
-	zhanpin[13].contect1="",
+	zhanpin[13].contect1="这件六耳大铜锅，为金代典型炊具，这种锅在辽代已较流行，金代沿袭并有所发展。在游猎或行军打仗中，需要临时安营扎寨，埋锅造饭，众多的人吃饭需用大锅。而女真人喜欢的食物中，羊、牛、马占有很大比重，他们又习惯煮食大块肉，这种六耳锅恰巧适应了当时的需要。这件大铜锅完整无损，是黑龙江省目前出土的铜锅中较大的一口，对于研究金代冶炼技术的发展有重大价值。请跟我来",
 	zhanpin[13].contect2="这是第一个展品",
 	zhanpin[13].contect3="这是第一个展品",
 
@@ -391,17 +391,67 @@ struct object zhanpin[100]={
 
 	zhanpin[16].objectnum=84,
 	zhanpin[16].objectnum_x=400,
-	zhanpin[16].objectnum_y=450,
+	zhanpin[16].objectnum_y=350,
 	zhanpin[16].direct=0,
-	zhanpin[16].time=5000,
+	zhanpin[16].time=67000,
 	zhanpin[16].mode=1,
-	zhanpin[16].contect1="",
+	zhanpin[16].contect1="金代陶瓷业在中国窑瓷史上是一个不可缺少的组成部分，迁都前在东北地区所生产的陶瓷水平较低，迁都燕京之后在关内生产的陶瓷则有了较大的发展，瓷器造型多承袭宋式的日用器皿，较典型的有双系、三系、四系瓶、系耳罐等，这与女真族的游牧渔猎生活有一定渊源关系。清酒肥羊四系瓶，此瓶瓷质较粗，胎呈米灰色。小口，削肩。肩上附有用于系带的四个桥状耳.大鼓腹.矮圈足。器表绘有简疏、明快的黑色草叶纹和弦纹。中间空白处用黑油横书“清酒肥羊”四个字。这件瓷器从造形、纹饰和文字内容上均带有浓厚的草地游牧生活的气息，是女真传统文化和中原文化相结合的产物。属金代磁州窑系产品。此外还有黑釉玉壶春瓶、黑釉葫芦型小壶。",
 	zhanpin[16].contect2="这是第一个展品",
 	zhanpin[16].contect3="这是第一个展品",
+
+	zhanpin[17].objectnum=85,
+	zhanpin[17].objectnum_x=400,
+	zhanpin[17].objectnum_y=400,
+	zhanpin[17].direct=0,
+	zhanpin[17].time=72000,
+	zhanpin[17].mode=1,
+	zhanpin[17].contect1="中原地区广为流传的历史故事被采用在铜镜上，由此出现了人物故事镜，汉文化对女真人潜移默化的影响可见一斑。金代铜禁政策严厉，为防止铜源流失，遂在新、旧铜镜边缘刻写官府验记文字和押记符号，这是金代铜镜的一个主要特征。金代山水人物故事镜是我国目前保存最为完好的金代铜镜，做工十分精致。镜背图案分为上、下两部分，铜镜采用写实与夸张相结合的艺术手法，构图虽然复杂，但布局合理，工艺精湛，堪称中国金代铜镜的佳作。这面山水人物故事纹铜镜是1975年从中国黑龙江省绥棱县境内的一座金代贵族墓葬中出土的，是女真贵族曾经使用过的一件器物，距今已有千年的历史。铜镜出土时没有锈蚀，而且保存完好，这在传世的中国古代铜镜中十分罕见，为古代铜镜中所鲜有，是不可多得的实物珍品。",
+	zhanpin[17].contect2="这是第一个展品",
+	zhanpin[17].contect3="这是第一个展品",
+
+	zhanpin[18].objectnum=86,
+	zhanpin[18].objectnum_x=400,
+	zhanpin[18].objectnum_y=450,
+	zhanpin[18].direct=0,
+	zhanpin[18].time=52000,
+	zhanpin[18].mode=1,
+	zhanpin[18].contect1="1988年5月，哈尔滨市道外区巨源乡城子村的村民在种地时挖到了一座石椁木棺墓。经考古人员考证，该墓是金代齐国王完颜晏夫妇合葬墓。完颜晏(?～1162年)，女真名斡论，是金太祖完颜阿骨打的堂弟，生前拜太尉、齐国王。此墓为夫妻合葬土坑竖穴石椁木棺墓，男墓主人身着8层17件服装，女墓主人身着9层16件服装，用料精美，做工考究。这两套自冠饰、衣裳、至鞋袜服饰基本完整，均为金代贵族服饰，款式还保留女真服饰左衽、窄袖等特点。金齐国王墓出土的丝织品服饰填补了中国金代服饰史的空白，被誉为“北国马王堆”。",
+	zhanpin[18].contect2="这是第一个展品",
+	zhanpin[18].contect3="这是第一个展品",
+
+	zhanpin[19].objectnum=87,
+	zhanpin[19].objectnum_x=400,
+	zhanpin[19].objectnum_y=500,
+	zhanpin[19].direct=0,
+	zhanpin[19].time=0,
+	zhanpin[19].mode=1,
+	zhanpin[19].contect1="",
+	zhanpin[19].contect2="这是第一个展品",
+	zhanpin[19].contect3="这是第一个展品",
+
+	zhanpin[20].objectnum=88,
+	zhanpin[20].objectnum_x=450,
+	zhanpin[20].objectnum_y=500,
+	zhanpin[20].direct=90,
+	zhanpin[20].time=80000,
+	zhanpin[20].mode=1,
+	zhanpin[20].contect1="下面介绍的是本馆十大镇馆之宝,铜坐龙。龙是我们华夏先民创造的一种独特的动物形象，崛起于白山黑水间的女真族，入主中原，建立的大金国，受中原先进文化的影响，金代帝王也喜欢把龙作为王权的象征之物。中国古代的龙的形制有盘龙、团龙、飞龙、行龙，而金代却是坐龙居多。女真族是一个狩猎民族，狗是他们的忠实伙伴，金代的坐龙采用狗的坐姿，符合了这个民族的文化心理。金仿宋制，依照《营造法式》记载，宋代建筑的望柱头有用坐龙装饰的规制，大量出土于金代皇家建筑遗址的金代铜座龙，或许是金代皇家建筑中的装饰物件。该件铜坐龙于黑龙江省哈尔滨市阿城区白城金上京会宁府遗址出土，通高19点6厘米，宽17厘米，进深8点5厘米。这就是历史第四展厅的全部内容啦，今天小灵就给大家讲解到这里啦,，大家可以继续往前走参观其余展厅哦，再见啦！",
+	zhanpin[20].contect2="这是第一个展品",
+	zhanpin[20].contect3="这是第一个展品",
+
+	zhanpin[21].objectnum=89,
+	zhanpin[21].objectnum_x=500,
+	zhanpin[21].objectnum_y=500,
+	zhanpin[21].direct=45,
+	zhanpin[21].time=5000,
+	zhanpin[21].mode=1,
+	zhanpin[21].contect1="",
+	zhanpin[21].contect2="这是第一个展品",
+	zhanpin[21].contect3="这是第一个展品",
 };
 int objectnums1[100]={1,50,2,51,3,52,4,99,53,5,6};//这个记录的是展品号(过时)
 int objectnumshand[100]={0,7,10,8,6};//这个记录的是展品号
-int objectnums[100]={7,81,82,83,84};//这个记录的是展品号
+int objectnums[100]={7,81,82,83,84,85,86,87,88,89};//这个记录的是展品号
 int objectnowpos=0;//第几个展品
 int objectnow=0;//展品数组的中展品的数组号
 int objectnowhand=0;
