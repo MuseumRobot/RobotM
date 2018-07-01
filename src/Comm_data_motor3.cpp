@@ -760,8 +760,8 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 	}
 	Info_robot.pianzhuan_stargazer=starAngel360;
 
-	float pointrox_stargazerchange=(10000+2084)-Info_robot.pointrox_stargazer*10;
-	float pointroy_stargazerchange=(10000-152)-Info_robot.pointroy_stargazer*10;
+	float pointrox_stargazerchange=(10000+862)-Info_robot.pointrox_stargazer*10;
+	float pointroy_stargazerchange=(10000+592)-Info_robot.pointroy_stargazer*10;
 	float pointroy_jiaoduchange=360-Info_robot.pianzhuan_stargazer;
 	int isok=0;
 	if(isone!=0)
@@ -811,7 +811,7 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 		}
 		else
 		{
-			plan.SERVEMODE=4;//机器人停止,已处于未知地址
+//			plan.SERVEMODE=4;//机器人停止,已处于未知地址
 		}
 
 	}

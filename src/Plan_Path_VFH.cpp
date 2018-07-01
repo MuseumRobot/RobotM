@@ -576,7 +576,7 @@ void CPlan_Path_VFH::basedVFHPLUS(void)
 	   angdiff = this->angle_diff((double)target_t,this->odom_pose[2]);
 
 	   ////////////////////////////////////////xhyÒýµ¼µã
-		if(dist < (15.0*dist_eps * 1e3)&&isbegio&&zhanpin[objectnow].mode==3)
+		if(dist < (10.0*dist_eps * 1e3)&&isbegio&&zhanpin[objectnow].mode==3)
 		{
 
 			objectnowpos=objectnowpos+1;

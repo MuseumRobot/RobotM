@@ -108,6 +108,20 @@ BOOL CVoice::OnInitDialog()
 	((CComboBox*)GetDlgItem(IDC_COMBO1))->ResetContent();
 	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆开闭馆时间"));
 	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆有几层，都有哪些展厅"));
+		((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆镇馆之宝有哪些？"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("免费讲解"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("洗手间位于哪里？"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("便民服务"));
+		((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("文创天地"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("社会服务项目"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆有哪些活动？"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆“相约龙博”课堂 "));
+		((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("环球自然日——青少年自然科学知识挑战赛"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("环球自然日——青少年科普绘画大赛"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省博物馆流动博物馆"));
+	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省文博志愿者基地"));
+		((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("博物馆简介"));
+	
 	// TODO:  在此添加额外的初始化
 
 	//////////////////xhy
