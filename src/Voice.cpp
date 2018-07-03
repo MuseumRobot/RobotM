@@ -136,7 +136,9 @@ BOOL CVoice::OnInitDialog()
 void CVoice::OnBnClickedCancel()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	p_CR->OnBnClickedOk();
 	CDialogEx::OnCancel();
+	
 }
 
 

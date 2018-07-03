@@ -22,6 +22,7 @@ using std::string;
 #define COMM_MOTOR 3 //底部电机串口号
 #define COMM_STAR 4//星标定位串口
 #define COMM_LASER 5 //激光传感器串口号
+CVoice* dlg;
 CMotor motor;
 CEvent wait_motordata;
 CEvent wait_motortts;
@@ -1082,8 +1083,7 @@ void CRecorder_ExampleDlg::OnBnClickedBtnCancelRecord(){
 	}
 }
 void CRecorder_ExampleDlg::OnBnClickedOk(){
-	Uninit(); 
-	OnOK();
+	delete dlg;
 }
 struct{
     char* pszName;
@@ -2152,8 +2152,12 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
  }
  void CRecorder_ExampleDlg::OnBnClickedMfcbutton2(){
 	 // TODO: 在此添加控件通知处理程序代码
-	CVoice dlg;
-	dlg.DoModal();
+	
+	dlg= new CVoice;
+	dlg->Create(IDD_DIALOG1);
+	dlg->ShowWindow(SW_SHOW);
+
+	
  }
  void CRecorder_ExampleDlg::OnBnClickedButton11(){
 	 hci_asr_recorder_cancel();
