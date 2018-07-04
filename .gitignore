@@ -1,2 +1,4 @@
 /bin/
 *.sdf
+/msvc/VC10/Debug/
+/msvc/VC10/Release/
