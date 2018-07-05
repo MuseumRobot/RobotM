@@ -53,10 +53,6 @@ double free_Obstacle_Distance_init;
 extern struct robotinfo Info_robot;
 extern CPlan_Path_VFH plan;
 ///////////////////////////////////////////////////
-long int whichturn=0;
-
-
-////////////////////////////////////////
 /******************************************************************************\
 ¶ÔÒ»¸ö¸´Êý x ¿ª n ´Î·½
 \******************************************************************************/
@@ -439,7 +435,7 @@ int VFH_Algorithm::Init()//VFHËã·¨³õÊ¼»¯
 	for(x=0;x<HIST_SIZE;x++) 
 	{
 		Hist[x] = 0;
-		Last_Binary_Hist[x] = 0;
+		Last_Binary_Hist[x] = 1;
 		Hist_Average_Distance[x]=0;
 
 	}
@@ -960,7 +956,7 @@ int VFH_Algorithm::Update_VFH( float current_speed,
 		fprintf(alloutfile9,"%f %f  CHOSEN: SPEED: %f TURNRATE: %f ÆÚÍû%f Ñ¡Ôñ%f ºòÑ¡%f \n ",current_speed,chosen_turnrate, chosen_speed, chosen_turnrate,Desired_Angle,Picked_Angle,Candidate_Angle[i]);
 
 	}
-	fprintf(alloutfile9,"/////////////////%d/////////////\n",whichturn);
+
 	fclose(alloutfile9);
 	return(1);
 
@@ -1112,7 +1108,6 @@ int VFH_Algorithm::Select_Candidate_Angle() //Ñ¡ÔñºòÑ¡½Ç¶È
 	}
 
 		fprintf(alloutfile9,"Last_Picked_Angle:  %f  %f \n",Desired_Angle,Picked_Angle);
-		fprintf(alloutfile9,"/////////////////%d/////////////\n",whichturn);
 	Last_Picked_Angle = Picked_Angle;
 	pick = Last_Picked_Angle;
 
@@ -1126,11 +1121,6 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 		FILE *alloutfile9;
 	
 	alloutfile9 = fopen("allout0019.txt","a+");
-
-	FILE *alloutfile10;
-	
-	alloutfile10 = fopen("alloutxhy0019.txt","a+");
-
 	int start, i, left;
 	float angle, new_angle;
 	std::vector<std::pair<int,int> > border;
@@ -1174,14 +1164,7 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 	// Consider each opening¿¼ÂÇÃ¿¸ö¿ª·Å¿Õ¼ä
 	//
 
-		/////////////////
-	for(int i=0;i<border.size();++i)
-	{
-		fprintf(alloutfile10,"Last_Picked_Angle:%d     %d     %d   \n",i,border[i].first,border[i].second);
 
-	}
-	fprintf(alloutfile10,"/////////////////%d/////////////\n",whichturn);
-	////////////
 	
 	
 
@@ -1211,22 +1194,6 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 			{
 				Second_Average_Distance=Hist_Average_Distance[(int)(border[i].second/SECTOR_ANGLE)+1];
 			}
-			//////////////xhy±ß½çÎÊÌâ
-
-			if(Second_Average_Distance<300)
-			{
-				Second_Average_Distance=First_Average_Distance;
-			}
-
-			if(First_Average_Distance>3000)
-			{
-				First_Average_Distance=Second_Average_Distance;
-			}
-
-
-			///////////////
-
-
 
 		//	double min_Average_Distance=MIN(First_Average_Distance,Second_Average_Distance);
 			double min_Average_Distance=(First_Average_Distance+Second_Average_Distance)/2.0;
@@ -1281,12 +1248,12 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 				fprintf(alloutfile9,"oookkk: %d   %f   \n", Candidate_Number_Free_Sector,min_angle_ext_robot);
 				int i_temp=0;
 
-				for (int i_number=2;i_number<Candidate_Number_Free_Sector-2;i_number++)
+				for (int i_number=0;i_number<Candidate_Number_Free_Sector;i_number++)
 				{
 					i_temp=i_number+1;
 					if (i_temp<Candidate_Number_Free_Sector)
 					{
-					new_angle=border[i].first+(i_temp)*min_angle_ext_robot*0.5;
+					new_angle=border[i].first+(i_temp)*min_angle_ext_robot*0.6;
 					
 					
 					}
@@ -1314,8 +1281,8 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 				//Candidate_Speed.push_back(MIN(Current_Max_Speed,MAX_SPEED_WIDE_OPENING));//±£´æÁËÖÐÐÄ½Ç¡¢×ó±ßÏß½Ç+40£¬ÓÒ±ßÏß½Ç-40Èý¸ö½Ç¶È
 
 				// See if candidate dir is in this opening ¼ìÑéºòÑ¡½ÇÊÇ·ñÔÚ¸Ã¿ª·ÅÉÈÇø£¬²úÉúÆÚÍû½Ç¶È
-				if ((Candidate_Angle.size()-Candidate_Number_Free_Sector+4)>0&&((Delta_Angle(Desired_Angle, Candidate_Angle[Candidate_Angle.size()-Candidate_Number_Free_Sector+4]) < 0) && 
-					(Delta_Angle(Desired_Angle, Candidate_Angle[Candidate_Angle.size()-1]) > 0)) )
+				if ((Delta_Angle(Desired_Angle, Candidate_Angle[Candidate_Angle.size()-Candidate_Number_Free_Sector]) < 0) && 
+					(Delta_Angle(Desired_Angle, Candidate_Angle[Candidate_Angle.size()-1]) > 0)) 
 				{
 					Candidate_Angle.push_back(Desired_Angle);
 					Candidate_Speed.push_back(MIN(Current_Max_Speed,MAX_SPEED_WIDE_OPENING));
@@ -1323,8 +1290,6 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 			}
 		
 		}
-
-		fprintf(alloutfile9,"////////%d/////////\n", whichturn);///xhy
 
 	}
 	else 
@@ -1337,10 +1302,9 @@ int VFH_Algorithm::Select_Direction() //ÅÐ¶ÏÉÈÇø
 //	fprintf(alloutfile9,"wwwwww: %f    \n", Desired_Angle);
 
 	Select_Candidate_Angle();//Ñ¡ÔñºòÑ¡½Ç¶È
-	++whichturn;
+
 
 	fclose(alloutfile9);
-	fclose(alloutfile10);
 	return(1);
 
 }
@@ -1735,7 +1699,7 @@ int VFH_Algorithm::Build_Primary_Polar_Histogram( float speed /*,FILE *outfile*/
 		Hist_Average_Distance[ii]=min_x_result;
 		icount1=int((ii*5+2.5)*1024/360+128);
 
-		fprintf(outfile009," %f  %d  %f %f %d  \n",Hist[ii],ii*5,Hist_Average_Distance[ii],speed,m_laser_data_postpro_vfh[icount1]);
+		fprintf(outfile009," %f  %d  %f %f %d  \n",Hist[ii],ii,Hist_Average_Distance[ii],speed,m_laser_data_postpro_vfh[icount1]);
 
 	}
 	//for(y=0;y<(int)ceil(WINDOW_DIAMETER/2.0);y++)
@@ -1757,7 +1721,6 @@ int VFH_Algorithm::Build_Primary_Polar_Histogram( float speed /*,FILE *outfile*/
 	//{
 	//	fprintf(outfile009,"%f            %d \n",Hist[x],x);
 	//}
-	fprintf(outfile009,"/////////////////%d/////////////\n",whichturn);
 	fclose(outfile009);
 	
 	return(1);
@@ -1878,8 +1841,6 @@ int VFH_Algorithm::Build_Binary_Polar_Histogram( float speed ) //´´½¨¶þÔª¼«×ø±êÖ
 	{
 		fprintf(outfile009," fffffff  %f      %f       %d   %f  %f  \n",Hist[x],Last_Binary_Hist[x],x,Get_Binary_Hist_High(speed),Get_Binary_Hist_Low(speed));
 	}
-	//////////////xhyxhy
-	fprintf(outfile009,"/////////////////%d/////////////\n",whichturn);
 	fclose(outfile009);
 	
 	return(1);

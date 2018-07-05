@@ -576,7 +576,7 @@ void CPlan_Path_VFH::basedVFHPLUS(void)
 	   angdiff = this->angle_diff((double)target_t,this->odom_pose[2]);
 
 	   ////////////////////////////////////////xhy引导点
-		if(dist < (10.0*dist_eps * 1e3)&&isbegio&&zhanpin[objectnow].mode==3)
+		if(dist < (15.0*dist_eps * 1e3)&&isbegio&&zhanpin[objectnow].mode==3)
 		{
 
 			objectnowpos=objectnowpos+1;
@@ -1180,21 +1180,20 @@ void CPlan_Path_VFH::Decision()
 
 void CPlan_Path_VFH::MyFtestDanger(void)
 {
-	int xhyceshi=2;
 	//自右向左将180°分为0-11共十二个扇区,分别判定每个扇区的危险情况
 	//每个扇区有1-4个危险等级,1级为绝对危险,4级为绝对安全
-	int danger0 = 100/xhyceshi; //每个扇区绝对停止距离
-	int danger1 = 125/xhyceshi;
-	int danger2 = 300/xhyceshi;
-	int danger3 = 350/xhyceshi;
-	int danger4 = 400/xhyceshi;
-	int danger5 = 450/xhyceshi;
-	int danger6 = 450/xhyceshi;
-	int danger7 = 400/xhyceshi;
-	int danger8 = 350/xhyceshi;
-	int danger9 = 300/xhyceshi;
-	int danger10 = 250/xhyceshi;
-	int danger11 = 200/xhyceshi;
+	int danger0 = 200; //每个扇区绝对停止距离
+	int danger1 = 250;
+	int danger2 = 300;
+	int danger3 = 350;
+	int danger4 = 400;
+	int danger5 = 450;
+	int danger6 = 450;
+	int danger7 = 400;
+	int danger8 = 350;
+	int danger9 = 300;
+	int danger10 = 250;
+	int danger11 = 200;
 
 	//int danger0 = 360; //每个扇区绝对停止距离
 	//int danger1 = 360;

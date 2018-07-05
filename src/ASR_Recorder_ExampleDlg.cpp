@@ -1,4 +1,9 @@
-ï»¿#include "stdafx.h"
+
+
+
+// Recorder_ExampleDlg.cpp : ÊµÏÖÎÄ¼ş
+//
+#include "stdafx.h"
 #include "ASR_Recorder_Example.h"
 #include "ASR_Recorder_ExampleDlg.h"
 #include "hci_asr_recorder.h"
@@ -7,49 +12,60 @@
 #include "hci_tts.h"
 #include "hci_tts_player.h"
 #include "hci_micarray.h"
-#include "UPURG.h" //æ¿€å…‰
+//xhyvhf
+#include "UPURG.h" //¼¤¹â
 #include "Plan_Path_VFH.h"
 #include "vfh_algorithm.h"
 #include "Voice.h"
+//move
 #include "Comm_data_motor3.h"
-#include "Comm_data_star.h" //çº¢å¤–æ ‡ç­¾å®šä½æ¨¡å—
-#pragma comment(lib,"Comm_data_star.lib") //è§†è§‰å®šä½
+
+//starxhy
+#include "Comm_data_star.h" //ºìÍâ±êÇ©¶¨Î»Ä£¿é
+#pragma comment(lib,"Comm_data_star.lib") //ÊÓ¾õ¶¨Î»
+
 #include "cJSON.h"
 #include <string>
-#include "mmsystem.h"  
 using std::string;
+
+#include "mmsystem.h"  
 #pragma comment(lib,"Winmm.lib")  
-#define COMM_MOTOR 3 //åº•éƒ¨ç”µæœºä¸²å£å·
-#define COMM_STAR 4//æ˜Ÿæ ‡å®šä½ä¸²å£
-#define COMM_LASER 5 //æ¿€å…‰ä¼ æ„Ÿå™¨ä¸²å£å·
-CVoice* dlg;
+
+//movexhy
+#define COMM_MOTOR 7 //µ×²¿µç»ú´®¿ÚºÅ
 CMotor motor;
+	CVoice* dlg;
 CEvent wait_motordata;
 CEvent wait_motortts;
 UINT ThreadComput_MotorData(LPVOID lpParam);
 UINT ThreadComput_MotorTts(LPVOID lpParam);
-CWinThread* pThread_Motor_Comput;////ç”µæœºæ•°æ®æ¥æ”¶çº¿ç¨‹
-CWinThread* pThread_Motor_tts;//ç”µæœºttsçº¿ç¨‹
-CFont *m_pFont;//åˆ›å»ºæ–°çš„å­—ä½“  
-CWinThread* pThread_Motor_autowalk;//ç”µæœºæ¼«æ¸¸çº¿ç¨‹
-bool moterautowalk_key= true;//å¼€å§‹æ¼«æ¸¸
+CWinThread* pThread_Motor_Comput;////µç»úÊı¾İ½ÓÊÕÏß³Ì
+CWinThread* pThread_Motor_tts;//µç»úttsÏß³Ì
+CFont *m_pFont;//´´½¨ĞÂµÄ×ÖÌå  
+ 
+CWinThread* pThread_Motor_autowalk;//µç»úÂşÓÎÏß³Ì
+bool moterautowalk_key= true;//¿ªÊ¼ÂşÓÎ
 UINT ThreadComput_Motorautowalk(LPVOID lpParam);
-float distance_l = 0.0; //å·¦è½®è·ç¦»
-float distanceold_l = 0.0; //å·¦è½®ä¸Šä¸€æ¬¡è·ç¦»
-float distance_r = 0.0; //å³è½®è·ç¦»
-float distanceold_r = 0.0; //å³è½®ä¸Šä¸€æ¬¡è·ç¦»
-float distance_z = 0.0; //å³è½®è·ç¦»
-float distanceold_z = 0.0; //å³è½®ä¸Šä¸€æ¬¡è·ç¦»
-float distancedif_l = 0.0; //å·¦è½®å·®å€¼
-float distancedif_r = 0.0; //å³è½®å·®å€¼
+
+float distance_l = 0.0; //×óÂÖ¾àÀë
+float distanceold_l = 0.0; //×óÂÖÉÏÒ»´Î¾àÀë
+float distance_r = 0.0; //ÓÒÂÖ¾àÀë
+float distanceold_r = 0.0; //ÓÒÂÖÉÏÒ»´Î¾àÀë
+float distance_z = 0.0; //ÓÒÂÖ¾àÀë
+float distanceold_z = 0.0; //ÓÒÂÖÉÏÒ»´Î¾àÀë
+float distancedif_l = 0.0; //×óÂÖ²îÖµ
+float distancedif_r = 0.0; //ÓÒÂÖ²îÖµ
 float distancedif_z = 0.0; //
-bool moter_key = true;//ç”µæœºæ•°æ®æ¥æ”¶çº¿ç¨‹æ§åˆ¶
+
+bool moter_key = true;//µç»úÊı¾İ½ÓÊÕÏß³Ì¿ØÖÆ
 bool motertts_key= true;
-bool motertts_key1=true;//ttsçº¿ç¨‹æµ‹è¯•1
-bool motertts_key2= true;//ttsçº¿ç¨‹æµ‹è¯•2
-bool motertts_key3=true;//ttsçº¿ç¨‹æµ‹è¯•1
-bool motertts_key4= true;//ttsçº¿ç¨‹æµ‹è¯•2
-struct robotinfo Info_robot = {
+bool motertts_key1=true;//ttsÏß³Ì²âÊÔ1
+bool motertts_key2= true;//ttsÏß³Ì²âÊÔ2
+bool motertts_key3=true;//ttsÏß³Ì²âÊÔ1
+bool motertts_key4= true;//ttsÏß³Ì²âÊÔ2
+
+  struct robotinfo Info_robot = 
+{
 	Info_robot.pi=3.141592654,
 	Info_robot.Drobot = 400,
 	Info_robot.zuolunfangxiang = 0,
@@ -57,6 +73,8 @@ struct robotinfo Info_robot = {
 	Info_robot.zuolunjuli = 0,
 	Info_robot.youlunjuli = 0,
 	Info_robot.pianzhuan = 0,//Info_robot.pi/2,
+	//#define Start_Pose_x 1388
+	//#define Start_Pose_y 1787
 	Info_robot.pointrox = 10000,
 	Info_robot.pointroy = 10000,
 	Info_robot.pian = 0.00001,
@@ -65,16 +83,22 @@ struct robotinfo Info_robot = {
 	Info_robot.pianzhuan_stargazer=0,
 	Info_robot.pointrox_stargazer=0,
 	Info_robot.pointroy_stargazer=0
+
 };
-Cstar StarGazer;  //è§†è§‰å®šä½æ§åˆ¶ç±»
-struct StarMark{
+//starxhy
+#define COMM_STAR 8//ĞÇ±ê¶¨Î»´®¿Ú
+Cstar StarGazer;  //ÊÓ¾õ¶¨Î»¿ØÖÆÀà
+
+struct StarMark
+{
 	int markID;
 	float mark_angle;
 	float mark_x;
 	float mark_y;
 };
-struct StarMark MARK[100]={ //LEDå®šä½æ ‡ç­¾æ•°ç»„
-	//æ¯å—è¾¹é•¿455
+
+struct StarMark MARK[100]={ //LED¶¨Î»±êÇ©Êı×é
+	//Ã¿¿é±ß³¤455
 	MARK[0].markID = 624,
 	MARK[0].mark_angle = 0.00,
 	MARK[0].mark_x = -427,
@@ -147,64 +171,93 @@ struct StarMark MARK[100]={ //LEDå®šä½æ ‡ç­¾æ•°ç»„
 	MARK[13].mark_x = 309,
 	MARK[13].mark_y = 1,
 };
+
+//xhyvhf
 #define Max_Laser_Data_Point 768
-struct threadInfo_laser_data{
+struct threadInfo_laser_data
+{
 	double 	m_Laser_Data_Value[Max_Laser_Data_Point];
 	int	m_Laser_Data_Point;
 };
-//æ¿€å…‰æµ‹è·å™¨æ•°æ®è¯»å–ç»“æ„å‚æ•°
-struct threadInfo_laser_data_postpro{
+//¼¤¹â²â¾àÆ÷Êı¾İ¶ÁÈ¡½á¹¹²ÎÊı
+struct threadInfo_laser_data_postpro
+{
 	double 	m_Laser_Data_Value_PostPro[Max_Laser_Data_Point];
 	int	m_Laser_Data_Point_PostPro;
 	double rx;
 	double ry;   //robot odometry pos
 	double  th;   //robot orientation 
+
 	double  x[10][769];//[cm]
 	double  y[10][769];//[cm]
 	int bad[10][769];// 0 if OK
+	//sources of invalidity - too big range;
+	//moving object; occluded;mixed pixel
 	int seg[10][769];
+
 };
+
 float m_nDlgWidth,m_nDlgHeight,m_nWidth,m_nHeight,m_Multiple_width,m_Mutiple_heith;
-bool change_flag;
-CUPURG m_cURG; //æ¿€å…‰ä¸²å£æ§åˆ¶ç±»
+		bool change_flag;
+
+#define COMM_LASER 9 //¼¤¹â´«¸ĞÆ÷´®¿ÚºÅ
+CUPURG m_cURG; //¼¤¹â´®¿Ú¿ØÖÆÀà
 int m_laser_data_raw[1000];
 int m_laser_data_postpro[1000];
 int m_Laser_Data_Point_PostPro;
 bool lase_key = true;
-bool key_laser = false; //æ¿€å…‰æ•°æ®å­˜å‚¨ä½ç½®å¼€å…³
+bool key_laser = false; //¼¤¹âÊı¾İ´æ´¢Î»ÖÃ¿ª¹Ø
 CEvent wait_data;
 CEvent wait_laserpose;
+
 CEvent wait_vfh;
 CEvent wait_motor;
+
 CEvent wait_gridfastslam;
-extern int speed_stated=20; //æœºå™¨äººé€Ÿåº¦
+
+extern int speed_stated=20; //»úÆ÷ÈËËÙ¶È
 extern int waittimer=0;
 extern int speed_stated_vfh;
+
 extern double vfh_Scene_scale_x;
 extern double vfh_Scene_scale_y;
-extern double Obstacle_Distance_init;/////////////////////////åˆå§‹é¿éšœè·ç¦»è®¾å®š
+
+extern double Obstacle_Distance_init;/////////////////////////³õÊ¼±ÜÕÏ¾àÀëÉè¶¨
 extern double delt_Obstacle_Distance_init;
 extern double free_Obstacle_Distance_init;
-extern int m_laser_data_postpro_vfh[1000]; //vfhä¸­æ¿€å…‰æ•°æ®
-CWinThread* pThread_DataExchange;  //vfhæ•°æ®äº¤æ¢çº¿ç¨‹
-CWinThread* pThread_VFHStart; //vfhå¯åŠ¨
-CWinThread* pThread_Read_Laser;  //æ¿€å…‰æ•°æ®è¯»çº¿ç¨‹
+extern int m_laser_data_postpro_vfh[1000]; //vfhÖĞ¼¤¹âÊı¾İ
+
+CWinThread* pThread_DataExchange;  //vfhÊı¾İ½»»»Ïß³Ì
+CWinThread* pThread_VFHStart; //vfhÆô¶¯
+
+CWinThread* pThread_Read_Laser;  //¼¤¹âÊı¾İ¶ÁÏß³Ì
 threadInfo_laser_data Info_laser_data;
-CWinThread* pReadThread_Laser_Pose_Compute; //æ¿€å…‰ä½å§¿è®¡ç®—çº¿ç¨‹
+
+CWinThread* pReadThread_Laser_Pose_Compute; //¼¤¹âÎ»×Ë¼ÆËãÏß³Ì
 UINT ThreadReadLaser_Data(LPVOID lpParam);
-UINT ThreadDataExchange(LPVOID lpParam); //æ•°æ®äº¤æ¢çº¿ç¨‹
+
+UINT ThreadDataExchange(LPVOID lpParam); //Êı¾İ½»»»Ïß³Ì
 UINT ThreaVFH(LPVOID lpParam);
+
 CPlan_Path_VFH plan;
 VFH_Algorithm algorithm;
+
+//extern double vfh_Scene_scale_x;
+//extern double vfh_Scene_scale_y;
+
 bool dataexchange_key = false;
 bool vfh_key = false;
 bool motor_key = false;
 LARGE_INTEGER freq1;
 LARGE_INTEGER start_t1, stop_t1;  
 double exe_time1;  
-//#pragma comment(lib,"Plan_Path_VFH.lib") //å¼•å…¥è·¯å¾„è§„åˆ’åº“
+
+//#pragma comment(lib,"Plan_Path_VFH.lib") //ÒıÈëÂ·¾¶¹æ»®¿â
+
 void Pathplan();
+
 bool gridfastslam_key = true;
+
 int wait_motor_timer = 200;
 bool speedkey = 0;
 CWinThread* pThread_MototCtrl;
@@ -214,30 +267,35 @@ int CtrlMode_old;
 int run_direction;
 int run_direction_old;
 int acceleration = 3;
+
 UINT ThreaMotorCtrl(LPVOID lpParam);
 void SpeedBuffer(int speed_l, int speed_r,int *speed_l_old, int *speed_r_old);
 extern float pick;
-struct object{
+/////////////////////////xhyobj
+struct object
+{
 	int objectnum;
 	float objectnum_x;
 	float objectnum_y;
 	float direct;
 	float time;
-	int mode;//1:åˆ°è¾¾è½¬å‘(å±•å“ç‚¹)2:åˆ°è¾¾æ’­æ”¾è¯­éŸ³(è¯­éŸ³ç‚¹)3:å³å°†åˆ°è¾¾è½¬å‘(å¼•å¯¼ç‚¹)
+	int mode;//1:µ½´ï×ªÏò(Õ¹Æ·µã)2:µ½´ï²¥·ÅÓïÒô(ÓïÒôµã)3:¼´½«µ½´ï×ªÏò(Òıµ¼µã)
+
 	char* contect1;
 	char* contect2;
 	char* contect3;
 };
+
 struct object zhanpin[100]={
-	zhanpin[0].objectnum=0,
-	zhanpin[0].objectnum_x=0,
-	zhanpin[0].objectnum_y=0,
+	zhanpin[0].objectnum=1,
+	zhanpin[0].objectnum_x=500,
+	zhanpin[0].objectnum_y=500,
 	zhanpin[0].direct=0,
 	zhanpin[0].time=10000,
 	zhanpin[0].mode=1,
-	zhanpin[0].contect1="è¿™æ˜¯ç»ˆç‚¹",
-	zhanpin[0].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[0].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
+	zhanpin[0].contect1="´ó¼ÒºÃ£¬ÎÒÊÇ¸Õ¸ÕÉÏ¸ÚµÄ½âËµÔ±Ğ¡Áé£¬À´×Ô¹ş¶û±õ¹¤Òµ´óÑ§£¬»¥¶¯Ã½ÌåÉè¼ÆÓë×°±¸·şÎñ´´ĞÂ£¬ÎÄ»¯ºÍÂÃÓÎ²¿ÖØµãÊµÑéÊÒ¡£ÎÒÊÇ¿ÉÒÔÌá¹©Òıµ¼£¬½²½âºÍ»¥¶¯µÈ·şÎñµÄÖÇÄÜ»úÆ÷ÈË£¬»¶Ó­¸÷Î»¹ÛÄ¦ÖØµãÊµÑéÊÒÕ¹ÀÀ£¬ÏÖÔÚ£¬Çë´ó¼ÒËæÎÒ²Î¹Û¡£",
+	zhanpin[0].contect2="ÕâÊÇµÚÒ»¸öÕ¹Æ·",
+	zhanpin[0].contect3="ÕâÊÇµÚÒ»¸öÕ¹Æ·",
 
 	zhanpin[1].objectnum=2,
 	zhanpin[1].objectnum_x=300,
@@ -262,7 +320,7 @@ struct object zhanpin[100]={
 	zhanpin[3].objectnum=99,
 	zhanpin[3].objectnum_x=100,
 	zhanpin[3].objectnum_y=600,
-	zhanpin[3].direct=225,//å¼•å¯¼ç‚¹
+	zhanpin[3].direct=225,//Òıµ¼µã
 	zhanpin[3].time=0,
 	zhanpin[3].mode=3,
 	zhanpin[3].contect1="",
@@ -296,27 +354,27 @@ struct object zhanpin[100]={
 	zhanpin[6].direct=135,
 	zhanpin[6].time=300000,
 	zhanpin[6].mode=1,
-	zhanpin[6].contect1="è¿™æ˜¯æˆ‘çš„å§å§å°æ¢…ï¼Œå®ƒæ˜¯ä¸æ˜¯æ¯”æˆ‘è‹—æ¡å‘€ï¼Ÿå°çµå°±é€åˆ°è¿™é‡Œå•¦ï¼Œåé¢è¿˜æœ‰æ›´ç²¾å½©çš„å±•ç¤ºï¼Œå°±ä¸ä¸€ä¸€ä»‹ç»å•¦ï¼Œæ¬¢è¿å¤§å®¶æ¥å“ˆå°”æ»¨å·¥ä¸šå¤§å­¦åšå®¢ï¼Œå†è§å•¦ã€‚",
-	zhanpin[6].contect2="è¿™æ˜¯ç¬¬ä¸‰ä¸ªå±•å“",
-	zhanpin[6].contect3="è¿™æ˜¯ç¬¬ä¸‰ä¸ªå±•å“",
+	zhanpin[6].contect1="ÕâÊÇÎÒµÄ½ã½ãĞ¡Ã·£¬ËüÊÇ²»ÊÇ±ÈÎÒÃçÌõÑ½£¿Ğ¡Áé¾ÍËÍµ½ÕâÀïÀ²£¬ºóÃæ»¹ÓĞ¸ü¾«²ÊµÄÕ¹Ê¾£¬¾Í²»Ò»Ò»½éÉÜÀ²£¬»¶Ó­´ó¼ÒÀ´¹ş¶û±õ¹¤Òµ´óÑ§×ö¿Í£¬ÔÙ¼ûÀ²¡£",
+	zhanpin[6].contect2="ÕâÊÇµÚÈı¸öÕ¹Æ·",
+	zhanpin[6].contect3="ÕâÊÇµÚÈı¸öÕ¹Æ·",
 
 	zhanpin[7].objectnum=50,
 	zhanpin[7].objectnum_x=400,
 	zhanpin[7].objectnum_y=500,
-	zhanpin[7].direct=180,//è¯­éŸ³æœ—è¯»ç‚¹
+	zhanpin[7].direct=180,//ÓïÒôÀÊ¶Áµã
 	zhanpin[7].time=0,
 	zhanpin[7].mode=2,
-	zhanpin[7].contect1="ç°åœ¨æˆ‘ä»¬å·¦å‰æ–¹çš„æ˜¯æ–‡åŒ–å’Œæ—…æ¸¸éƒ¨çš„18å®¶é‡ç‚¹å®éªŒå®¤ï¼Œä»–ä»¬æ˜¯å›½å®¶æ–‡åŒ–ç§‘æŠ€åˆ›æ–°ä½“ç³»çš„é‡è¦ç»„æˆéƒ¨åˆ†ï¼Œæ˜¯å‡èšå’ŒåŸ¹å…»ä¼˜ç§€æ–‡åŒ–ç§‘æŠ€äººæ‰ï¼Œç»„ç»‡æ–‡åŒ–ç§‘æŠ€åˆ›æ–°å’Œå¼€å±•å­¦æœ¯äº¤æµçš„é‡è¦å¹³å°ã€‚",
+	zhanpin[7].contect1="ÏÖÔÚÎÒÃÇ×óÇ°·½µÄÊÇÎÄ»¯ºÍÂÃÓÎ²¿µÄ18¼ÒÖØµãÊµÑéÊÒ£¬ËûÃÇÊÇ¹ú¼ÒÎÄ»¯¿Æ¼¼´´ĞÂÌåÏµµÄÖØÒª×é³É²¿·Ö£¬ÊÇÄı¾ÛºÍÅàÑøÓÅĞãÎÄ»¯¿Æ¼¼ÈË²Å£¬×éÖ¯ÎÄ»¯¿Æ¼¼´´ĞÂºÍ¿ªÕ¹Ñ§Êõ½»Á÷µÄÖØÒªÆ½Ì¨¡£",
 	zhanpin[7].contect2="",
 	zhanpin[7].contect3="",
 
 	zhanpin[8].objectnum=51,
 	zhanpin[8].objectnum_x=300,
 	zhanpin[8].objectnum_y=550,
-	zhanpin[8].direct=90,//è¯­éŸ³æœ—è¯»ç‚¹
+	zhanpin[8].direct=90,//ÓïÒôÀÊ¶Áµã
 	zhanpin[8].time=0,
 	zhanpin[8].mode=2,
-	zhanpin[8].contect1="å¥½çš„ï¼Œä¸‹é¢è¯·å¤§å®¶è·Ÿæˆ‘æ¥ï¼Œå‰æ–¹æ˜¯å¤ç±ä¿æŠ¤ç§‘æŠ€é‡ç‚¹å®éªŒå®¤ï¼Œå®ƒä¾æ‰˜äºå›½å®¶å›¾ä¹¦é¦†ï¼Œå¸¦æ¥çš„æ˜¯è‡ªä¸»ç ”å‘çš„å›¾ä¹¦æ•´æœ¬æ‰¹é‡è„±é…¸æŠ€æœ¯ï¼Œè¯·å¤§å®¶æ¬£èµç»è¿‡è„±é…¸å¤„ç†åçš„å›¾ä¹¦ã€‚",
+	zhanpin[8].contect1="ºÃµÄ£¬ÏÂÃæÇë´ó¼Ò¸úÎÒÀ´£¬Ç°·½ÊÇ¹Å¼®±£»¤¿Æ¼¼ÖØµãÊµÑéÊÒ£¬ËüÒÀÍĞÓÚ¹ú¼ÒÍ¼Êé¹İ£¬´øÀ´µÄÊÇ×ÔÖ÷ÑĞ·¢µÄÍ¼ÊéÕû±¾ÅúÁ¿ÍÑËá¼¼Êõ£¬Çë´ó¼ÒĞÀÉÍ¾­¹ıÍÑËá´¦ÀíºóµÄÍ¼Êé¡£",
 	zhanpin[8].contect2="",
 	zhanpin[8].contect3="",
 
@@ -326,7 +384,7 @@ struct object zhanpin[100]={
 	zhanpin[9].direct=180,
 	zhanpin[9].time=0,
 	zhanpin[9].mode=2,
-	zhanpin[9].contect1="å¥½å•¦ï¼Œç°åœ¨æˆ‘ä»¬æ¥å‚è§‚ä¸‹ä¸€ä¸ªå±•ä½ï¼Œä¸ç»¸æ–‡åŒ–ä¼ æ‰¿ä¸äº§å“è®¾è®¡æ•°å­—åŒ–æŠ€æœ¯é‡ç‚¹å®éªŒå®¤ï¼Œå®ƒä¾æ‰˜äºæµ™æ±Ÿç†å·¥å¤§å­¦ï¼Œè¿™é‡Œå±•ç¤ºçš„æ˜¯ä¸ç»¸å›¾æ¡ˆåŠé¢æ–™æ•°å­—åŒ–è®¾è®¡ï¼Œè¯·å¤§å®¶æ¬£èµã€‚",
+	zhanpin[9].contect1="ºÃÀ²£¬ÏÖÔÚÎÒÃÇÀ´²Î¹ÛÏÂÒ»¸öÕ¹Î»£¬Ë¿³ñÎÄ»¯´«³ĞÓë²úÆ·Éè¼ÆÊı×Ö»¯¼¼ÊõÖØµãÊµÑéÊÒ£¬ËüÒÀÍĞÓÚÕã½­Àí¹¤´óÑ§£¬ÕâÀïÕ¹Ê¾µÄÊÇË¿³ñÍ¼°¸¼°ÃæÁÏÊı×Ö»¯Éè¼Æ£¬Çë´ó¼ÒĞÀÉÍ¡£",
 	zhanpin[9].contect2="",
 	zhanpin[9].contect3="",
 
@@ -336,185 +394,132 @@ struct object zhanpin[100]={
 	zhanpin[10].direct=225,
 	zhanpin[10].time=0,
 	zhanpin[10].mode=2,
-	zhanpin[10].contect1="å¥½çš„ï¼Œæˆ‘ä»¬ç»§ç»­ï¼Œç°åœ¨å¤§å®¶å¯ä»¥çœ‹å‰æ–¹çš„ä¹¦ç”»ä¿æŠ¤é‡ç‚¹å®éªŒå®¤ï¼Œä¾æ‰˜äºæ•…å®«åšç‰©é™¢ï¼Œå¤ä¹¦ç”»è£…è£±åŠä¿®å¤æŠ€è‰ºæ˜¯æˆ‘å›½å›½å®¶çº§éé—ä¼ æ‰¿é¡¹ç›®ï¼Œä¸­å›½ä¹¦ç”»è‰ºæœ¯åœ¨ä¸–ç•Œè‰ºæœ¯ä¹‹æ—äº«æœ‰æé«˜å£°èª‰ã€‚ç°åœ¨æ‚¨çœ‹åˆ°çš„å±•ç¤ºï¼Œæ­£æ˜¯è£…è£±ä¿®å¤æŠ€è‰ºå»¶ç»­åƒå¹´æµä¼ ä¸‹æ¥çš„åŸºæœ¬å·¥è‰ºã€‚",
+	zhanpin[10].contect1="ºÃµÄ£¬ÎÒÃÇ¼ÌĞø£¬ÏÖÔÚ´ó¼Ò¿ÉÒÔ¿´Ç°·½µÄÊé»­±£»¤ÖØµãÊµÑéÊÒ£¬ÒÀÍĞÓÚ¹Ê¹¬²©ÎïÔº£¬¹ÅÊé»­×°ñÑ¼°ĞŞ¸´¼¼ÒÕÊÇÎÒ¹ú¹ú¼Ò¼¶·ÇÒÅ´«³ĞÏîÄ¿£¬ÖĞ¹úÊé»­ÒÕÊõÔÚÊÀ½çÒÕÊõÖ®ÁÖÏíÓĞ¼«¸ßÉùÓş¡£ÏÖÔÚÄú¿´µ½µÄÕ¹Ê¾£¬ÕıÊÇ×°ñÑĞŞ¸´¼¼ÒÕÑÓĞøÇ§ÄêÁ÷´«ÏÂÀ´µÄ»ù±¾¹¤ÒÕ¡£",
 	zhanpin[10].contect2="",
 	zhanpin[10].contect3="",
 
+
 	zhanpin[11].objectnum=7,
-	zhanpin[11].objectnum_x=500,
-	zhanpin[11].objectnum_y=500,
-	zhanpin[11].direct=45,
-	zhanpin[11].time=42000,
+	zhanpin[11].objectnum_x=600,
+	zhanpin[11].objectnum_y=400,
+	zhanpin[11].direct=225,
+	zhanpin[11].time=0,
 	zhanpin[11].mode=1,
-	zhanpin[11].contect1="å…¬å…ƒåäºŒä¸–çºªåˆï¼Œç»§æ¸¤æµ·å›½ä¹‹åï¼Œéºé¨åè£”å¥³çœŸäººå†åº¦å…´èµ·ï¼Œå®šå±…åœ¨é˜¿ä»€æ²³ç•”çš„å¥³çœŸå®Œé¢œéƒ¨ï¼Œåœ¨é¦–é¢†é˜¿éª¨æ‰“çš„å¸¦é¢†ä¸‹ç»Ÿä¸€äº†å¥³çœŸå„éƒ¨,å¹¶äº1115å¹´å»ºç«‹é‡‘æœï¼Œå®šéƒ½ä¸Šäº¬ä¼šå®åºœï¼ˆä»Šé»‘é¾™æ±Ÿçœå“ˆå°”æ»¨å¸‚é˜¿åŸåŒºç™½åŸï¼‰ï¼Œæˆä¸ºç™½å±±é»‘æ°´çš„ä¸»å®°ã€‚è¿›è€Œç­è¾½å’ŒåŒ—å®‹ï¼Œç»Ÿæ²»ä¸­åå¤§åœ°åŠå£æ±Ÿå±±è¾¾ç™¾ä½™å¹´ã€‚é‡‘æœæœ€å¼ºç››æ—¶æ‰€è¾–ç–†åŸŸåŒ—è‡³å¤–å…´å®‰å²­ï¼Œä¸œåŒ—è‡³é„‚éœæ¬¡å…‹æµ·åŠæ—¥æœ¬æµ·ï¼Œä¸œå—æŠµé¸­ç»¿æ±Ÿä¸é«˜ä¸½ä¸ºé‚»ï¼Œè¥¿è¾¾é™•è¥¿è¥¿åŒ—åœ°åŸŸä¸è¥¿å¤äº¤ç•Œï¼Œå—ä¸å—å®‹ä»¥æ·®æ²³ä¸ºç•Œï¼Œè‚ƒæ…æ—ç³»é¦–æ¬¡å…¥ä¸»ä¸­åŸã€‚",
+	zhanpin[11].contect1="",
 	zhanpin[11].contect2="",
 	zhanpin[11].contect3="",
-
-	zhanpin[12].objectnum=1,
-	zhanpin[12].objectnum_x=500,
-	zhanpin[12].objectnum_y=500,
-	zhanpin[12].direct=0,
-	zhanpin[12].time=10000,
-	zhanpin[12].mode=1,
-	zhanpin[12].contect1="å¤§å®¶å¥½ï¼Œæˆ‘æ˜¯åˆšåˆšä¸Šå²—çš„è§£è¯´å‘˜å°çµï¼Œæ¥è‡ªå“ˆå°”æ»¨å·¥ä¸šå¤§å­¦ï¼Œäº’åŠ¨åª’ä½“è®¾è®¡ä¸è£…å¤‡æœåŠ¡åˆ›æ–°ï¼Œæ–‡åŒ–å’Œæ—…æ¸¸éƒ¨é‡ç‚¹å®éªŒå®¤ã€‚æˆ‘æ˜¯å¯ä»¥æä¾›å¼•å¯¼ï¼Œè®²è§£å’Œäº’åŠ¨ç­‰æœåŠ¡çš„æ™ºèƒ½æœºå™¨äººï¼Œæ¬¢è¿å„ä½è§‚æ‘©é‡ç‚¹å®éªŒå®¤å±•è§ˆï¼Œç°åœ¨ï¼Œè¯·å¤§å®¶éšæˆ‘å‚è§‚ã€‚",
-	zhanpin[12].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[12].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[13].objectnum=81,
-	zhanpin[13].objectnum_x=500,
-	zhanpin[13].objectnum_y=450,
-	zhanpin[13].direct=180,
-	zhanpin[13].time=30000,
-	zhanpin[13].mode=1,
-	zhanpin[13].contect1="è¿™ä»¶å…­è€³å¤§é“œé”…ï¼Œä¸ºé‡‘ä»£å…¸å‹ç‚Šå…·ï¼Œè¿™ç§é”…åœ¨è¾½ä»£å·²è¾ƒæµè¡Œï¼Œé‡‘ä»£æ²¿è¢­å¹¶æœ‰æ‰€å‘å±•ã€‚åœ¨æ¸¸çŒæˆ–è¡Œå†›æ‰“ä»—ä¸­ï¼Œéœ€è¦ä¸´æ—¶å®‰è¥æ‰å¯¨ï¼ŒåŸ‹é”…é€ é¥­ï¼Œä¼—å¤šçš„äººåƒé¥­éœ€ç”¨å¤§é”…ã€‚è€Œå¥³çœŸäººå–œæ¬¢çš„é£Ÿç‰©ä¸­ï¼Œç¾Šã€ç‰›ã€é©¬å æœ‰å¾ˆå¤§æ¯”é‡ï¼Œä»–ä»¬åˆä¹ æƒ¯ç…®é£Ÿå¤§å—è‚‰ï¼Œè¿™ç§å…­è€³é”…æ°å·§é€‚åº”äº†å½“æ—¶çš„éœ€è¦ã€‚è¿™ä»¶å¤§é“œé”…å®Œæ•´æ— æŸï¼Œæ˜¯é»‘é¾™æ±Ÿçœç›®å‰å‡ºåœŸçš„é“œé”…ä¸­è¾ƒå¤§çš„ä¸€å£ï¼Œå¯¹äºç ”ç©¶é‡‘ä»£å†¶ç‚¼æŠ€æœ¯çš„å‘å±•æœ‰é‡å¤§ä»·å€¼ã€‚è¯·è·Ÿæˆ‘æ¥",
-	zhanpin[13].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[13].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[14].objectnum=82,
-	zhanpin[14].objectnum_x=500,
-	zhanpin[14].objectnum_y=300,
-	zhanpin[14].direct=180,
-	zhanpin[14].time=0,
-	zhanpin[14].mode=1,
-	zhanpin[14].contect1="",
-	zhanpin[14].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[14].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	
-	zhanpin[15].objectnum=83,
-	zhanpin[15].objectnum_x=400,
-	zhanpin[15].objectnum_y=300,
-	zhanpin[15].direct=90,
-	zhanpin[15].time=0,
-	zhanpin[15].mode=1,
-	zhanpin[15].contect1="",
-	zhanpin[15].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[15].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[16].objectnum=84,
-	zhanpin[16].objectnum_x=400,
-	zhanpin[16].objectnum_y=350,
-	zhanpin[16].direct=0,
-	zhanpin[16].time=67000,
-	zhanpin[16].mode=1,
-	zhanpin[16].contect1="é‡‘ä»£é™¶ç“·ä¸šåœ¨ä¸­å›½çª‘ç“·å²ä¸Šæ˜¯ä¸€ä¸ªä¸å¯ç¼ºå°‘çš„ç»„æˆéƒ¨åˆ†ï¼Œè¿éƒ½å‰åœ¨ä¸œåŒ—åœ°åŒºæ‰€ç”Ÿäº§çš„é™¶ç“·æ°´å¹³è¾ƒä½ï¼Œè¿éƒ½ç‡•äº¬ä¹‹ååœ¨å…³å†…ç”Ÿäº§çš„é™¶ç“·åˆ™æœ‰äº†è¾ƒå¤§çš„å‘å±•ï¼Œç“·å™¨é€ å‹å¤šæ‰¿è¢­å®‹å¼çš„æ—¥ç”¨å™¨çš¿ï¼Œè¾ƒå…¸å‹çš„æœ‰åŒç³»ã€ä¸‰ç³»ã€å››ç³»ç“¶ã€ç³»è€³ç½ç­‰ï¼Œè¿™ä¸å¥³çœŸæ—çš„æ¸¸ç‰§æ¸”çŒç”Ÿæ´»æœ‰ä¸€å®šæ¸Šæºå…³ç³»ã€‚æ¸…é…’è‚¥ç¾Šå››ç³»ç“¶ï¼Œæ­¤ç“¶ç“·è´¨è¾ƒç²—ï¼Œèƒå‘ˆç±³ç°è‰²ã€‚å°å£ï¼Œå‰Šè‚©ã€‚è‚©ä¸Šé™„æœ‰ç”¨äºç³»å¸¦çš„å››ä¸ªæ¡¥çŠ¶è€³.å¤§é¼“è…¹.çŸ®åœˆè¶³ã€‚å™¨è¡¨ç»˜æœ‰ç®€ç–ã€æ˜å¿«çš„é»‘è‰²è‰å¶çº¹å’Œå¼¦çº¹ã€‚ä¸­é—´ç©ºç™½å¤„ç”¨é»‘æ²¹æ¨ªä¹¦â€œæ¸…é…’è‚¥ç¾Šâ€å››ä¸ªå­—ã€‚è¿™ä»¶ç“·å™¨ä»é€ å½¢ã€çº¹é¥°å’Œæ–‡å­—å†…å®¹ä¸Šå‡å¸¦æœ‰æµ“åšçš„è‰åœ°æ¸¸ç‰§ç”Ÿæ´»çš„æ°”æ¯ï¼Œæ˜¯å¥³çœŸä¼ ç»Ÿæ–‡åŒ–å’Œä¸­åŸæ–‡åŒ–ç›¸ç»“åˆçš„äº§ç‰©ã€‚å±é‡‘ä»£ç£å·çª‘ç³»äº§å“ã€‚æ­¤å¤–è¿˜æœ‰é»‘é‡‰ç‰å£¶æ˜¥ç“¶ã€é»‘é‡‰è‘«èŠ¦å‹å°å£¶ã€‚",
-	zhanpin[16].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[16].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[17].objectnum=85,
-	zhanpin[17].objectnum_x=400,
-	zhanpin[17].objectnum_y=400,
-	zhanpin[17].direct=0,
-	zhanpin[17].time=72000,
-	zhanpin[17].mode=1,
-	zhanpin[17].contect1="ä¸­åŸåœ°åŒºå¹¿ä¸ºæµä¼ çš„å†å²æ•…äº‹è¢«é‡‡ç”¨åœ¨é“œé•œä¸Šï¼Œç”±æ­¤å‡ºç°äº†äººç‰©æ•…äº‹é•œï¼Œæ±‰æ–‡åŒ–å¯¹å¥³çœŸäººæ½œç§»é»˜åŒ–çš„å½±å“å¯è§ä¸€æ–‘ã€‚é‡‘ä»£é“œç¦æ”¿ç­–ä¸¥å‰ï¼Œä¸ºé˜²æ­¢é“œæºæµå¤±ï¼Œé‚åœ¨æ–°ã€æ—§é“œé•œè¾¹ç¼˜åˆ»å†™å®˜åºœéªŒè®°æ–‡å­—å’ŒæŠ¼è®°ç¬¦å·ï¼Œè¿™æ˜¯é‡‘ä»£é“œé•œçš„ä¸€ä¸ªä¸»è¦ç‰¹å¾ã€‚é‡‘ä»£å±±æ°´äººç‰©æ•…äº‹é•œæ˜¯æˆ‘å›½ç›®å‰ä¿å­˜æœ€ä¸ºå®Œå¥½çš„é‡‘ä»£é“œé•œï¼Œåšå·¥ååˆ†ç²¾è‡´ã€‚é•œèƒŒå›¾æ¡ˆåˆ†ä¸ºä¸Šã€ä¸‹ä¸¤éƒ¨åˆ†ï¼Œé“œé•œé‡‡ç”¨å†™å®ä¸å¤¸å¼ ç›¸ç»“åˆçš„è‰ºæœ¯æ‰‹æ³•ï¼Œæ„å›¾è™½ç„¶å¤æ‚ï¼Œä½†å¸ƒå±€åˆç†ï¼Œå·¥è‰ºç²¾æ¹›ï¼Œå ªç§°ä¸­å›½é‡‘ä»£é“œé•œçš„ä½³ä½œã€‚è¿™é¢å±±æ°´äººç‰©æ•…äº‹çº¹é“œé•œæ˜¯1975å¹´ä»ä¸­å›½é»‘é¾™æ±Ÿçœç»¥æ£±å¿å¢ƒå†…çš„ä¸€åº§é‡‘ä»£è´µæ—å¢“è‘¬ä¸­å‡ºåœŸçš„ï¼Œæ˜¯å¥³çœŸè´µæ—æ›¾ç»ä½¿ç”¨è¿‡çš„ä¸€ä»¶å™¨ç‰©ï¼Œè·ä»Šå·²æœ‰åƒå¹´çš„å†å²ã€‚é“œé•œå‡ºåœŸæ—¶æ²¡æœ‰é”ˆèš€ï¼Œè€Œä¸”ä¿å­˜å®Œå¥½ï¼Œè¿™åœ¨ä¼ ä¸–çš„ä¸­å›½å¤ä»£é“œé•œä¸­ååˆ†ç½•è§ï¼Œä¸ºå¤ä»£é“œé•œä¸­æ‰€é²œæœ‰ï¼Œæ˜¯ä¸å¯å¤šå¾—çš„å®ç‰©çå“ã€‚",
-	zhanpin[17].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[17].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[18].objectnum=86,
-	zhanpin[18].objectnum_x=400,
-	zhanpin[18].objectnum_y=450,
-	zhanpin[18].direct=0,
-	zhanpin[18].time=52000,
-	zhanpin[18].mode=1,
-	zhanpin[18].contect1="1988å¹´5æœˆï¼Œå“ˆå°”æ»¨å¸‚é“å¤–åŒºå·¨æºä¹¡åŸå­æ‘çš„æ‘æ°‘åœ¨ç§åœ°æ—¶æŒ–åˆ°äº†ä¸€åº§çŸ³æ¤æœ¨æ£ºå¢“ã€‚ç»è€ƒå¤äººå‘˜è€ƒè¯ï¼Œè¯¥å¢“æ˜¯é‡‘ä»£é½å›½ç‹å®Œé¢œæ™å¤«å¦‡åˆè‘¬å¢“ã€‚å®Œé¢œæ™(?ï½1162å¹´)ï¼Œå¥³çœŸåæ–¡è®ºï¼Œæ˜¯é‡‘å¤ªç¥–å®Œé¢œé˜¿éª¨æ‰“çš„å ‚å¼Ÿï¼Œç”Ÿå‰æ‹œå¤ªå°‰ã€é½å›½ç‹ã€‚æ­¤å¢“ä¸ºå¤«å¦»åˆè‘¬åœŸå‘ç«–ç©´çŸ³æ¤æœ¨æ£ºå¢“ï¼Œç”·å¢“ä¸»äººèº«ç€8å±‚17ä»¶æœè£…ï¼Œå¥³å¢“ä¸»äººèº«ç€9å±‚16ä»¶æœè£…ï¼Œç”¨æ–™ç²¾ç¾ï¼Œåšå·¥è€ƒç©¶ã€‚è¿™ä¸¤å¥—è‡ªå† é¥°ã€è¡£è£³ã€è‡³é‹è¢œæœé¥°åŸºæœ¬å®Œæ•´ï¼Œå‡ä¸ºé‡‘ä»£è´µæ—æœé¥°ï¼Œæ¬¾å¼è¿˜ä¿ç•™å¥³çœŸæœé¥°å·¦è¡½ã€çª„è¢–ç­‰ç‰¹ç‚¹ã€‚é‡‘é½å›½ç‹å¢“å‡ºåœŸçš„ä¸ç»‡å“æœé¥°å¡«è¡¥äº†ä¸­å›½é‡‘ä»£æœé¥°å²çš„ç©ºç™½ï¼Œè¢«èª‰ä¸ºâ€œåŒ—å›½é©¬ç‹å †â€ã€‚",
-	zhanpin[18].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[18].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[19].objectnum=87,
-	zhanpin[19].objectnum_x=400,
-	zhanpin[19].objectnum_y=500,
-	zhanpin[19].direct=0,
-	zhanpin[19].time=0,
-	zhanpin[19].mode=1,
-	zhanpin[19].contect1="",
-	zhanpin[19].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[19].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[20].objectnum=88,
-	zhanpin[20].objectnum_x=450,
-	zhanpin[20].objectnum_y=500,
-	zhanpin[20].direct=90,
-	zhanpin[20].time=80000,
-	zhanpin[20].mode=1,
-	zhanpin[20].contect1="ä¸‹é¢ä»‹ç»çš„æ˜¯æœ¬é¦†åå¤§é•‡é¦†ä¹‹å®,é“œåé¾™ã€‚é¾™æ˜¯æˆ‘ä»¬åå¤å…ˆæ°‘åˆ›é€ çš„ä¸€ç§ç‹¬ç‰¹çš„åŠ¨ç‰©å½¢è±¡ï¼Œå´›èµ·äºç™½å±±é»‘æ°´é—´çš„å¥³çœŸæ—ï¼Œå…¥ä¸»ä¸­åŸï¼Œå»ºç«‹çš„å¤§é‡‘å›½ï¼Œå—ä¸­åŸå…ˆè¿›æ–‡åŒ–çš„å½±å“ï¼Œé‡‘ä»£å¸ç‹ä¹Ÿå–œæ¬¢æŠŠé¾™ä½œä¸ºç‹æƒçš„è±¡å¾ä¹‹ç‰©ã€‚ä¸­å›½å¤ä»£çš„é¾™çš„å½¢åˆ¶æœ‰ç›˜é¾™ã€å›¢é¾™ã€é£é¾™ã€è¡Œé¾™ï¼Œè€Œé‡‘ä»£å´æ˜¯åé¾™å±…å¤šã€‚å¥³çœŸæ—æ˜¯ä¸€ä¸ªç‹©çŒæ°‘æ—ï¼Œç‹—æ˜¯ä»–ä»¬çš„å¿ å®ä¼™ä¼´ï¼Œé‡‘ä»£çš„åé¾™é‡‡ç”¨ç‹—çš„åå§¿ï¼Œç¬¦åˆäº†è¿™ä¸ªæ°‘æ—çš„æ–‡åŒ–å¿ƒç†ã€‚é‡‘ä»¿å®‹åˆ¶ï¼Œä¾ç…§ã€Šè¥é€ æ³•å¼ã€‹è®°è½½ï¼Œå®‹ä»£å»ºç­‘çš„æœ›æŸ±å¤´æœ‰ç”¨åé¾™è£…é¥°çš„è§„åˆ¶ï¼Œå¤§é‡å‡ºåœŸäºé‡‘ä»£çš‡å®¶å»ºç­‘é—å€çš„é‡‘ä»£é“œåº§é¾™ï¼Œæˆ–è®¸æ˜¯é‡‘ä»£çš‡å®¶å»ºç­‘ä¸­çš„è£…é¥°ç‰©ä»¶ã€‚è¯¥ä»¶é“œåé¾™äºé»‘é¾™æ±Ÿçœå“ˆå°”æ»¨å¸‚é˜¿åŸåŒºç™½åŸé‡‘ä¸Šäº¬ä¼šå®åºœé—å€å‡ºåœŸï¼Œé€šé«˜19ç‚¹6å˜ç±³ï¼Œå®½17å˜ç±³ï¼Œè¿›æ·±8ç‚¹5å˜ç±³ã€‚è¿™å°±æ˜¯å†å²ç¬¬å››å±•å…çš„å…¨éƒ¨å†…å®¹å•¦ï¼Œä»Šå¤©å°çµå°±ç»™å¤§å®¶è®²è§£åˆ°è¿™é‡Œå•¦,ï¼Œå¤§å®¶å¯ä»¥ç»§ç»­å¾€å‰èµ°å‚è§‚å…¶ä½™å±•å…å“¦ï¼Œå†è§å•¦ï¼",
-	zhanpin[20].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[20].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-
-	zhanpin[21].objectnum=89,
-	zhanpin[21].objectnum_x=500,
-	zhanpin[21].objectnum_y=500,
-	zhanpin[21].direct=45,
-	zhanpin[21].time=5000,
-	zhanpin[21].mode=1,
-	zhanpin[21].contect1="",
-	zhanpin[21].contect2="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
-	zhanpin[21].contect3="è¿™æ˜¯ç¬¬ä¸€ä¸ªå±•å“",
 };
-int objectnums1[100]={1,50,2,51,3,52,4,99,53,5,6};//è¿™ä¸ªè®°å½•çš„æ˜¯å±•å“å·(è¿‡æ—¶)
-int objectnumshand[100]={0,7,10,8,6};//è¿™ä¸ªè®°å½•çš„æ˜¯å±•å“å·
-int objectnums[100]={7,81,82,83,84,85,86,87,88,89};//è¿™ä¸ªè®°å½•çš„æ˜¯å±•å“å·
-int objectnowpos=0;//ç¬¬å‡ ä¸ªå±•å“
-int objectnow=0;//å±•å“æ•°ç»„çš„ä¸­å±•å“çš„æ•°ç»„å·
+//*******
+int objectnums1[100]={1,50,2,51,3,52,4,99,53,5,6};//Õâ¸ö¼ÇÂ¼µÄÊÇÕ¹Æ·ºÅ
+//******
+int objectnumshand[100]={0,7,10,8,6};//Õâ¸ö¼ÇÂ¼µÄÊÇÕ¹Æ·ºÅ
+//*******
+int objectnums[100]={7,1};//Õâ¸ö¼ÇÂ¼µÄÊÇÕ¹Æ·ºÅ
+
+////////
+int objectnowpos=0;//µÚ¼¸¸öÕ¹Æ·
+int objectnow=0;//Õ¹Æ·Êı×éµÄÖĞÕ¹Æ·µÄÊı×éºÅ
+
 int objectnowhand=0;
+
 #define PIf 3.1415926
 extern bool isbegio;
+//////////////////////
 bool zhanting=false;
 bool ishand=false;
+////////////////////////////2018/5/31//ÓïÒô×Ô¶¯²¥·Å
 UINT ThreadComput_speakautotts(LPVOID lpParam);
-CWinThread* pThread_speak_autotts;////è‡ªåŠ¨æ’­æ”¾çº¿ç¨‹
-bool autotts_key=true;//è‡ªåŠ¨æ’­æ”¾å¼€å…³
-bool isautotts=false;//æ˜¯å¦å¯ä»¥æ’­æ”¾
+CWinThread* pThread_speak_autotts;////×Ô¶¯²¥·ÅÏß³Ì
+bool autotts_key=true;//×Ô¶¯²¥·Å¿ª¹Ø
+bool isautotts=false;//ÊÇ·ñ¿ÉÒÔ²¥·Å
 int autotts_time_sleep=0; 
 CRecorder_ExampleDlg *p_CR=NULL;
 extern CVoice *p_DR;
+
+///////////////////////////
 #define WM_USER_SHOW_STATUS	WM_USER + 100
+
 void Convert(char* strIn,char* strOut, int sourceCodepage, int targetCodepage);
 int Json_Explain (char buf[],char Dest[],char result[]) ;
+
 MicArraySession MicArraysession;
 MicArrayHandle MicArrayhandle;
+
+
 float hopedata_x = 0.00;
 float hopedata_y = 0.00;
 float hopedata_theta = 0.00;
+
 char*tts;
 CString *str;
-//åˆæˆå‡½æ•°
+//ºÏ³Éº¯Êı
 void TTSSynth(const string &cap_key, const string &txt_file, const string &out_pcm_file);
-bool HCIAPI TtsSynthCallbackFunction(_OPT_ _IN_ void * pvUserParam,_MUST_ _IN_ TTS_SYNTH_RESULT * psTtsSynthResult,_MUST_ _IN_ HCI_ERR_CODE  hciErrCode);
+bool HCIAPI TtsSynthCallbackFunction(_OPT_ _IN_ void * pvUserParam,
+                                     _MUST_ _IN_ TTS_SYNTH_RESULT * psTtsSynthResult,
+                                     _MUST_ _IN_ HCI_ERR_CODE  hciErrCode);
 static HCI_ERR_CODE WakeupFunc(void *pUserContext, MICARRAY_WAKE_RESULT *pWakeResult);
-static HCI_ERR_CODE WakeDirectionFunc(void *pUserContext, int nDirection);
-static HCI_ERR_CODE VoiceReadyFunc(void *pUserContext, short *pVoiceData, int nVoiceSampleCount);
-// ç”¨äºåº”ç”¨ç¨‹åºâ€œå…³äºâ€èœå•é¡¹çš„ CAboutDlg å¯¹è¯æ¡†
 
-class CAboutDlg : public CDialog{
+static HCI_ERR_CODE WakeDirectionFunc(void *pUserContext, int nDirection);
+
+static HCI_ERR_CODE VoiceReadyFunc(void *pUserContext, short *pVoiceData, int nVoiceSampleCount);
+// ÓÃÓÚÓ¦ÓÃ³ÌĞò¡°¹ØÓÚ¡±²Ëµ¥ÏîµÄ CAboutDlg ¶Ô»°¿ò
+
+class CAboutDlg : public CDialog
+{
 public:
 	CAboutDlg();
-// å¯¹è¯æ¡†æ•°æ®
+
+// ¶Ô»°¿òÊı¾İ
 	enum { IDD = IDD_ABOUTBOX };
-protected:
-	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV æ”¯æŒ
-// å®ç°
+
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV Ö§³Ö
+
+// ÊµÏÖ
 protected:
 	DECLARE_MESSAGE_MAP()
 };
-CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD){
+
+CAboutDlg::CAboutDlg() : CDialog(CAboutDlg::IDD)
+{
 }
-void CAboutDlg::DoDataExchange(CDataExchange* pDX){
+
+void CAboutDlg::DoDataExchange(CDataExchange* pDX)
+{
 	CDialog::DoDataExchange(pDX);
 }
+
 BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 END_MESSAGE_MAP()
-// CRecorder_ExampleDlg å¯¹è¯æ¡†
 
-CRecorder_ExampleDlg::CRecorder_ExampleDlg(CWnd* pParent /*=NULL*/): CDialog(CRecorder_ExampleDlg::IDD, pParent), m_recordingFlag(FALSE){
+// CRecorder_ExampleDlg ¶Ô»°¿ò
+
+CRecorder_ExampleDlg::CRecorder_ExampleDlg(CWnd* pParent /*=NULL*/)
+	: CDialog(CRecorder_ExampleDlg::IDD, pParent)
+	, m_recordingFlag(FALSE)
+{
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+	//  str = _T("");
+	//  strMessage = _T("");
+	//msg = _T("");
 }
-void CRecorder_ExampleDlg::DoDataExchange(CDataExchange* pDX){
+
+void CRecorder_ExampleDlg::DoDataExchange(CDataExchange* pDX)
+{
 	CDialog::DoDataExchange(pDX);
 	DDX_Check(pDX, IDC_BTN_SAVE_RECORDING, m_recordingFlag);
+	//  DDX_Control(pDX, IDC_BUTTON6, m_btn_NAV);
+	//  DDX_Control(pDX, IDC_BTN_CANCEL_RECORD, m_btn_INDRO);
+	//  DDX_Control(pDX, IDC_BTN_START_RECORD, addr_);
+	//  DDX_Control(pDX, IDC_BUTTON2, dir_);
+	//  DDX_Control(pDX, IDC_BUTTON1, m_IconBtn_up);
 	DDX_Control(pDX, IDC_BUTTON1, m_btn1);
+	//  DDX_Control(pDX, IDC_BUTTON2, m_btn2);
+	//  DDX_Control(pDX, IDC_BUTTON3, m_btn2);
 	DDX_Control(pDX, IDC_BUTTON5, m_btn3);
 	DDX_Control(pDX, IDC_BUTTON4, m_btn4);
 	DDX_Control(pDX, IDC_STATIC1, m_pic1);
+	//  DDX_Control(pDX, IDC_MFCBUTTON3, m_btn2);
 	DDX_Control(pDX, IDC_MFCBUTTON7, m_mfcbtn7);
 	DDX_Control(pDX, IDC_MFCBUTTON1, m_mfcbtn1);
 	DDX_Control(pDX, IDC_MFCBUTTON2, m_mfcbtn2);
@@ -522,7 +527,10 @@ void CRecorder_ExampleDlg::DoDataExchange(CDataExchange* pDX){
 	DDX_Control(pDX, IDC_MFCBUTTON4, m_mfcbtn4);
 	DDX_Control(pDX, IDC_MFCBUTTON5, m_mfcbtn5);
 	DDX_Control(pDX, IDC_MFCBUTTON6, m_mfcbtn6);
+
+
 }
+
 BEGIN_MESSAGE_MAP(CRecorder_ExampleDlg, CDialog)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
@@ -551,96 +559,154 @@ BEGIN_MESSAGE_MAP(CRecorder_ExampleDlg, CDialog)
 	ON_WM_DRAWITEM()
 	ON_WM_SIZE()
 	ON_STN_CLICKED(IDC_STATIC1, &CRecorder_ExampleDlg::OnStnClickedStatic1)
+	//ON_BN_CLICKED(IDC_BUTTON9, &CRecorder_ExampleDlg::OnBnClickedButton9)
 	ON_BN_CLICKED(IDC_MFCBUTTON1, &CRecorder_ExampleDlg::OnBnClickedMfcbutton1)
 	ON_BN_CLICKED(IDC_MFCBUTTON3, &CRecorder_ExampleDlg::OnBnClickedMfcbutton3)
 	ON_BN_CLICKED(IDC_MFCBUTTON5, &CRecorder_ExampleDlg::OnBnClickedMfcbutton5)
+	
 	ON_BN_CLICKED(IDC_MFCBUTTON6, &CRecorder_ExampleDlg::OnBnClickedMfcbutton6)
 	ON_BN_CLICKED(IDC_MFCBUTTON7, &CRecorder_ExampleDlg::OnBnClickedMfcbutton7)
+	
+	
+	
 	ON_BN_CLICKED(IDC_MFCBUTTON2, &CRecorder_ExampleDlg::OnBnClickedMfcbutton2)
 	ON_BN_CLICKED(IDC_BUTTON11, &CRecorder_ExampleDlg::OnBnClickedButton11)
 	ON_BN_CLICKED(IDC_BUTTON12, &CRecorder_ExampleDlg::OnBnClickedButton12)
 END_MESSAGE_MAP()
 
-bool CheckAndUpdataAuth(){
-    //è·å–è¿‡æœŸæ—¶é—´
+bool CheckAndUpdataAuth()
+{
+    //»ñÈ¡¹ıÆÚÊ±¼ä
     int64 nExpireTime;
     int64 nCurTime = (int64)time( NULL );
     HCI_ERR_CODE errCode = hci_get_auth_expire_time( &nExpireTime );
-    if( errCode == HCI_ERR_NONE ){
-        //è·å–æˆåŠŸåˆ™åˆ¤æ–­æ˜¯å¦è¿‡æœŸ
-        if( nExpireTime > nCurTime ){
-            //æ²¡æœ‰è¿‡æœŸ
+    if( errCode == HCI_ERR_NONE )
+    {
+        //»ñÈ¡³É¹¦ÔòÅĞ¶ÏÊÇ·ñ¹ıÆÚ
+        if( nExpireTime > nCurTime )
+        {
+            //Ã»ÓĞ¹ıÆÚ
             printf( "auth can use continue\n" );
             return true;
         }
     }
-    //è·å–è¿‡æœŸæ—¶é—´å¤±è´¥æˆ–å·²ç»è¿‡æœŸ
-    //æ‰‹åŠ¨è°ƒç”¨æ›´æ–°æˆæƒ
+
+    //»ñÈ¡¹ıÆÚÊ±¼äÊ§°Ü»òÒÑ¾­¹ıÆÚ
+    //ÊÖ¶¯µ÷ÓÃ¸üĞÂÊÚÈ¨
     errCode = hci_check_auth();
-    if( errCode == HCI_ERR_NONE ){
-        //æ›´æ–°æˆåŠŸ
+    if( errCode == HCI_ERR_NONE )
+    {
+        //¸üĞÂ³É¹¦
         printf( "check auth success \n" );
         return true;
-    }else{
-        //æ›´æ–°å¤±è´¥
+    }
+    else
+    {
+        //¸üĞÂÊ§°Ü
         printf( "check auth return (%d:%s)\n", errCode ,hci_get_error_info(errCode));
         return false;
     }
 }
-//è·å–capkeyå±æ€§
-void GetCapkeyProperty(const string&cap_key,AsrRecogType & type,AsrRecogMode &mode){
+
+//»ñÈ¡capkeyÊôĞÔ
+void GetCapkeyProperty(const string&cap_key,AsrRecogType & type,AsrRecogMode &mode)
+{
     HCI_ERR_CODE errCode = HCI_ERR_NONE;
 	CAPABILITY_ITEM *pItem = NULL;
-	// æšä¸¾æ‰€æœ‰çš„asrèƒ½åŠ›
+
+	// Ã¶¾ÙËùÓĞµÄasrÄÜÁ¦
 	CAPABILITY_LIST list = {0};
-	if ((errCode = hci_get_capability_list("asr", &list))!= HCI_ERR_NONE){
-		// æ²¡æœ‰æ‰¾åˆ°ç›¸åº”çš„èƒ½åŠ›ã€‚
+	if ((errCode = hci_get_capability_list("asr", &list))!= HCI_ERR_NONE)
+	{
+		// Ã»ÓĞÕÒµ½ÏàÓ¦µÄÄÜÁ¦¡£
 		return;
 	}
-	// è·å–asrèƒ½åŠ›é…ç½®ä¿¡æ¯ã€‚
-	for (int i = 0; i < list.uiItemCount; i++){
-		if (list.pItemList[i].pszCapKey != NULL && stricmp(list.pItemList[i].pszCapKey, cap_key.c_str()) == 0){
+
+	// »ñÈ¡asrÄÜÁ¦ÅäÖÃĞÅÏ¢¡£
+	for (int i = 0; i < list.uiItemCount; i++)
+	{
+		if (list.pItemList[i].pszCapKey != NULL && stricmp(list.pItemList[i].pszCapKey, cap_key.c_str()) == 0)
+		{
 			pItem = &list.pItemList[i];
 			break;
 		}
 	}
-	// æ²¡æœ‰è·å–ç›¸åº”èƒ½åŠ›é…ç½®ï¼Œè¿”å›ã€‚
-	if (pItem == NULL || pItem->pszCapKey == NULL){
+
+	// Ã»ÓĞ»ñÈ¡ÏàÓ¦ÄÜÁ¦ÅäÖÃ£¬·µ»Ø¡£
+	if (pItem == NULL || pItem->pszCapKey == NULL)
+	{
 		hci_free_capability_list(&list);
 		return;
 	}
-	if (strstr(pItem->pszCapKey, "cloud") != NULL){
+
+    
+	if (strstr(pItem->pszCapKey, "cloud") != NULL)
+	{
 		type = kRecogTypeCloud;
-	}else{
+	}
+	else
+	{
 		type = kRecogTypeLocal;
 	}  
-	if (strstr(pItem->pszCapKey, "freetalk") != NULL){
+
+	if (strstr(pItem->pszCapKey, "freetalk") != NULL)
+	{
 		mode = kRecogModeFreetalk;
-	}else if (strstr(pItem->pszCapKey, "grammar") != NULL){
+	}
+	else if (strstr(pItem->pszCapKey, "grammar") != NULL)
+	{
 		mode = kRecogModeGrammar;
-	}else if (strstr(pItem->pszCapKey, "dialog") != NULL){
+	}
+	else if (strstr(pItem->pszCapKey, "dialog") != NULL)
+	{
 		mode = kRecogModeDialog;
-	}else{
+	}
+	else
+	{
 		mode = kRecogModeUnkown;
 	}
+
 	hci_free_capability_list(&list);
+       
     return;
 };
-BOOL CRecorder_ExampleDlg::OnInitDialog(){
+// CRecorder_ExampleDlg ÏûÏ¢´¦Àí³ÌĞò
+
+BOOL CRecorder_ExampleDlg::OnInitDialog()
+{
 	CDialog::OnInitDialog();
+	//»æÖÆÔ²½Ç¶Ô»°¿ò
+	/*SetWindowLong(m_hWnd,GWL_HWNDPARENT,NULL);
+	CRgn m_rgn; 
+	RECT rc; 
+	GetWindowRect(&rc); 
+	m_rgn.CreateRoundRectRgn(rc.left,rc.top,rc.right,rc.bottom,800,100); 
+	SetWindowRgn(m_rgn,TRUE); */
+
+
+
+	//SetWindowPos(NULL,0,0,GetSystemMetrics(SM_CXSCREEN),GetSystemMetrics(SM_CYSCREEN),0);
+//¸Ä±ä
+
+
+	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
 	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
 	ASSERT(IDM_ABOUTBOX < 0xF000);
+
 	CMenu* pSysMenu = GetSystemMenu(FALSE);
-	if (pSysMenu != NULL){
+	if (pSysMenu != NULL)
+	{
 		BOOL bNameValid;
 		CString strAboutMenu;
 		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
 		ASSERT(bNameValid);
-		if (!strAboutMenu.IsEmpty()){
+		if (!strAboutMenu.IsEmpty())
+		{
 			pSysMenu->AppendMenu(MF_SEPARATOR);
 			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
 		}
 	}
+
 	CFont * f;   
     f = new CFont;   
     f->CreateFont(50, // nHeight   
@@ -656,106 +722,169 @@ BOOL CRecorder_ExampleDlg::OnInitDialog(){
     CLIP_DEFAULT_PRECIS, // nClipPrecision   
     DEFAULT_QUALITY, // nQuality   
     DEFAULT_PITCH | FF_SWISS, // nPitchAndFamily   
-    _T("å¾®è½¯é›…é»‘")); // lpszFac   
-     // SetTextColor(HDC hDC,RGB(255,255,0)); //è®¾ç½®å­—ä½“é¢œè‰²  
-      //å°†æŒ‰é’®ä¿®æ”¹ä¸ºBS_OWNERDRAWé£æ ¼,å…è®¸buttonçš„é‡‡ç”¨è‡ªç»˜æ¨¡å¼
+    _T("Î¢ÈíÑÅºÚ")); // lpszFac   
+  
+     // SetTextColor(HDC hDC,RGB(255,255,0)); //ÉèÖÃ×ÖÌåÑÕÉ«  
+	/*GetDlgItem(IDC_STATIC4)->SetFont(f);
+      GetDlgItem(IDC_MFCBUTTON7)->SetFont(f);  
+	  GetDlgItem(IDC_MFCBUTTON2)->SetFont(f);  
+	  GetDlgItem(IDC_MFCBUTTON5)->SetFont(f);
+	  GetDlgItem(IDC_MFCBUTTON6)->SetFont(f);
+	  GetDlgItem(IDC_MFCBUTTON1)->SetFont(f);  
+	  GetDlgItem(IDC_MFCBUTTON3)->SetFont(f);  
+	  GetDlgItem(IDC_MFCBUTTON4)->SetFont(f);
+	  GetDlgItem(IDC_BTN_START_RECORD)->SetFont(f);  
+	  GetDlgItem(IDC_BTN_CANCEL_RECORD)->SetFont(f); 
+
+	 */
+	 
+      //½«°´Å¥ĞŞ¸ÄÎªBS_OWNERDRAW·ç¸ñ,ÔÊĞíbuttonµÄ²ÉÓÃ×Ô»æÄ£Ê½
      GetDlgItem(IDC_MFCBUTTON7)->ModifyStyle(0,BS_OWNERDRAW,0);
-     //ç»‘å®šæ§ä»¶IDC_BUTTON1ä¸ç±»CMyButtonï¼Œå“åº”é‡è½½å‡½æ•°DrawItem()
-	 m_mfcbtn7.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn7.SetTextColor(RGB(92,55,27));
-	 m_mfcbtn6.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn6.SetTextColor(RGB(92,55,27));
-	 m_mfcbtn5.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn5.SetTextColor(RGB(92,55,27));
-	 m_mfcbtn4.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn4.SetTextColor(RGB(92,55,27));
-	 m_mfcbtn3.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn3.SetTextColor(RGB(92,55,27));
-	 m_mfcbtn2.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn2.SetTextColor(RGB(92,55,27));
-	 m_mfcbtn1.SetFaceColor(RGB(195,209,216));
-	 m_mfcbtn1.SetTextColor(RGB(92,55,27));
-	SetIcon(m_hIcon, TRUE);			// è®¾ç½®å¤§å›¾æ ‡
-	SetIcon(m_hIcon, FALSE);		// è®¾ç½®å°å›¾æ ‡
+	 
+     //°ó¶¨¿Ø¼şIDC_BUTTON1ÓëÀàCMyButton£¬ÏìÓ¦ÖØÔØº¯ÊıDrawItem()
+	
+	  m_mfcbtn7.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn7.SetTextColor(RGB(92,55,27));
+	  m_mfcbtn6.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn6.SetTextColor(RGB(92,55,27));
+	  m_mfcbtn5.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn5.SetTextColor(RGB(92,55,27));
+	  m_mfcbtn4.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn4.SetTextColor(RGB(92,55,27));
+	   m_mfcbtn3.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn3.SetTextColor(RGB(92,55,27));
+	   m_mfcbtn2.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn2.SetTextColor(RGB(92,55,27));
+	     m_mfcbtn1.SetFaceColor(RGB(195,209,216));
+	  m_mfcbtn1.SetTextColor(RGB(92,55,27));
+	
+	  
+	  //buttonÌùÍ¼,ÎŞÓÃ
+	 /* HBITMAP   hBitmap; 
+
+		HBITMAP hbmp1=::LoadBitmap(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDB_BITMAP1));
+        m_btn1.SetBitmap(hbmp1);
+
+		HBITMAP hbmp3=::LoadBitmap(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDB_BITMAP3));
+        m_btn3.SetBitmap(hbmp3);
+		HBITMAP hbmp4=::LoadBitmap(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDB_BITMAP4));
+        m_btn4.SetBitmap(hbmp4);
+  
+  
+       HBITMAP hbmp5=::LoadBitmap(AfxGetInstanceHandle(),MAKEINTRESOURCE(IDB_BITMAP5));
+        m_pic1.SetBitmap(hbmp5);
+		*/
+	// IDM_ABOUTBOX ±ØĞëÔÚÏµÍ³ÃüÁî·¶Î§ÄÚ¡£
+
+	//ÃÀ»¯
+
+
+	// ÉèÖÃ´Ë¶Ô»°¿òµÄÍ¼±ê¡£µ±Ó¦ÓÃ³ÌĞòÖ÷´°¿Ú²»ÊÇ¶Ô»°¿òÊ±£¬¿ò¼Ü½«×Ô¶¯
+	//  Ö´ĞĞ´Ë²Ù×÷
+	SetIcon(m_hIcon, TRUE);			// ÉèÖÃ´óÍ¼±ê
+	SetIcon(m_hIcon, FALSE);		// ÉèÖÃĞ¡Í¼±ê
+
 	((CButton *)GetDlgItem( IDC_CONTINUE ))->SetCheck(TRUE);
+
+	//////////////////xhy
 	p_CR=(CRecorder_ExampleDlg*)this;
-    if (Init() == false){
+	//////////////////
+    if (Init() == false)
+    {
         return FALSE;
     }
-	return TRUE;  // é™¤éå°†ç„¦ç‚¹è®¾ç½®åˆ°æ§ä»¶ï¼Œå¦åˆ™è¿”å› TRUE
+	return TRUE;  // ³ı·Ç½«½¹µãÉèÖÃµ½¿Ø¼ş£¬·ñÔò·µ»Ø TRUE
 }
-void CRecorder_ExampleDlg::OnSysCommand(UINT nID, LPARAM lParam){
-	if ((nID & 0xFFF0) == IDM_ABOUTBOX){
+
+void CRecorder_ExampleDlg::OnSysCommand(UINT nID, LPARAM lParam)
+{
+	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
+	{
 		CAboutDlg dlgAbout;
 		dlgAbout.DoModal();
 	}
-	else{
+	else
+	{
 		CDialog::OnSysCommand(nID, lParam);
 	}
 }
-// å¦‚æœå‘å¯¹è¯æ¡†æ·»åŠ æœ€å°åŒ–æŒ‰é’®ï¼Œåˆ™éœ€è¦ä¸‹é¢çš„ä»£ç 
-//  æ¥ç»˜åˆ¶è¯¥å›¾æ ‡ã€‚å¯¹äºä½¿ç”¨æ–‡æ¡£/è§†å›¾æ¨¡å‹çš„ MFC åº”ç”¨ç¨‹åºï¼Œ
-//  è¿™å°†ç”±æ¡†æ¶è‡ªåŠ¨å®Œæˆã€‚
 
-void CRecorder_ExampleDlg::OnPaint(){
-	if (IsIconic()){
-		CPaintDC dc(this); // ç”¨äºç»˜åˆ¶çš„è®¾å¤‡ä¸Šä¸‹æ–‡
+// Èç¹ûÏò¶Ô»°¿òÌí¼Ó×îĞ¡»¯°´Å¥£¬ÔòĞèÒªÏÂÃæµÄ´úÂë
+//  À´»æÖÆ¸ÃÍ¼±ê¡£¶ÔÓÚÊ¹ÓÃÎÄµµ/ÊÓÍ¼Ä£ĞÍµÄ MFC Ó¦ÓÃ³ÌĞò£¬
+//  Õâ½«ÓÉ¿ò¼Ü×Ô¶¯Íê³É¡£
+
+void CRecorder_ExampleDlg::OnPaint()
+{
+	if (IsIconic())
+	{
+		CPaintDC dc(this); // ÓÃÓÚ»æÖÆµÄÉè±¸ÉÏÏÂÎÄ
+
 		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
-		// ä½¿å›¾æ ‡åœ¨å·¥ä½œåŒºçŸ©å½¢ä¸­å±…ä¸­
+
+		// Ê¹Í¼±êÔÚ¹¤×÷Çø¾ØĞÎÖĞ¾ÓÖĞ
 		int cxIcon = GetSystemMetrics(SM_CXICON);
 		int cyIcon = GetSystemMetrics(SM_CYICON);
 		CRect rect;
 		GetClientRect(&rect);
 		int x = (rect.Width() - cxIcon + 1) / 2;
 		int y = (rect.Height() - cyIcon + 1) / 2;
-		// ç»˜åˆ¶å›¾æ ‡
+
+		// »æÖÆÍ¼±ê
 		dc.DrawIcon(x, y, m_hIcon);
-	}else{
+	}
+	else
+	{
 		//CDialog::OnPaint(); 
-		//æ·»åŠ ä»£ç å¯¹è¯æ¡†èƒŒæ™¯è´´å›¾
+		//Ìí¼Ó´úÂë¶Ô»°¿ò±³¾°ÌùÍ¼
 		CPaintDC   dc(this);  
 		CRect   rect;  
-		GetClientRect(&rect);    //è·å–å¯¹è¯æ¡†é•¿å®½      
-		CDC   dcBmp;             //å®šä¹‰å¹¶åˆ›å»ºä¸€ä¸ªå†…å­˜è®¾å¤‡ç¯å¢ƒ
-		dcBmp.CreateCompatibleDC(&dc);             //åˆ›å»ºå…¼å®¹æ€§DC
+		GetClientRect(&rect);    //»ñÈ¡¶Ô»°¿ò³¤¿í      
+		CDC   dcBmp;             //¶¨Òå²¢´´½¨Ò»¸öÄÚ´æÉè±¸»·¾³
+		dcBmp.CreateCompatibleDC(&dc);             //´´½¨¼æÈİĞÔDC
 		CBitmap   bmpBackground;   
-		bmpBackground.LoadBitmap(IDB_BITMAP7);    //è½½å…¥èµ„æºä¸­å›¾ç‰‡
-		BITMAP   m_bitmap;                         //å›¾ç‰‡å˜é‡               
-		bmpBackground.GetBitmap(&m_bitmap);       //å°†å›¾ç‰‡è½½å…¥ä½å›¾ä¸­
-		//å°†ä½å›¾é€‰å…¥ä¸´æ—¶å†…å­˜è®¾å¤‡ç¯å¢ƒ
+		bmpBackground.LoadBitmap(IDB_BITMAP7);    //ÔØÈë×ÊÔ´ÖĞÍ¼Æ¬
+		BITMAP   m_bitmap;                         //Í¼Æ¬±äÁ¿               
+		bmpBackground.GetBitmap(&m_bitmap);       //½«Í¼Æ¬ÔØÈëÎ»Í¼ÖĞ
+		//½«Î»Í¼Ñ¡ÈëÁÙÊ±ÄÚ´æÉè±¸»·¾³
 		CBitmap  *pbmpOld=dcBmp.SelectObject(&bmpBackground);
-		//è°ƒç”¨å‡½æ•°æ˜¾ç¤ºå›¾ç‰‡StretchBltæ˜¾ç¤ºå½¢çŠ¶å¯å˜
+		//µ÷ÓÃº¯ÊıÏÔÊ¾Í¼Æ¬StretchBltÏÔÊ¾ĞÎ×´¿É±ä
 		dc.StretchBlt(0,0,rect.Width(),rect.Height(),&dcBmp,0,0,m_bitmap.bmWidth,m_bitmap.bmHeight,SRCCOPY); 
-	}
+			}
 }
-//å½“ç”¨æˆ·æ‹–åŠ¨æœ€å°åŒ–çª—å£æ—¶ç³»ç»Ÿè°ƒç”¨æ­¤å‡½æ•°å–å¾—å…‰æ ‡
-//æ˜¾ç¤ºã€‚
-HCURSOR CRecorder_ExampleDlg::OnQueryDragIcon(){
+
+//µ±ÓÃ»§ÍÏ¶¯×îĞ¡»¯´°¿ÚÊ±ÏµÍ³µ÷ÓÃ´Ëº¯ÊıÈ¡µÃ¹â±ê
+//ÏÔÊ¾¡£
+HCURSOR CRecorder_ExampleDlg::OnQueryDragIcon()
+{
 	return static_cast<HCURSOR>(m_hIcon);
 }
-LRESULT CRecorder_ExampleDlg::OnShowStatus( WPARAM wParam, LPARAM lParam ){
+
+LRESULT CRecorder_ExampleDlg::OnShowStatus( WPARAM wParam, LPARAM lParam )
+{
 	CString * str = (CString *)lParam;
 	AppendMessage(*str);
 	delete str;
+
 	RECORDER_EVENT eEvent = (RECORDER_EVENT)wParam;
-	switch( eEvent ){
-	// è‹¥æ˜¯å¼€å§‹å½•éŸ³ã€å¬åˆ°å£°éŸ³æˆ–è€…å¼€å§‹è¯†åˆ«ï¼Œåˆ™ä½¿æŒ‰é’®ä¸å¯ç”¨
+	switch( eEvent )
+	{
+		// ÈôÊÇ¿ªÊ¼Â¼Òô¡¢Ìıµ½ÉùÒô»òÕß¿ªÊ¼Ê¶±ğ£¬ÔòÊ¹°´Å¥²»¿ÉÓÃ
 	case RECORDER_EVENT_BEGIN_RECORD:
 	case RECORDER_EVENT_BEGIN_RECOGNIZE:		
 	case RECORDER_EVENT_HAVING_VOICE:
 		GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( FALSE );
 		GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( TRUE );
 		break;
-		// çŠ¶æ€ä¿æŒä¸å˜
+		// ×´Ì¬±£³Ö²»±ä
 	case RECORDER_EVENT_ENGINE_ERROR:
 		break;
-		// å½•éŸ³ç»“æŸã€ä»»åŠ¡ç»“æŸ
+		// Â¼Òô½áÊø¡¢ÈÎÎñ½áÊø
 	case RECORDER_EVENT_END_RECORD:
 	case RECORDER_EVENT_TASK_FINISH:
 		GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( TRUE );
 		GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( FALSE );
 		break;
-		// è¯†åˆ«ç»“æŸ
+		// Ê¶±ğ½áÊø
 	case RECORDER_EVENT_RECOGNIZE_COMPLETE:
 		if (IsDlgButtonChecked( IDC_CONTINUE ) == FALSE)
 		{
@@ -763,7 +892,7 @@ LRESULT CRecorder_ExampleDlg::OnShowStatus( WPARAM wParam, LPARAM lParam ){
 			GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( FALSE );
 		}
 		break;
-		// å…¶ä»–çŠ¶æ€ï¼ŒåŒ…æ‹¬æœªå¬åˆ°å£°éŸ³æˆ–è€…å‘ç”Ÿé”™è¯¯ç­‰ï¼Œåˆ™æ¢å¤æŒ‰é’®å¯ç”¨
+		// ÆäËû×´Ì¬£¬°üÀ¨Î´Ìıµ½ÉùÒô»òÕß·¢Éú´íÎóµÈ£¬Ôò»Ö¸´°´Å¥¿ÉÓÃ
 	default:
 		char buff[32];
 		sprintf(buff, "Default Event:%d", eEvent);
@@ -772,12 +901,17 @@ LRESULT CRecorder_ExampleDlg::OnShowStatus( WPARAM wParam, LPARAM lParam ){
 		GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( TRUE );
 		GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( FALSE );
 	}
+
 	return 0;
 }
-void CRecorder_ExampleDlg::OnBnClickedBtnStartRecord(){	
+
+void CRecorder_ExampleDlg::OnBnClickedBtnStartRecord()
+{	
+
 	CString strErrorMessage;
 	hci_tts_player_stop();
 	hci_tts_player_release();
+
 	RECORDER_ERR_CODE eRetasr = RECORDER_ERR_UNKNOWN;
 	RECORDER_CALLBACK_PARAM call_back;
 	memset( &call_back, 0, sizeof(RECORDER_CALLBACK_PARAM) );
@@ -794,10 +928,15 @@ void CRecorder_ExampleDlg::OnBnClickedBtnStartRecord(){
 
 	string initConfig = "initCapkeys=asr.cloud.dialog";	
 	initConfig        += ",dataPath=../../data";
+	//string initConfig = "dataPath=" + account_info->data_path();
+	//initConfig      += ",encode=speex";
+	//initConfig		+= ",initCapkeys=asr.local.grammar";			      //³õÊ¼»¯±¾µØÒıÇæ
+
 	eRetasr = hci_asr_recorder_init( initConfig.c_str(), &call_back);
-	if (eRetasr != RECORDER_ERR_NONE){
+	if (eRetasr != RECORDER_ERR_NONE)
+	{
 		hci_release();
-		strErrorMessage.Format( "å½•éŸ³æœºåˆå§‹åŒ–å¤±è´¥,é”™è¯¯ç %d", eRetasr);
+		strErrorMessage.Format( "Â¼Òô»ú³õÊ¼»¯Ê§°Ü,´íÎóÂë%d", eRetasr);
 		MessageBox( strErrorMessage );
 		return ;
 	}
@@ -807,69 +946,83 @@ void CRecorder_ExampleDlg::OnBnClickedBtnStartRecord(){
 	GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( FALSE );
 	GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( TRUE );	
 	
-	// æ¸…ç©ºçŠ¶æ€è®°å½•
+	// Çå¿Õ×´Ì¬¼ÇÂ¼
 	SetDlgItemText( IDC_EDIT1, "" );
 
     AccountInfo *account_info = AccountInfo::GetInstance();
     string startConfig = "";
-	if (!IsDlgButtonChecked( IDC_ONLY_RECORDING )){
+	if (!IsDlgButtonChecked( IDC_ONLY_RECORDING ))
+    {
      	startConfig += "capkey=" + account_info->cap_key();
 	}
 	startConfig += ",audioformat=pcm16k16bit";
 	//startConfig += ",domain=qwdz,intention=qwmap;music,needcontent=no";
 	//startConfig     += ",realTime=rt";
-    if (IsDlgButtonChecked( IDC_CONTINUE )){
+    if (IsDlgButtonChecked( IDC_CONTINUE ))
+    {
         startConfig += ",continuous=yes";
     }
-	if ( m_RecogMode == kRecogModeGrammar ){
+	if ( m_RecogMode == kRecogModeGrammar )
+	{
 		char chTmp[32] = {0};
 		sprintf(chTmp,",grammarid=%d",m_GrammarId);
 		startConfig += chTmp; 
 	}
-	if ( m_RecogMode == kRecogModeDialog ){
+
+	if ( m_RecogMode == kRecogModeDialog )
+	{
 		startConfig +=",intention=weather;joke;story;baike;calendar;translation;news"; 
 	}
+
 	eRet = hci_asr_recorder_start(startConfig.c_str(),"");
-	if (RECORDER_ERR_NONE != eRet){
+	if (RECORDER_ERR_NONE != eRet)
+	{
 		CString strErrMessage;
-		strErrMessage.Format( "å¼€å§‹å½•éŸ³å¤±è´¥,é”™è¯¯ç %d", eRet );
+		strErrMessage.Format( "¿ªÊ¼Â¼ÒôÊ§°Ü,´íÎóÂë%d", eRet );
 		MessageBox( strErrMessage );
 		GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( TRUE );
 		return;
 	}
 }
-bool CRecorder_ExampleDlg::Init(){	
+
+bool CRecorder_ExampleDlg::Init()
+{	
     CString strErrorMessage;
+
+
 	m_recordingFlag = FALSE;
 	m_recordingFileName = "recording.pcm";
 	m_recordingFile = NULL;
 	SetDlgItemText( IDC_EDIT_SAVE_RECORDING_FILE, m_recordingFileName );
 	UpdateData(FALSE);
-    // è·å–AccountInfoå•ä¾‹
+
+    // »ñÈ¡AccountInfoµ¥Àı
     AccountInfo *account_info = AccountInfo::GetInstance();
-    // è´¦å·ä¿¡æ¯è¯»å–
+    // ÕËºÅĞÅÏ¢¶ÁÈ¡
     string account_info_file = "../../testdata/AccountInfo.txt";
     bool account_success = account_info->LoadFromFile(account_info_file);
-    if (!account_success){
+    if (!account_success)
+    {
         strErrorMessage.Format("AccountInfo read from %s failed\n", account_info_file.c_str());
         MessageBox(strErrorMessage);
         return false;
     }
 
-    // SYSåˆå§‹åŒ–
+    // SYS³õÊ¼»¯
     HCI_ERR_CODE errCode = HCI_ERR_NONE;
-    // é…ç½®ä¸²æ˜¯ç”±"å­—æ®µ=å€¼"çš„å½¢å¼ç»™å‡ºçš„ä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œå¤šä¸ªå­—æ®µä¹‹é—´ä»¥','éš”å¼€ã€‚å­—æ®µåä¸åˆ†å¤§å°å†™ã€‚
+    // ÅäÖÃ´®ÊÇÓÉ"×Ö¶Î=Öµ"µÄĞÎÊ½¸ø³öµÄÒ»¸ö×Ö·û´®£¬¶à¸ö×Ö¶ÎÖ®¼äÒÔ','¸ô¿ª¡£×Ö¶ÎÃû²»·Ö´óĞ¡Ğ´¡£
     string init_config = "";
-    init_config += "appKey=" + account_info->app_key();              //çµäº‘åº”ç”¨åºå·
-    init_config += ",developerKey=" + account_info->developer_key(); //çµäº‘å¼€å‘è€…å¯†é’¥
-    init_config += ",cloudUrl=" + account_info->cloud_url();         //çµäº‘äº‘æœåŠ¡çš„æ¥å£åœ°å€
+    init_config += "appKey=" + account_info->app_key();              //ÁéÔÆÓ¦ÓÃĞòºÅ
+    init_config += ",developerKey=" + account_info->developer_key(); //ÁéÔÆ¿ª·¢ÕßÃÜÔ¿
+    init_config += ",cloudUrl=" + account_info->cloud_url();         //ÁéÔÆÔÆ·şÎñµÄ½Ó¿ÚµØÖ·
 	init_config += ",capKey=sma.local.wake;sma.local.doa;sma.local.vqe" ; 
-	init_config += ",authpath=" + account_info->auth_path();         //æˆæƒæ–‡ä»¶æ‰€åœ¨è·¯å¾„ï¼Œä¿è¯å¯å†™
-    init_config += ",logfilepath=" + account_info->logfile_path();   //æ—¥å¿—çš„è·¯å¾„
+	init_config += ",authpath=" + account_info->auth_path();         //ÊÚÈ¨ÎÄ¼şËùÔÚÂ·¾¶£¬±£Ö¤¿ÉĞ´
+    init_config += ",logfilepath=" + account_info->logfile_path();   //ÈÕÖ¾µÄÂ·¾¶
 	init_config += ",logfilesize=1024000,loglevel=5";
-    // å…¶ä»–é…ç½®ä½¿ç”¨é»˜è®¤å€¼ï¼Œä¸å†æ·»åŠ ï¼Œå¦‚æœæƒ³è®¾ç½®å¯ä»¥å‚è€ƒå¼€å‘æ‰‹å†Œ
+    // ÆäËûÅäÖÃÊ¹ÓÃÄ¬ÈÏÖµ£¬²»ÔÙÌí¼Ó£¬Èç¹ûÏëÉèÖÃ¿ÉÒÔ²Î¿¼¿ª·¢ÊÖ²á
     errCode = hci_init( init_config.c_str() );
-    if( errCode != HCI_ERR_NONE ){
+    if( errCode != HCI_ERR_NONE )
+    {
         strErrorMessage.Format( "hci_init return (%d:%s)\n", errCode, hci_get_error_info(errCode) );
         MessageBox(strErrorMessage);
         return false;
@@ -877,23 +1030,25 @@ bool CRecorder_ExampleDlg::Init(){
     printf( "hci_init success\n" );
 
 
-    // æ£€æµ‹æˆæƒ,å¿…è¦æ—¶åˆ°äº‘ç«¯ä¸‹è½½æˆæƒã€‚æ­¤å¤„éœ€è¦æ³¨æ„çš„æ˜¯ï¼Œè¿™ä¸ªå‡½æ•°åªæ˜¯é€šè¿‡æ£€æµ‹æˆæƒæ˜¯å¦è¿‡æœŸæ¥åˆ¤æ–­æ˜¯å¦éœ€è¦è¿›è¡Œ
-    // è·å–æˆæƒæ“ä½œï¼Œå¦‚æœåœ¨å¼€å‘è°ƒè¯•è¿‡ç¨‹ä¸­ï¼Œæˆæƒè´¦å·ä¸­æ–°å¢äº†çµäº‘sdkçš„èƒ½åŠ›ï¼Œè¯·åˆ°hci_initä¼ å…¥çš„authPathè·¯å¾„ä¸­
-    // åˆ é™¤HCI_AUTHæ–‡ä»¶ã€‚å¦åˆ™æ— æ³•è·å–æ–°çš„æˆæƒæ–‡ä»¶ï¼Œä»è€Œæ— æ³•ä½¿ç”¨æ–°å¢çš„çµäº‘èƒ½åŠ›ã€‚
-    if (!CheckAndUpdataAuth()){
+    // ¼ì²âÊÚÈ¨,±ØÒªÊ±µ½ÔÆ¶ËÏÂÔØÊÚÈ¨¡£´Ë´¦ĞèÒª×¢ÒâµÄÊÇ£¬Õâ¸öº¯ÊıÖ»ÊÇÍ¨¹ı¼ì²âÊÚÈ¨ÊÇ·ñ¹ıÆÚÀ´ÅĞ¶ÏÊÇ·ñĞèÒª½øĞĞ
+    // »ñÈ¡ÊÚÈ¨²Ù×÷£¬Èç¹ûÔÚ¿ª·¢µ÷ÊÔ¹ı³ÌÖĞ£¬ÊÚÈ¨ÕËºÅÖĞĞÂÔöÁËÁéÔÆsdkµÄÄÜÁ¦£¬Çëµ½hci_init´«ÈëµÄauthPathÂ·¾¶ÖĞ
+    // É¾³ıHCI_AUTHÎÄ¼ş¡£·ñÔòÎŞ·¨»ñÈ¡ĞÂµÄÊÚÈ¨ÎÄ¼ş£¬´Ó¶øÎŞ·¨Ê¹ÓÃĞÂÔöµÄÁéÔÆÄÜÁ¦¡£
+    if (!CheckAndUpdataAuth())
+    {
         hci_release();
         strErrorMessage.Format("CheckAndUpdateAuth failed\n");
         MessageBox(strErrorMessage);
         return false;
     }
 
-    // capkeyå±æ€§è·å–
+    // capkeyÊôĞÔ»ñÈ¡
     m_RecogType = kRecogTypeUnkown;
     m_RecogMode = kRecogModeUnkown;
     GetCapkeyProperty(account_info->cap_key(),m_RecogType,m_RecogMode);
 
-	if( m_RecogType == kRecogTypeCloud && m_RecogMode == kRecogModeGrammar ){
-        // äº‘ç«¯è¯­æ³•æš‚æ—¶ä¸æ”¯æŒå®æ—¶è¯†åˆ«
+	if( m_RecogType == kRecogTypeCloud && m_RecogMode == kRecogModeGrammar )
+	{
+        // ÔÆ¶ËÓï·¨ÔİÊ±²»Ö§³ÖÊµÊ±Ê¶±ğ
 		// GetDlgItem( IDC_REALTIME )->EnableWindow(FALSE);
 		hci_release();
         strErrorMessage.Format("Recorder not support cloud grammar, init failed\n");
@@ -901,164 +1056,101 @@ bool CRecorder_ExampleDlg::Init(){
         return false;
 	}
 
-/*asr_recorderåˆå§‹åŒ–*/
+/*Âó¿Ë·ç³õÊ¼»¯*/
+	char *configFile ="hci_micarray.ini";
+	errCode = hci_micarray_init(configFile, &MicArrayhandle);
+/*	if(errCode != HCI_ERR_NONE)
+	{
+		strErrorMessage.Format("hci_micarray_init failed (%d:%s)\n", errCode, hci_get_error_info(errCode));
+        MessageBox(strErrorMessage);
+
+		return -3;
+	}
+*/	hci_micarray_statechange_func scf = NULL;
+	hci_micarray_wakeup_func wuf = WakeupFunc;
+	hci_micarray_wakedirection_func wdf = WakeDirectionFunc;
+	hci_micarray_voiceready_func vrf = VoiceReadyFunc;
+
+	errCode = hci_micarray_session_start(MicArrayhandle, scf, wuf, wdf, vrf, NULL, &MicArraysession);
+
+
+/*asr_recorder³õÊ¼»¯*/
     RECORDER_ERR_CODE eRet = RECORDER_ERR_UNKNOWN;
+/*	RECORDER_CALLBACK_PARAM call_back;
+	memset( &call_back, 0, sizeof(RECORDER_CALLBACK_PARAM) );
+	call_back.pvStateChangeUsrParam		= this;
+	call_back.pvRecogFinishUsrParam		= this;
+	call_back.pvErrorUsrParam			= this;
+	call_back.pvRecordingUsrParam		= this;
+	call_back.pvRecogProcessParam		= this;
+    call_back.pfnStateChange	= CRecorder_ExampleDlg::RecordEventChange;
+	call_back.pfnRecogFinish	= CRecorder_ExampleDlg::RecorderRecogFinish;
+	call_back.pfnError			= CRecorder_ExampleDlg::RecorderErr;
+	call_back.pfnRecording		= CRecorder_ExampleDlg::RecorderRecordingCallback;
+	call_back.pfnRecogProcess   = CRecorder_ExampleDlg::RecorderRecogProcess;
+*/
+	//{
+	//	// TODO
+	//	while(true)
+	//	{
+	//		RECORDER_ERR_CODE errCode;
+	//		string strConfig = string("initCapKeys=asr.local.grammar.v4,dataPath=") + account_info->data_path();
+	//		errCode = hci_asr_recorder_init(strConfig.c_str(), &call_back);
+	//		assert(RECORDER_ERR_NONE == errCode);
+
+	//		strConfig = "capKey=asr.local.grammar.v4,grammarType=wordlist,audioFormat=pcm16k16bit,isFile=yes"; // + getLocalGrammarConfig();
+	//		string grammarDataPath = "../../testdata/wordlist_utf8.txt";
+	//		errCode = hci_asr_recorder_start(strConfig.c_str(), grammarDataPath.c_str());
+	//		assert(RECORDER_ERR_NONE == errCode);
+
+	//		Sleep(5000);
+	//		errCode = hci_asr_recorder_release();
+	//		assert(RECORDER_ERR_NONE == errCode);
+	//	}
+	//}
+/*
+	string initConfig = "initCapkeys=" + account_info->cap_key();	
+	initConfig        += ",dataPath=" + account_info->data_path();
+	//string initConfig = "dataPath=" + account_info->data_path();
+	//initConfig      += ",encode=speex";
+	//initConfig		+= ",initCapkeys=asr.local.grammar";			      //³õÊ¼»¯±¾µØÒıÇæ
+
+	eRet = hci_asr_recorder_init( initConfig.c_str(), &call_back);
+	if (eRet != RECORDER_ERR_NONE)
+	{
+		hci_release();
+		strErrorMessage.Format( "Â¼Òô»ú³õÊ¼»¯Ê§°Ü,´íÎóÂë%d", eRet);
+		MessageBox( strErrorMessage );
+		return false;
+	}
+*/
     m_GrammarId = -1;
-    if (m_RecogMode == kRecogModeGrammar){
+    if (m_RecogMode == kRecogModeGrammar)
+    {
         string grammarFile = account_info->test_data_path() + "/stock_10001.gram";
-        if (m_RecogType == kRecogTypeLocal){
+        if (m_RecogType == kRecogTypeLocal)
+        {
 			string strLoadGrammarConfig = "grammarType=jsgf,isFile=yes,capkey=" + account_info->cap_key();
             eRet = hci_asr_recorder_load_grammar(strLoadGrammarConfig.c_str() , grammarFile.c_str(), &m_GrammarId );
-            if( eRet != RECORDER_ERR_NONE ){
+            if( eRet != RECORDER_ERR_NONE )
+            {
                 hci_asr_recorder_release();
                 hci_release();
-                strErrorMessage.Format( "è½½å…¥è¯­æ³•æ–‡ä»¶å¤±è´¥,é”™è¯¯ç %d", eRet );
+                strErrorMessage.Format( "ÔØÈëÓï·¨ÎÄ¼şÊ§°Ü,´íÎóÂë%d", eRet );
                 MessageBox( strErrorMessage );
                 return false;
             }
             EchoGrammarData(grammarFile);
         }
-        else{
-            // å¦‚æœæ˜¯äº‘ç«¯è¯­æ³•è¯†åˆ«ï¼Œéœ€è¦å¼€å‘è€…é€šè¿‡å¼€å‘è€…ç¤¾åŒºè‡ªè¡Œä¸Šä¼ è¯­æ³•æ–‡ä»¶ï¼Œå¹¶è·å¾—å¯ä»¥ä½¿ç”¨çš„IDã€‚
+        else
+        {
+            // Èç¹ûÊÇÔÆ¶ËÓï·¨Ê¶±ğ£¬ĞèÒª¿ª·¢ÕßÍ¨¹ı¿ª·¢ÕßÉçÇø×ÔĞĞÉÏ´«Óï·¨ÎÄ¼ş£¬²¢»ñµÃ¿ÉÒÔÊ¹ÓÃµÄID¡£
             // m_GrammarId = 2;
         }
     }
 
-#ifdef COMM_MOTOR
-// ç”µæœºä¸²å£åˆå§‹åŒ–
-if(motor.open_com_motor(COMM_MOTOR)){
-	//ç”µæœºæ•°æ®è®¡ç®—
-	pThread_Motor_Comput = AfxBeginThread(ThreadComput_MotorData,NULL);
-	int a= 1;
-}else{
-	int a=0;
-}
-#endif
-
-#ifdef COMM_STAR
-	//æ˜Ÿæ ‡å®šä½ä¸²å£åˆå§‹åŒ–
-	if (StarGazer.open_com(COMM_STAR)){
-		int a=1;
-	}else{
-		int a=0;
-	}
-#endif
-
-#ifdef COMM_LASER
-	//æ¿€å…‰æ•°æ®åˆå§‹èµ‹å€¼10000
-	for(int loop=0;loop<1000;loop++){
-		m_laser_data_postpro[loop] = 50000;
-	}
-	// æ¿€å…‰ä¸²å£åˆå§‹åŒ–
-	if (m_cURG.Create(COMM_LASER)){
-		m_cURG.SwitchOn();
-		m_cURG.SCIP20();	
-		m_cURG.GetDataByGD(0,768,1);
-		pThread_Read_Laser=AfxBeginThread(ThreadReadLaser_Data,&Info_laser_data);
-	}
-#endif
-	plan.Scene_scale_x = 20.0;
-	plan.Scene_scale_y = 20.0;
-	plan.danger = false;
-	vfh_Scene_scale_x = 20.0;
-	vfh_Scene_scale_y = 20.0;
-	Obstacle_Distance_init = 1200;/////////////////////////åˆå§‹é¿éšœè·ç¦»è®¾å®š
-	delt_Obstacle_Distance_init = 200;
-	free_Obstacle_Distance_init = 1600;
-	dataexchange_key = true;
-	vfh_key = true;
-	motor_key = false;
-	//æ¿€å…‰æ•°æ®åˆå§‹åŒ–
-	for (int loop = 0;loop<1000;loop++){
-		plan.m_laser_data_postpro[loop] = 50000;
-		m_laser_data_postpro_vfh[loop] = 50000;
-	}
-	//ä¸VFHç®—æ³•ä¸­æ•°æ®äº¤æ¢
-	pThread_DataExchange=AfxBeginThread(ThreadDataExchange,NULL);
-	plan.Init();
-	algorithm.Init();
-	pThread_VFHStart = AfxBeginThread(ThreaVFH,NULL); //vfhåˆå§‹åŒ–,æ¿€å…‰ä½ç½®è®¾å®š
-	SetTimer(1,200,NULL);
-    return true;
-}
-void CRecorder_ExampleDlg::EchoGrammarData(const string &grammarFile){
-    FILE* fp = fopen( grammarFile.c_str(), "rt" );
-    if( fp == NULL ){
-        GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( FALSE );
-        CString strErrorMessage;
-        strErrorMessage.Format("æ‰“å¼€è¯­æ³•æ–‡ä»¶%så¤±è´¥",grammarFile.c_str());
-        MessageBox( strErrorMessage );
-        return;
-    }
-    unsigned char szBom[3];
-    fread( szBom, 3, 1, fp );
-    // è‹¥æœ‰bomå¤´ï¼Œåˆ™æ¸…é™¤ï¼Œæ²¡æœ‰åˆ™å½“å‰ä½ç½®å›åˆ°å¤´éƒ¨
-    if( !( szBom[0] == 0xef && szBom[1] == 0xbb && szBom[2] == 0xbf ) ){
-        fseek( fp, 0, SEEK_SET );
-    }
-    CString grammarData = "";
-    char szData[1024] = {0};
-    while( fgets( szData, 1024, fp ) != NULL ){
-        unsigned char* pszGBK = NULL;
-        HciExampleComon::UTF8ToGBK( (unsigned char*)szData, &pszGBK);
-        grammarData += (char*)pszGBK;
-        HciExampleComon::FreeConvertResult( pszGBK );
-        grammarData += "\r\n";
-    }
-    fclose( fp );
-    SetDlgItemText( IDC_EDIT_WORDLIST, grammarData );
-    return;
-}
-bool CRecorder_ExampleDlg::Uninit(void){
-	HCI_ERR_CODE eRet = HCI_ERR_NONE;	
-	// å¦‚æœæ˜¯æœ¬åœ°è¯­æ³•è¯†åˆ«ï¼Œåˆ™éœ€è¦é‡Šæ”¾è¯­æ³•èµ„æº
-	if( m_RecogType == kRecogTypeLocal && m_RecogMode == kRecogModeGrammar ){
-		hci_asr_recorder_unload_grammar( m_GrammarId );
-	}
-	RECORDER_ERR_CODE eRecRet;
-	eRecRet = hci_asr_recorder_release();
-	if(eRecRet != RECORDER_ERR_NONE){
-		return false;
-	}
-	HCI_ERR_CODE errCode;
-	errCode = hci_micarray_session_stop(&MicArraysession);
-	errCode = hci_micarray_release(&MicArrayhandle);
-	eRet = hci_release();
-	AccountInfo::ReleaseInstance();
-	return eRet == HCI_ERR_NONE;
-}
-void CRecorder_ExampleDlg::OnBnClickedBtnCancelRecord(){
-	RECORDER_ERR_CODE eRet = hci_asr_recorder_cancel();
-	if (RECORDER_ERR_NONE != eRet){
-		CString str;
-		str.Format( _T("ç»ˆæ­¢å½•éŸ³å¤±è´¥,é”™è¯¯ç %d"), eRet );
-		MessageBox( str );
-		return;
-	}
-	GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( TRUE );
-	GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( FALSE );
-	hci_asr_recorder_release();
-	HCI_ERR_CODE err_code = HCI_ERR_NONE;
-	string tts_init_config = "dataPath=";
-    tts_init_config += "../../data";
-	tts_init_config += ",initCapkeys=tts.cloud.wangjing";
-	err_code = hci_tts_init(tts_init_config.c_str());
-	if (err_code != HCI_ERR_NONE){
-		printf("hci_tts_init return (%d:%s) \n",err_code,hci_get_error_info(err_code));
-		return;
-	}
-	// è®¾ç½®è¯­éŸ³åˆæˆæµ‹è¯•æ–‡ä»¶
-	string file_to_synth;
-	if ("tts.cloud.wangjing" == "tts.local.synth.sing"){
-		file_to_synth = "../../testdata/S3ML_sing.txt.enc";
-	}else{
-		file_to_synth = "../../testdata/tts.txt";
-	}
-	string out_pcm_file = "../../testdata/ttsceshi.pcm";
-	TTSSynth("tts.cloud.wangjing", file_to_synth, out_pcm_file);
-	//TTSååˆå§‹åŒ–
-	hci_tts_release();
-    printf("hci_tts_release\n");
+	/*tts_player³õÊ¼»¯*/
+/*
 	PLAYER_CALLBACK_PARAM cb;
     cb.pfnStateChange = CRecorder_ExampleDlg::CB_EventChange;
 	cb.pvStateChangeUsrParam = this;
@@ -1066,53 +1158,312 @@ void CRecorder_ExampleDlg::OnBnClickedBtnCancelRecord(){
 	cb.pvProgressChangeUsrParam = this;
 	cb.pfnPlayerError = CRecorder_ExampleDlg::CB_SdkErr;
 	cb.pvPlayerErrorUsrParam = this;
+
+	PLAYER_ERR_CODE eReti = PLAYER_ERR_NONE;
+	string initConfigtts = "initCapkeys=tts.cloud.wangjing";
+    initConfigtts += ",dataPath=../../data" ;
+	eReti = hci_tts_player_init( initConfigtts.c_str(), &cb );
+	if (eRet != PLAYER_ERR_NONE)
+	{
+		hci_release();
+		CString str;
+		str.Format( "²¥·ÅÆ÷³õÊ¼»¯Ê§°Ü,´íÎóÂë%d.", eRet);
+		MessageBox( str );
+		
+	}
+*/
+
+	//movexhy
+	#ifdef COMM_MOTOR
+	// µç»ú´®¿Ú³õÊ¼»¯
+//	strcpy(StateResult[0].Name,"µç»úÇı¶¯Æ÷");
+	if(motor.open_com_motor(COMM_MOTOR))
+	{
+		//µç»úÊı¾İ¼ÆËã
+		pThread_Motor_Comput = AfxBeginThread(ThreadComput_MotorData,NULL);
+		int a= 1;
+	}
+	else
+	{
+		int a=0;
+	}
+	#endif
+
+#ifdef COMM_STAR
+	//ĞÇ±ê¶¨Î»´®¿Ú³õÊ¼»¯
+//	strcpy(StateResult[5].Name,"ĞÇ±ê¶¨Î»ÏµÍ³");
+	if (StarGazer.open_com(COMM_STAR))
+	{
+//		StateResult[5].Result = 1;
+		int a=1;
+	} 
+	else
+	{
+//		StateResult[5].Result = 0;
+		int a=0;
+	}
+	
+#endif
+//xhyvhf
+#ifdef COMM_LASER
+//	strcpy(StateResult[2].Name,"¼¤¹âÀ×´ï");
+	//¼¤¹âÊı¾İ³õÊ¼¸³Öµ10000
+	for(int loop=0;loop<1000;loop++)
+	{
+		m_laser_data_postpro[loop] = 50000;
+	}
+
+	// ¼¤¹â´®¿Ú³õÊ¼»¯
+	if (m_cURG.Create(COMM_LASER))
+	{
+		//MessageBox("ddddd  ÕâÊÇÒ»¸ö×î¼òµ¥µÄÏûÏ¢¿ò£¡");
+		m_cURG.SwitchOn();
+		m_cURG.SCIP20();//////////////////////////	
+		
+		m_cURG.GetDataByGD(0,768,1);
+
+		pThread_Read_Laser=AfxBeginThread(ThreadReadLaser_Data,&Info_laser_data);
+	//	Sleep(100);
+	////	pThread_Read_Laser_PostPro=AfxBeginThread(ThreadReadLaser_Data_PostPro,&Info_laser_data_postpro);
+	//	Sleep(200);
+	////	pReadThread_Laser_Pose_Compute = AfxBeginThread(ThreadLaser_Post_Computer,NULL);
+	//	StateResult[2].Result = 1;
+	//}
+	//else
+	//{
+	//	StateResult[2].Result = 0;
+	}
+#endif
+
+	plan.Scene_scale_x = 20.0;
+	plan.Scene_scale_y = 20.0;
+	plan.danger = false;
+	vfh_Scene_scale_x = 20.0;
+	vfh_Scene_scale_y = 20.0;
+	Obstacle_Distance_init = 1000;/////////////////////////³õÊ¼±ÜÕÏ¾àÀëÉè¶¨
+	delt_Obstacle_Distance_init = 200;
+	free_Obstacle_Distance_init = 1500;
+	dataexchange_key = true;
+	vfh_key = true;
+	motor_key = false;
+
+	//¼¤¹âÊı¾İ³õÊ¼»¯
+	for (int loop = 0;loop<1000;loop++)
+	{
+		plan.m_laser_data_postpro[loop] = 50000;
+		m_laser_data_postpro_vfh[loop] = 50000;
+	}
+
+	//ÓëVFHËã·¨ÖĞÊı¾İ½»»»
+	pThread_DataExchange=AfxBeginThread(ThreadDataExchange,NULL);
+	plan.Init();
+	algorithm.Init();
+	pThread_VFHStart = AfxBeginThread(ThreaVFH,NULL); //vfh³õÊ¼»¯,¼¤¹âÎ»ÖÃÉè¶¨
+	SetTimer(1,200,NULL);
+
+    return true;
+}
+
+void CRecorder_ExampleDlg::EchoGrammarData(const string &grammarFile)
+{
+    FILE* fp = fopen( grammarFile.c_str(), "rt" );
+    if( fp == NULL )
+    {
+        GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( FALSE );
+        CString strErrorMessage;
+        strErrorMessage.Format("´ò¿ªÓï·¨ÎÄ¼ş%sÊ§°Ü",grammarFile.c_str());
+        MessageBox( strErrorMessage );
+        return;
+    }
+
+    unsigned char szBom[3];
+    fread( szBom, 3, 1, fp );
+    // ÈôÓĞbomÍ·£¬ÔòÇå³ı£¬Ã»ÓĞÔòµ±Ç°Î»ÖÃ»Øµ½Í·²¿
+    if( !( szBom[0] == 0xef && szBom[1] == 0xbb && szBom[2] == 0xbf ) )
+    {
+        fseek( fp, 0, SEEK_SET );
+    }
+
+    CString grammarData = "";
+    char szData[1024] = {0};
+    while( fgets( szData, 1024, fp ) != NULL )
+    {
+        unsigned char* pszGBK = NULL;
+        HciExampleComon::UTF8ToGBK( (unsigned char*)szData, &pszGBK);
+        grammarData += (char*)pszGBK;
+        HciExampleComon::FreeConvertResult( pszGBK );
+        grammarData += "\r\n";
+    }
+
+    fclose( fp );
+    SetDlgItemText( IDC_EDIT_WORDLIST, grammarData );
+    return;
+}
+
+bool CRecorder_ExampleDlg::Uninit(void)
+{
+	HCI_ERR_CODE eRet = HCI_ERR_NONE;	
+	// Èç¹ûÊÇ±¾µØÓï·¨Ê¶±ğ£¬ÔòĞèÒªÊÍ·ÅÓï·¨×ÊÔ´
+	if( m_RecogType == kRecogTypeLocal && m_RecogMode == kRecogModeGrammar )
+	{
+		hci_asr_recorder_unload_grammar( m_GrammarId );
+	}
+	RECORDER_ERR_CODE eRecRet;
+	eRecRet = hci_asr_recorder_release();
+
+	if(eRecRet != RECORDER_ERR_NONE)
+	{
+		return false;
+	}
+	HCI_ERR_CODE errCode;
+	errCode = hci_micarray_session_stop(&MicArraysession);
+
+	errCode = hci_micarray_release(&MicArrayhandle);
+
+	eRet = hci_release();
+
+	AccountInfo::ReleaseInstance();
+
+	return eRet == HCI_ERR_NONE;
+}
+
+void CRecorder_ExampleDlg::OnBnClickedBtnCancelRecord()
+{
+	RECORDER_ERR_CODE eRet = hci_asr_recorder_cancel();
+	if (RECORDER_ERR_NONE != eRet)
+	{
+		CString str;
+		str.Format( _T("ÖÕÖ¹Â¼ÒôÊ§°Ü,´íÎóÂë%d"), eRet );
+		MessageBox( str );
+		return;
+	}
+	GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( TRUE );
+	GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( FALSE );
+
+	hci_asr_recorder_release();
+
+	/* tts */
+	
+
+
+	HCI_ERR_CODE err_code = HCI_ERR_NONE;
+
+	string tts_init_config = "dataPath=";
+    tts_init_config += "../../data";
+	tts_init_config += ",initCapkeys=tts.cloud.wangjing";
+
+	err_code = hci_tts_init(tts_init_config.c_str());
+	if (err_code != HCI_ERR_NONE)
+	{
+		printf("hci_tts_init return (%d:%s) \n",err_code,hci_get_error_info(err_code));
+		return;
+	}
+
+	// ÉèÖÃÓïÒôºÏ³É²âÊÔÎÄ¼ş
+	string file_to_synth;
+	if ("tts.cloud.wangjing" == "tts.local.synth.sing")
+	{
+		file_to_synth = "../../testdata/S3ML_sing.txt.enc";
+	}
+	else
+	{
+		file_to_synth = "../../testdata/tts.txt";
+	}
+	
+	string out_pcm_file = "../../testdata/ttsceshi.pcm";
+	TTSSynth("tts.cloud.wangjing", file_to_synth, out_pcm_file);
+
+	//TTS·´³õÊ¼»¯
+	hci_tts_release();
+    printf("hci_tts_release\n");
+
+	/* tts_player */
+
+
+	PLAYER_CALLBACK_PARAM cb;
+    cb.pfnStateChange = CRecorder_ExampleDlg::CB_EventChange;
+	cb.pvStateChangeUsrParam = this;
+	cb.pfnProgressChange = CRecorder_ExampleDlg::CB_ProgressChange;
+	cb.pvProgressChangeUsrParam = this;
+	cb.pfnPlayerError = CRecorder_ExampleDlg::CB_SdkErr;
+	cb.pvPlayerErrorUsrParam = this;
+
 	PLAYER_ERR_CODE eReti = PLAYER_ERR_NONE;
 	string initConfig = "initCapkeys=tts.cloud.wangjing";
     initConfig += ",dataPath=../../data" ;
 	eReti = hci_tts_player_init( initConfig.c_str(), &cb );
-	if (eRet != PLAYER_ERR_NONE){
+	if (eRet != PLAYER_ERR_NONE)
+	{
 		hci_release();
 		CString str;
-		str.Format( "æ’­æ”¾å™¨åˆå§‹åŒ–å¤±è´¥,é”™è¯¯ç %d.", eRet);
+		str.Format( "²¥·ÅÆ÷³õÊ¼»¯Ê§°Ü,´íÎóÂë%d.", eRet);
 		MessageBox( str );
+		
 	}
+
 	string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+
+//	char *pUTF8Str=tts;
+//	unsigned char* pszUTF8 = NULL;
+//    HciExampleComon::GBKToUTF8( (unsigned char*)pUTF8Str, &pszUTF8 );
+
+
 	PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)tts, startConfig.c_str() );
+//    HciExampleComon::FreeConvertResult(pszUTF8);
 	if(eRetk==PLAYER_ERR_NONE){
 		int a=5;
+
 	}
+//	hci_tts_player_release();
+
 }
-void CRecorder_ExampleDlg::OnBnClickedOk(){
-	delete dlg;
+
+	/*          *///////
+
+
+void CRecorder_ExampleDlg::OnBnClickedOk()
+{
+	Uninit(); 
+
+	OnOK();
 }
-struct{
+
+struct 
+{
     char* pszName;
     char* pszComment;
-}
-g_sStatus[] ={
-    {"RECORDER_EVENT_BEGIN_RECORD",         "é—®ä¸ªé—®é¢˜å§"},
-    {"RECORDER_EVENT_HAVING_VOICE",         "å¬åˆ°å£°éŸ³ æ£€æµ‹åˆ°å§‹ç«¯çš„æ—¶å€™ä¼šè§¦å‘è¯¥äº‹ä»¶"},
-    {"RECORDER_EVENT_NO_VOICE_INPUT",       "æ²¡æœ‰å¬åˆ°å£°éŸ³"},
-    {"RECORDER_EVENT_BUFF_FULL",            "ç¼“å†²åŒºå·²å¡«æ»¡"},
-    {"RECORDER_EVENT_END_RECORD",           "ç»„ç»‡è¯­è¨€ing"},
-    {"RECORDER_EVENT_BEGIN_RECOGNIZE",      "å€¾å¬ä¸­"},
-    {"RECORDER_EVENT_RECOGNIZE_COMPLETE",   "æˆ‘æƒ³å¥½äº†"},
-    {"RECORDER_EVENT_ENGINE_ERROR",         "å¼•æ“å‡ºé”™"},
-    {"RECORDER_EVENT_DEVICE_ERROR",         "è®¾å¤‡å‡ºé”™"},
-    {"RECORDER_EVENT_MALLOC_ERROR",         "åˆ†é…ç©ºé—´å¤±è´¥"},
-    {"RECORDER_EVENT_INTERRUPTED",          "å†…éƒ¨é”™è¯¯"},
-    {"RECORDER_EVENT_PERMISSION_DENIED",    "å†…éƒ¨é”™è¯¯"},
-    {"RECORDER_EVENT_TASK_FINISH",          "å°çµè¦ä¼‘æ¯ä¸€ä¸‹"},
-    {"RECORDER_EVENT_RECOGNIZE_PROCESS",    "è¯†åˆ«ä¸­é—´çŠ¶æ€"}
+}g_sStatus[] =
+{
+    {"RECORDER_EVENT_BEGIN_RECORD",         "ÎÊ¸öÎÊÌâ°É"},
+    {"RECORDER_EVENT_HAVING_VOICE",         "Ìıµ½ÉùÒô ¼ì²âµ½Ê¼¶ËµÄÊ±ºò»á´¥·¢¸ÃÊÂ¼ş"},
+    {"RECORDER_EVENT_NO_VOICE_INPUT",       "Ã»ÓĞÌıµ½ÉùÒô"},
+    {"RECORDER_EVENT_BUFF_FULL",            "»º³åÇøÒÑÌîÂú"},
+    {"RECORDER_EVENT_END_RECORD",           "×éÖ¯ÓïÑÔing"},
+    {"RECORDER_EVENT_BEGIN_RECOGNIZE",      "ÇãÌıÖĞ"},
+    {"RECORDER_EVENT_RECOGNIZE_COMPLETE",   "ÎÒÏëºÃÁË"},
+    {"RECORDER_EVENT_ENGINE_ERROR",         "ÒıÇæ³ö´í"},
+    {"RECORDER_EVENT_DEVICE_ERROR",         "Éè±¸³ö´í"},
+    {"RECORDER_EVENT_MALLOC_ERROR",         "·ÖÅä¿Õ¼äÊ§°Ü"},
+    {"RECORDER_EVENT_INTERRUPTED",          "ÄÚ²¿´íÎó"},
+    {"RECORDER_EVENT_PERMISSION_DENIED",    "ÄÚ²¿´íÎó"},
+    {"RECORDER_EVENT_TASK_FINISH",          "Ğ¡ÁéÒªĞİÏ¢Ò»ÏÂ"},
+    {"RECORDER_EVENT_RECOGNIZE_PROCESS",    "Ê¶±ğÖĞ¼ä×´Ì¬"}
 };
 
-void HCIAPI CRecorder_ExampleDlg::RecordEventChange(RECORDER_EVENT eRecorderEvent, void *pUsrParam){
+void HCIAPI CRecorder_ExampleDlg::RecordEventChange(RECORDER_EVENT eRecorderEvent, void *pUsrParam)
+{
     CRecorder_ExampleDlg *dlg = (CRecorder_ExampleDlg*)pUsrParam;
-	if(eRecorderEvent == RECORDER_EVENT_BEGIN_RECOGNIZE){
+	///hhhh
+//    p_CR=(CRecorder_ExampleDlg*)pUsrParam;
+
+	if(eRecorderEvent == RECORDER_EVENT_BEGIN_RECOGNIZE)
+	{
 		dlg->m_startClock = clock();
 	}
-	if(eRecorderEvent == RECORDER_EVENT_END_RECORD){
-		if(dlg->m_recordingFile != NULL){
+	if(eRecorderEvent == RECORDER_EVENT_END_RECORD)
+	{
+		if(dlg->m_recordingFile != NULL)
+		{
 			fclose(dlg->m_recordingFile);
 			dlg->m_recordingFile = NULL;
 		}
@@ -1121,37 +1472,58 @@ void HCIAPI CRecorder_ExampleDlg::RecordEventChange(RECORDER_EVENT eRecorderEven
 	CString strMessage(g_sStatus[eRecorderEvent].pszComment);
 	dlg->PostRecorderEventAndMsg(eRecorderEvent, strMessage);
 }
-void CRecorder_ExampleDlg::AppendMessage(CString & strMsg){
+
+void CRecorder_ExampleDlg::AppendMessage(CString & strMsg)
+{
     CString strMessage = "";
     p_DR->GetDlgItemText( IDC_EDIT1, strMessage );
+    
 	int nMessageLenMax = 1024;
-	if(strMessage.GetLength() > nMessageLenMax){
+	if(strMessage.GetLength() > nMessageLenMax)
+	{
 		strMessage = strMessage.Right(nMessageLenMax);
 	}
+	
 	CString strNewMessage = "";
 	strNewMessage = strMsg;
-	if(strMessage.GetLength() > 0){
+	if(strMessage.GetLength() > 0)
+	{
 		strNewMessage += "\r\n";
 		strNewMessage += strMessage;
+		
+		
 	}
+	
     p_DR->SetDlgItemText( IDC_EDIT1, strNewMessage );
 
 }
-void CRecorder_ExampleDlg::PostRecorderEventAndMsg(RECORDER_EVENT eRecorderEvent, const CString & strMessage){
+void CRecorder_ExampleDlg::PostRecorderEventAndMsg(RECORDER_EVENT eRecorderEvent, const CString & strMessage)
+{
 	CString * msg = new CString(strMessage);
 	::PostMessage(m_hWnd, WM_USER_SHOW_STATUS, eRecorderEvent, (LPARAM)msg);
 }
-void HCIAPI CRecorder_ExampleDlg::RecorderRecogFinish(RECORDER_EVENT eRecorderEvent,ASR_RECOG_RESULT *psAsrRecogResult,void *pUsrParam){
+
+void HCIAPI CRecorder_ExampleDlg::RecorderRecogFinish(
+                                       RECORDER_EVENT eRecorderEvent,
+                                       ASR_RECOG_RESULT *psAsrRecogResult,
+                                       void *pUsrParam)
+{
 	CString strMessage = "";
+
     CRecorder_ExampleDlg *dlg = (CRecorder_ExampleDlg*)pUsrParam;
-	if(eRecorderEvent == RECORDER_EVENT_RECOGNIZE_COMPLETE){
+	if(eRecorderEvent == RECORDER_EVENT_RECOGNIZE_COMPLETE)
+	{
 		char buff[32];
 		clock_t endClock = clock();
+
+		//strMessage.AppendFormat( "Äã¾õµÃÂúÒâÂğ", (int)endClock - (int)dlg->m_startClock );
+		
 		dlg->PostRecorderEventAndMsg(eRecorderEvent, strMessage);
 	}
 
     strMessage = "";
-    if( psAsrRecogResult->uiResultItemCount > 0 ){
+    if( psAsrRecogResult->uiResultItemCount > 0 )
+    {
         unsigned char* pucUTF8 = NULL;
         HciExampleComon::UTF8ToGBK( (unsigned char*)psAsrRecogResult->psResultItemList[0].pszResult, &pucUTF8 );
        
@@ -1160,63 +1532,102 @@ void HCIAPI CRecorder_ExampleDlg::RecorderRecogFinish(RECORDER_EVENT eRecorderEv
 
 		tts=(char* )pszGBK;
 
-	  //strMessage.AppendFormat( "å°çµçš„ç­”æ¡ˆ: %s", pucUTF8 );
+	  //strMessage.AppendFormat( "Ğ¡ÁéµÄ´ğ°¸: %s", pucUTF8 );
         HciExampleComon::FreeConvertResult( pucUTF8 );
-		char buf[10000] = {NULL};
-		char result[10000]={NULL};
+		 char buf[10000] = {NULL};
+		 char result[10000]={NULL};
 		Convert(psAsrRecogResult->psResultItemList[0].pszResult,buf,CP_UTF8,CP_ACP);
 		int iLength ;
 		Json_Explain(buf,buf,result);
+		
+
+
 		HciExampleComon::GBKToUTF8( (unsigned char*)buf, (unsigned char**)&pszGBK);
+
+
 		tts=(char* )pszGBK;
-		strMessage.AppendFormat( "æ‚¨çš„é—®é¢˜: %s\r\nå°çµçš„ç­”æ¡ˆ: %s", result , buf);
+		
+		strMessage.AppendFormat( "ÄúµÄÎÊÌâ: %s\r\nĞ¡ÁéµÄ´ğ°¸: %s", result , buf);
+
+		
+		
+//		strMessage.AppendFormat( "Ê¶±ğ½á¹û: %s", pucUTF8 );
+//        HciExampleComon::FreeConvertResult( pucUTF8 );
         pucUTF8 = NULL;
 		isautotts=true;
 		autotts_time_sleep=strlen(tts);
     }
-    else{
-        strMessage.AppendFormat( "å°çµæ²¡å¬æ¸…ï¼Œèƒ½å†è¯´ä¸€éå—" );
+    else
+    {
+        strMessage.AppendFormat( "Ğ¡ÁéÃ»ÌıÇå£¬ÄÜÔÙËµÒ»±éÂğ" );
     }
+	
+	
 	dlg->PostRecorderEventAndMsg(eRecorderEvent, strMessage);
 }
-void HCIAPI CRecorder_ExampleDlg::RecorderRecogProcess(RECORDER_EVENT eRecorderEvent,ASR_RECOG_RESULT *psAsrRecogResult,void *pUsrParam){
+
+void HCIAPI CRecorder_ExampleDlg::RecorderRecogProcess(
+                                        RECORDER_EVENT eRecorderEvent,
+                                        ASR_RECOG_RESULT *psAsrRecogResult,
+                                        void *pUsrParam)
+{
     CRecorder_ExampleDlg *dlg = (CRecorder_ExampleDlg*)pUsrParam;
     CString strMessage = "";
-    if( psAsrRecogResult->uiResultItemCount > 0 ){
+    if( psAsrRecogResult->uiResultItemCount > 0 )
+    {
         unsigned char* pucUTF8 = NULL;
         HciExampleComon::UTF8ToGBK( (unsigned char*)psAsrRecogResult->psResultItemList[0].pszResult, &pucUTF8 );
-        strMessage.AppendFormat( "è¯†åˆ«ä¸­é—´ç»“æœ: %s", pucUTF8 );
+        strMessage.AppendFormat( "Ê¶±ğÖĞ¼ä½á¹û: %s", pucUTF8 );
         HciExampleComon::FreeConvertResult( pucUTF8 );
         pucUTF8 = NULL;
     }
-    else{
-        strMessage.AppendFormat( "*****æ— è¯†åˆ«ç»“æœ*****" );
+    else
+    {
+        strMessage.AppendFormat( "*****ÎŞÊ¶±ğ½á¹û*****" );
     }
+
 	dlg->PostRecorderEventAndMsg(eRecorderEvent, strMessage);    
 }
-void HCIAPI CRecorder_ExampleDlg::RecorderErr(RECORDER_EVENT eRecorderEvent,HCI_ERR_CODE eErrorCode,void *pUsrParam){
+
+void HCIAPI CRecorder_ExampleDlg::RecorderErr(
+                               RECORDER_EVENT eRecorderEvent,
+                               HCI_ERR_CODE eErrorCode,
+                               void *pUsrParam)
+{
     CRecorder_ExampleDlg * dlg = (CRecorder_ExampleDlg*)pUsrParam;
     CString strMessage = "";
-    strMessage.AppendFormat( "ç³»ç»Ÿé”™è¯¯:%d", eErrorCode );
+    strMessage.AppendFormat( "ÏµÍ³´íÎó:%d", eErrorCode );
 
 	dlg->PostRecorderEventAndMsg(eRecorderEvent, strMessage);
 }
-void HCIAPI CRecorder_ExampleDlg::RecorderRecordingCallback(unsigned char * pVoiceData,unsigned int uiVoiceLen,void * pUsrParam){
+
+void HCIAPI CRecorder_ExampleDlg::RecorderRecordingCallback(
+                                     unsigned char * pVoiceData,
+                                     unsigned int uiVoiceLen,
+                                     void * pUsrParam
+                                     )
+{
 	CRecorder_ExampleDlg * dlg = (CRecorder_ExampleDlg *)pUsrParam;
 	dlg->RecorderRecording(pVoiceData, uiVoiceLen);
 }
-void CRecorder_ExampleDlg::RecorderRecording(unsigned char * pVoiceData, unsigned int uiVoiceLen){
-	if(m_recordingFlag == FALSE){
-		if(m_recordingFile != NULL){
+
+void CRecorder_ExampleDlg::RecorderRecording(unsigned char * pVoiceData, unsigned int uiVoiceLen)
+{
+	if(m_recordingFlag == FALSE)
+	{
+		if(m_recordingFile != NULL)
+		{
 			fclose(m_recordingFile);
 			m_recordingFile = NULL;
 		}
 		return;
 	}
 
-	if(m_recordingFile == NULL){
+	if(m_recordingFile == NULL)
+	{
 		m_recordingFile = fopen( m_recordingFileName.GetBuffer(), "wb" );
-		if( m_recordingFile == NULL ){
+		if( m_recordingFile == NULL )
+		{
 			return;
 		}
 	}
@@ -1224,69 +1635,104 @@ void CRecorder_ExampleDlg::RecorderRecording(unsigned char * pVoiceData, unsigne
 	fwrite(pVoiceData, sizeof(unsigned char), uiVoiceLen, m_recordingFile);
 	fflush(m_recordingFile);
 }
-void CRecorder_ExampleDlg::OnBnClickedBtnBrowser(){
+
+void CRecorder_ExampleDlg::OnBnClickedBtnBrowser()
+{
 	CFileDialog dlgFile(TRUE, NULL, m_recordingFileName.GetBuffer(), OFN_HIDEREADONLY, _T("PCM Files (*.pcm)|*.pcm|All Files (*.*)|*.*||"), NULL);
-    if (dlgFile.DoModal()){
+    if (dlgFile.DoModal())
+    {
         m_recordingFileName = dlgFile.GetPathName();
     }
-    SetDlgItemText( IDC_EDIT_SAVE_RECORDING_FILE, m_recordingFileName );
+    
+	SetDlgItemText( IDC_EDIT_SAVE_RECORDING_FILE, m_recordingFileName );
 }
-void CRecorder_ExampleDlg::OnBnClickedSaveRecording(){
+
+void CRecorder_ExampleDlg::OnBnClickedSaveRecording()
+{
 	UpdateData(TRUE);
 
-	if(m_recordingFlag == FALSE){
-		if(m_recordingFile != NULL)	{
+	if(m_recordingFlag == FALSE)
+	{
+		if(m_recordingFile != NULL)
+		{
 			fclose(m_recordingFile);
 			m_recordingFile = NULL;
 		}
 	}
 }
-void CRecorder_ExampleDlg::OnEnChangeEditStatus(){
+
+
+void CRecorder_ExampleDlg::OnEnChangeEditStatus()
+{
+	// TODO:  If this is a RICHEDIT control, the control will not
+	// send this notification unless you override the CDialog::OnInitDialog()
+	// function and call CRichEditCtrl().SetEventMask()
+	// with the ENM_CHANGE flag ORed into the mask.
+
+	// TODO:  Add your control notification handler code here
 }
-bool HCIAPI TtsSynthCallbackFunction(_OPT_ _IN_ void * pvUserParam,_MUST_ _IN_ TTS_SYNTH_RESULT * psTtsSynthResult,_MUST_ _IN_ HCI_ERR_CODE  hciErrCode){
-    if( hciErrCode != HCI_ERR_NONE ){
+
+
+///////
+bool HCIAPI TtsSynthCallbackFunction(_OPT_ _IN_ void * pvUserParam,
+                                     _MUST_ _IN_ TTS_SYNTH_RESULT * psTtsSynthResult,
+                                     _MUST_ _IN_ HCI_ERR_CODE  hciErrCode)
+{
+    if( hciErrCode != HCI_ERR_NONE )
+    {
         return false;
     }
+
     //printf("voice data size %d\n",psTtsSynthResult->uiVoiceSize);
-    // å°†åˆæˆç»“æœå†™å…¥æ–‡ä»¶
-    if (psTtsSynthResult->pvVoiceData != NULL){
+    // ½«ºÏ³É½á¹ûĞ´ÈëÎÄ¼ş
+    if (psTtsSynthResult->pvVoiceData != NULL)
+    {
         FILE * fp = (FILE *)pvUserParam;
         fwrite(psTtsSynthResult->pvVoiceData, psTtsSynthResult->uiVoiceSize, 1, fp);
     }
-	//mark å›è°ƒç»“æœ
-	if (psTtsSynthResult->nMarkCount > 0){
-		for (int i=0; i<psTtsSynthResult->nMarkCount; ++i){
+
+	//mark »Øµ÷½á¹û
+	if (psTtsSynthResult->nMarkCount > 0)
+	{
+		for (int i=0; i<psTtsSynthResult->nMarkCount; ++i)
+		{
 			printf("MarkName:%s, with the time in audio:%d \n",psTtsSynthResult->pMark[i].pszName,psTtsSynthResult->pMark[i].time);
 		}
 
 	}
-    // æ­¤å›è°ƒå‡½æ•°è¿”å›falseä¼šä¸­æ­¢åˆæˆï¼Œè¿”å›trueè¡¨ç¤ºç»§ç»­åˆæˆ
+
+    // ´Ë»Øµ÷º¯Êı·µ»Øfalse»áÖĞÖ¹ºÏ³É£¬·µ»Øtrue±íÊ¾¼ÌĞøºÏ³É
     return true;
 }
-void TTSSynth(const string &cap_key, const string &txt_file, const string &out_pcm_file ){
-    // åˆæˆæ–‡æœ¬è¯»å–
+
+void TTSSynth(const string &cap_key, const string &txt_file, const string &out_pcm_file )
+{
+    // ºÏ³ÉÎÄ±¾¶ÁÈ¡
     HciExampleComon::FileReader txt_data;
     if( txt_data.Load(txt_file.c_str(),1) == false )
     {
         printf( "Open input text file %s error!\n", txt_file.c_str() );
         return;
     }
-    // æ‰“å¼€è¾“å‡ºæ–‡ä»¶
+
+    // ´ò¿ªÊä³öÎÄ¼ş
     FILE * fp = fopen( out_pcm_file.c_str(), "wb" );
-    if( fp == NULL ){
+    if( fp == NULL )
+    {
         printf( "Create output pcm file %s error!\n", out_pcm_file.c_str());
         return;
     }
 
     HCI_ERR_CODE err_code = HCI_ERR_NONE;
-    // å¯åŠ¨ TTS Session
+    // Æô¶¯ TTS Session
     string session_config = "capkey=";
     session_config += cap_key;
     int session_id = -1;
 
     printf( "hci_tts_session_start config [%s]\n", session_config.c_str() );
     err_code = hci_tts_session_start( session_config.c_str(), &session_id );
-    if( err_code != HCI_ERR_NONE ){
+    if( err_code != HCI_ERR_NONE )
+    {
         printf("hci_tts_session_start return (%d:%s) \n",err_code,hci_get_error_info(err_code));
         fclose(fp);
         return;
@@ -1294,16 +1740,18 @@ void TTSSynth(const string &cap_key, const string &txt_file, const string &out_p
     printf( "hci_tts_session_start success\n" );
 
 	string synth_config;
-	if (cap_key.find("tts.cloud.synth") != string::npos){
-		//property å±äº ç§æœ‰äº‘ äº‘ç«¯èƒ½åŠ› å¿…å¡«å‚æ•°ï¼Œå…·ä½“è¯·å‚è€ƒå¼€å‘æ‰‹å†Œ
-		//none: æ‰€æœ‰æ ‡è®°å°†ä¼šè¢«è§†ä¸ºæ–‡æœ¬è¯»å‡ºï¼Œç¼ºçœå€¼
+	if (cap_key.find("tts.cloud.synth") != string::npos)
+	{
+		//property ÊôÓÚ Ë½ÓĞÔÆ ÔÆ¶ËÄÜÁ¦ ±ØÌî²ÎÊı£¬¾ßÌåÇë²Î¿¼¿ª·¢ÊÖ²á
+		//none: ËùÓĞ±ê¼Ç½«»á±»ÊÓÎªÎÄ±¾¶Á³ö£¬È±Ê¡Öµ
 		synth_config = "property=cn_xiaokun_common,tagmode=none";
 	}
 
-	if (cap_key.find("tts.local.synth.sing") != string::npos){
+	if (cap_key.find("tts.local.synth.sing") != string::npos)
+	{
 		synth_config = "tagmode=s3ml_sing";
 	}
-//*	char*tts="æˆ‘æ˜¯";
+//*	char*tts="ÎÒÊÇ";
 	char *pUTF8Str=tts;
 	
 	unsigned char* pszGBK;
@@ -1314,13 +1762,15 @@ void TTSSynth(const string &cap_key, const string &txt_file, const string &out_p
 //	err_code = hci_tts_synth( session_id, (char*)txt_data.buff_, synth_config.c_str(), TtsSynthCallbackFunction, fp );
 	fclose(fp);
 
-    if( err_code != HCI_ERR_NONE ){
+    if( err_code != HCI_ERR_NONE )
+    {
         printf("hci_tts_session_start return (%d:%s) \n",err_code,hci_get_error_info(err_code));
     }
 
-    // ç»ˆæ­¢ TTS Session
+    // ÖÕÖ¹ TTS Session
     err_code = hci_tts_session_stop( session_id );
-    if( err_code != HCI_ERR_NONE ){
+    if( err_code != HCI_ERR_NONE )
+    {
         printf( "hci_tts_session_stop return %d\n", err_code );
         return;
     }
@@ -1328,88 +1778,212 @@ void TTSSynth(const string &cap_key, const string &txt_file, const string &out_p
 
     return;
 }
-void CRecorder_ExampleDlg::OnBnClickedOnlyRecording(){
-	
+
+void CRecorder_ExampleDlg::OnBnClickedOnlyRecording()
+{
+	// TODO: Add your control notification handler code here
 }
-void CRecorder_ExampleDlg::OnBnClickedContinue(){
-	
+
+
+void CRecorder_ExampleDlg::OnBnClickedContinue()
+{
+	// TODO: Add your control notification handler code here
 }
-void CRecorder_ExampleDlg::OnEnChangeEditSaveRecordingFile(){
-	
+
+
+void CRecorder_ExampleDlg::OnEnChangeEditSaveRecordingFile()
+{
+	// TODO:  If this is a RICHEDIT control, the control will not
+	// send this notification unless you override the CDialog::OnInitDialog()
+	// function and call CRichEditCtrl().SetEventMask()
+	// with the ENM_CHANGE flag ORed into the mask.
+
+	// TODO:  Add your control notification handler code here
 }
-void HCIAPI CRecorder_ExampleDlg::CB_EventChange(_MUST_ _IN_ PLAYER_EVENT ePlayerEvent,_OPT_ _IN_ void * pUsrParam){
+
+void HCIAPI CRecorder_ExampleDlg::CB_EventChange(
+                           _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,
+                           _OPT_ _IN_ void * pUsrParam)
+{
     string strEvent;
-    switch ( ePlayerEvent ){
-    case PLAYER_EVENT_BEGIN:strEvent = "å¼€å§‹æ’­æ”¾";break;
-    case PLAYER_EVENT_PAUSE:strEvent = "æš‚åœæ’­æ”¾"; break;
-    case PLAYER_EVENT_RESUME:strEvent = "æ¢å¤æ’­æ”¾";break;
-    case PLAYER_EVENT_PROGRESS:strEvent = "æ’­æ”¾è¿›åº¦";break;
-    case PLAYER_EVENT_BUFFERING:strEvent = "æ’­æ”¾ç¼“å†²";break;
-    case PLAYER_EVENT_END:strEvent = "æ’­æ”¾å®Œæ¯•";break;
-    case PLAYER_EVENT_ENGINE_ERROR:strEvent = "å¼•æ“å‡ºé”™";break;
-    case PLAYER_EVENT_DEVICE_ERROR:strEvent = "è®¾å¤‡å‡ºé”™";break;
+    switch ( ePlayerEvent ) 
+    {
+    case PLAYER_EVENT_BEGIN:
+        strEvent = "¿ªÊ¼²¥·Å";
+        break;
+    case PLAYER_EVENT_PAUSE:
+        strEvent = "ÔİÍ£²¥·Å";
+        break;
+    case PLAYER_EVENT_RESUME:
+        strEvent = "»Ö¸´²¥·Å";
+        break;
+    case PLAYER_EVENT_PROGRESS:
+        strEvent = "²¥·Å½ø¶È";
+        break;
+    case PLAYER_EVENT_BUFFERING:
+        strEvent = "²¥·Å»º³å";
+        break;
+    case PLAYER_EVENT_END:
+        strEvent = "²¥·ÅÍê±Ï";
+        break;
+    case PLAYER_EVENT_ENGINE_ERROR:
+        strEvent = "ÒıÇæ³ö´í";
+        break;
+    case PLAYER_EVENT_DEVICE_ERROR:
+        strEvent = "Éè±¸³ö´í";
+        break;
     }
+/*    TRACE ( "%s: %s\n", __FUNCTION__, strEvent.c_str() );
+    CTTSPlayer_ExampleDlg* dlg = (CTTSPlayer_ExampleDlg*)pUsrParam;
+    dlg->SetDlgItemText( IDC_EDIT_STATUS, (char*)strEvent.c_str() );
+
+	*/
 }
-void HCIAPI CRecorder_ExampleDlg::CB_ProgressChange (_MUST_ _IN_ PLAYER_EVENT ePlayerEvent,_MUST_ _IN_ int nStart,_MUST_ _IN_ int nStop,_OPT_ _IN_ void * pUsrParam){
+
+
+void HCIAPI CRecorder_ExampleDlg::CB_ProgressChange (
+                               _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,
+                               _MUST_ _IN_ int nStart,
+                               _MUST_ _IN_ int nStop,
+                               _OPT_ _IN_ void * pUsrParam)
+{
     string strEvent;
     char szData[256] = {0};
-    switch ( ePlayerEvent ){
-    case PLAYER_EVENT_BEGIN:strEvent = "å¼€å§‹æ’­æ”¾";break;
-    case PLAYER_EVENT_PAUSE:strEvent = "æš‚åœæ’­æ”¾";break;
-    case PLAYER_EVENT_RESUME:strEvent = "æ¢å¤æ’­æ”¾";break;
-    case PLAYER_EVENT_PROGRESS:sprintf( szData, "æ’­æ”¾è¿›åº¦ï¼šèµ·å§‹=%d,ç»ˆç‚¹=%d", nStart, nStop );strEvent = szData;break;
-    case PLAYER_EVENT_BUFFERING:strEvent = "æ’­æ”¾ç¼“å†²";break;
-    case PLAYER_EVENT_END:strEvent = "æ’­æ”¾å®Œæ¯•";break;
-    case PLAYER_EVENT_ENGINE_ERROR:strEvent = "å¼•æ“å‡ºé”™";break;
-	case PLAYER_EVENT_DEVICE_ERROR:strEvent = "è®¾å¤‡å‡ºé”™";break;
+    switch ( ePlayerEvent ) 
+    {
+        //  case PLAYER_EVENT_INIT_COMPLETE:
+        //  	strEvent = "³õÊ¼»¯Íê±Ï";
+        //  	break;
+    case PLAYER_EVENT_BEGIN:
+        strEvent = "¿ªÊ¼²¥·Å";
+        break;
+    case PLAYER_EVENT_PAUSE:
+        strEvent = "ÔİÍ£²¥·Å";
+        break;
+    case PLAYER_EVENT_RESUME:
+        strEvent = "»Ö¸´²¥·Å";
+        break;
+    case PLAYER_EVENT_PROGRESS: //ÕâÀïµÄ½ø¶ÈÊÇ×ªÎªUTF-8Ö®ºóµÄÆğ¡¢ÖÕµã
+        sprintf( szData, "²¥·Å½ø¶È£ºÆğÊ¼=%d,ÖÕµã=%d", nStart, nStop );
+        strEvent = szData;
+        break;
+    case PLAYER_EVENT_BUFFERING:
+        strEvent = "²¥·Å»º³å";
+        break;
+    case PLAYER_EVENT_END:
+        strEvent = "²¥·ÅÍê±Ï";
+        break;
+    case PLAYER_EVENT_ENGINE_ERROR:
+        strEvent = "ÒıÇæ³ö´í";
+        break;
+    case PLAYER_EVENT_DEVICE_ERROR:
+        strEvent = "Éè±¸³ö´í";
+        break;
     }
+/*    TRACE ( "%s: %s\n", __FUNCTION__, strEvent.c_str() );
+    CTTSPlayer_ExampleDlg* dlg = (CTTSPlayer_ExampleDlg*)pUsrParam;
+    dlg->SetDlgItemText( IDC_EDIT_STATUS, (char*)strEvent.c_str() );
+*/
 }
-void HCIAPI CRecorder_ExampleDlg::CB_SdkErr( _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,_MUST_ _IN_ HCI_ERR_CODE eErrorCode,_OPT_ _IN_ void * pUsrParam ){
+
+
+void HCIAPI CRecorder_ExampleDlg::CB_SdkErr( _MUST_ _IN_ PLAYER_EVENT ePlayerEvent,
+                      _MUST_ _IN_ HCI_ERR_CODE eErrorCode,
+                      _OPT_ _IN_ void * pUsrParam )
+{
     string strEvent;
-    switch ( ePlayerEvent ){
-	case PLAYER_EVENT_BEGIN:strEvent = "å¼€å§‹æ’­æ”¾";break;
-	case PLAYER_EVENT_PAUSE:strEvent = "æš‚åœæ’­æ”¾";break;
-	case PLAYER_EVENT_RESUME:strEvent = "æ¢å¤æ’­æ”¾";break;
-	case PLAYER_EVENT_PROGRESS:strEvent = "æ’­æ”¾è¿›åº¦";break;
-	case PLAYER_EVENT_BUFFERING:strEvent = "æ’­æ”¾ç¼“å†²";break;
-	case PLAYER_EVENT_END:strEvent = "æ’­æ”¾å®Œæ¯•";break;
-	case PLAYER_EVENT_ENGINE_ERROR:strEvent = "å¼•æ“å‡ºé”™";break;
-	case PLAYER_EVENT_DEVICE_ERROR:strEvent = "è®¾å¤‡å‡ºé”™";break;
+    switch ( ePlayerEvent ) 
+    {
+    case PLAYER_EVENT_BEGIN:
+        strEvent = "¿ªÊ¼²¥·Å";
+        break;
+    case PLAYER_EVENT_PAUSE:
+        strEvent = "ÔİÍ£²¥·Å";
+        break;
+    case PLAYER_EVENT_RESUME:
+        strEvent = "»Ö¸´²¥·Å";
+        break;
+    case PLAYER_EVENT_PROGRESS:
+        strEvent = "²¥·Å½ø¶È";
+        break;
+    case PLAYER_EVENT_BUFFERING:
+        strEvent = "²¥·Å»º³å";
+        break;
+    case PLAYER_EVENT_END:
+        strEvent = "²¥·ÅÍê±Ï";
+        break;
+    case PLAYER_EVENT_ENGINE_ERROR:
+        strEvent = "ÒıÇæ³ö´í";
+        break;
+    case PLAYER_EVENT_DEVICE_ERROR:
+        strEvent = "Éè±¸³ö´í";
+        break;
     }
+
+/*    TRACE ( "%s: %s\n", __FUNCTION__, strEvent.c_str() );
+    CTTSPlayer_ExampleDlg* dlg = (CTTSPlayer_ExampleDlg*)pUsrParam;
+    dlg->SetDlgItemText( IDC_EDIT_STATUS, (char*)strEvent.c_str() );
+*/
 }
-static HCI_ERR_CODE WakeupFunc(void *pUserContext, MICARRAY_WAKE_RESULT *pWakeResult){
+
+static HCI_ERR_CODE WakeupFunc(void *pUserContext, MICARRAY_WAKE_RESULT *pWakeResult)
+{
 	HCI_ERR_CODE errCode = HCI_ERR_NONE;
+
 	return errCode;
 }
-static HCI_ERR_CODE WakeDirectionFunc(void *pUserContext, int nDirection){
+
+static HCI_ERR_CODE WakeDirectionFunc(void *pUserContext, int nDirection)
+{
 	HCI_ERR_CODE errCode = HCI_ERR_NONE;
+
 	printf(":: Wake Direction : %p, %d\n", pUserContext, nDirection);
+
 	return errCode;
 }
-static HCI_ERR_CODE VoiceReadyFunc(void *pUserContext, short *pVoiceData, int nVoiceSampleCount){
+
+static HCI_ERR_CODE VoiceReadyFunc(void *pUserContext, short *pVoiceData, int nVoiceSampleCount)
+{
+
 	HCI_ERR_CODE errCode = HCI_ERR_NONE;
+
 	static FILE * m_fpOut = NULL;
+
 	int size;
 	char *filename = "mictest.pcm";
-	if(m_fpOut == NULL){
+
+	if(m_fpOut == NULL)
+	{
+		//printf("Start record after wakeup: %d.\n", nRecordTime);
+
 		m_fpOut = fopen(filename, "wb");
-		if(m_fpOut == NULL){
+		if(m_fpOut == NULL)
+		{
 			printf("VoiceReadyFunc Open File Failed:%s.\n", filename);
+
 			errCode = HCI_ERR_UNSUPPORT;
+
 			return errCode;
 		}
 	}
-	if(m_fpOut != NULL){
+
+	if(m_fpOut != NULL)
+	{
 		size = fwrite(pVoiceData, sizeof(short), nVoiceSampleCount, m_fpOut);
-		if(size != nVoiceSampleCount){
+		if(size != nVoiceSampleCount)
+		{
 			printf(":: fwrite data failed, %d of %d, %d, %s\n",
 			       size, nVoiceSampleCount, errno, strerror(errno));
 		}
 		fflush(m_fpOut);
 	}
+
 	return HCI_ERR_NONE;
 }
-void Convert(char* strIn,char* strOut, int sourceCodepage, int targetCodepage){  
+
+
+void Convert(char* strIn,char* strOut, int sourceCodepage, int targetCodepage)  
+{  
 	int len=lstrlen(strIn);  
 	int unicodeLen=MultiByteToWideChar(sourceCodepage,0,strIn,-1,NULL,0);  
 	wchar_t* pUnicode;  
@@ -1425,25 +1999,35 @@ void Convert(char* strIn,char* strOut, int sourceCodepage, int targetCodepage){
 	delete pUnicode;  
 	delete pTargetData;  
 }  
-int Json_Explain (char buf[],char Dest[],char result[]){  
+
+  int Json_Explain (char buf[],char Dest[],char result[])  
+{  
 	cJSON *json , *json_result, *json_intention, *json_answer,*json_content,*date,*description,*direction,*high,*low,*location,
 		*power,*domain,*content,*text,*date_gongli,*lunarDay,*lunarMonth,*week,*holiday,*channelName,*desc,*title;
 	char temp[1000] = {NULL};
-	// è§£ææ•°æ®åŒ…  
+	// ½âÎöÊı¾İ°ü  
 	json = cJSON_Parse(buf);  
-	if (!json){  
+	if (!json)  
+	{  
 		printf("Error before: [%s]\n",cJSON_GetErrorPtr());  
 	}  
-	else{// è§£æå¼€å…³å€¼  
+else  
+	{  
+		// ½âÎö¿ª¹ØÖµ  
 		json_result = cJSON_GetObjectItem( json, "result");  //intention=weather;calendar;train;flight;joke;story;baike
 		json_answer =  cJSON_GetObjectItem(json , "answer");
+		
 		json_content = cJSON_GetObjectItem(json_answer , "content");
 		json_intention=cJSON_GetObjectItem(json_answer , "intention");
+
 		domain=cJSON_GetObjectItem(json_intention , "domain");
-		if( json_result != NULL &&domain != NULL ){
+
+		
+		if( json_result != NULL &&domain != NULL )  
+		{
 			strcpy(result,json_result->valuestring);
 			if(!strcmp(domain->valuestring,"weather")){
-				// ä»valuestringä¸­è·å¾—ç»“æœ  
+			// ´ÓvaluestringÖĞ»ñµÃ½á¹û  
 				date = cJSON_GetObjectItem(json_content , "date");
 				description = cJSON_GetObjectItem(json_content , "description");
 				direction = cJSON_GetObjectItem(json_content , "direction");
@@ -1454,6 +2038,7 @@ int Json_Explain (char buf[],char Dest[],char result[]){
 
 				strcpy(Dest,json_result->valuestring);
 				strcpy(Dest,domain->valuestring);
+				
 				strcat(Dest,",");
 				strcat(Dest,date->valuestring);
 				strcat(Dest,",");
@@ -1461,30 +2046,35 @@ int Json_Explain (char buf[],char Dest[],char result[]){
 				strcat(Dest,",");
 				strcat(Dest,direction->valuestring);
 				strcat(Dest,",");
-				strcat(Dest,"é£åŠ›");
+				strcat(Dest,"·çÁ¦");
 				strcat(Dest,power->valuestring);
+				
 				strcat(Dest,",");
 				//strcat(Dest,location->valuestring);
-				strcat(Dest,"æœ€é«˜æ°”æ¸©");
+				strcat(Dest,"×î¸ßÆøÎÂ");
 				itoa(high->valueint,temp,10);
 				strcat(Dest,temp);
-				strcat(Dest,"æ‘„æ°åº¦");
-				strcat(Dest,",");
-				strcat(Dest,"æœ€ä½æ°”æ¸©");
+					strcat(Dest,"ÉãÊÏ¶È");
+					strcat(Dest,",");
+					strcat(Dest,"×îµÍÆøÎÂ");
 				itoa(low->valueint,temp,10);
 				strcat(Dest,temp);
-				strcat(Dest,"æ‘„æ°åº¦");
-				strcat(Dest,"ã€‚");
+					strcat(Dest,"ÉãÊÏ¶È");
+					strcat(Dest,"¡£");
 			}
 			else if(!strcmp(domain->valuestring,"joke")){
 				 content = cJSON_GetObjectItem(json_content , "content");	
 				strcpy(Dest,content->valuestring);
+				
 			}
 			else if(!strcmp(domain->valuestring,"story")){
+				
 				content = cJSON_GetObjectItem(json_content , "content");
 				strcpy(Dest,content->valuestring);
+				
 			}
 			else if(!strcmp(domain->valuestring,"baike")){
+				
 				content = cJSON_GetObjectItem(json_content , "content");
 				text = content = cJSON_GetObjectItem(json_content , "text");
 				strcpy(Dest,text->valuestring);
@@ -1499,7 +2089,7 @@ int Json_Explain (char buf[],char Dest[],char result[]){
 				holiday = cJSON_GetObjectItem(json_content , "holiday");
 				strcpy(Dest,date_gongli->valuestring);
 				strcat(Dest,",");
-				strcat(Dest,"å†œå†");
+				strcat(Dest,"Å©Àú");
 				strcat(Dest,lunarMonth->valuestring);
 				strcat(Dest,lunarDay->valuestring);
 				strcat(Dest,",");
@@ -1509,11 +2099,14 @@ int Json_Explain (char buf[],char Dest[],char result[]){
 				strcat(Dest,".");
 			}
 			else if(!strcmp(domain->valuestring,"translation")){
+				
 				content = cJSON_GetObjectItem(json_content , "content");
 				text = content = cJSON_GetObjectItem(json_content , "text");
 				strcpy(Dest,text->valuestring);
+				
 			}
 			else if(!strcmp(domain->valuestring,"news")){
+				
 				content = cJSON_GetObjectItem(json_content , "content");
 				channelName = cJSON_GetObjectItem(json_content , "channelName");
 				desc = cJSON_GetObjectItem(json_content , "desc");
@@ -1523,107 +2116,190 @@ int Json_Explain (char buf[],char Dest[],char result[]){
 				strcat(Dest,title->valuestring);
 				strcat(Dest,",");
 				strcat(Dest,desc->valuestring);
-			}	
+				
+			}
+					
 		}
 		else
-		{  strcpy(Dest,"å“å‘€,è¿™ä¸ªé—®é¢˜æˆ‘ä¸ä¼šå•Š,ä½ æ•™æ•™æˆ‘å§!");}
-		// é‡Šæ”¾å†…å­˜ç©ºé—´  
+		{  strcpy(Dest,"°¥Ñ½,Õâ¸öÎÊÌâÎÒ²»»á°¡,Äã½Ì½ÌÎÒ°É!");}
+		// ÊÍ·ÅÄÚ´æ¿Õ¼ä  
 		cJSON_Delete(json); 
 	}
+	
+	
 	return 0;  
   }  
-//ç”µæœºæ•°æ®è®¡ç®—çº¿ç¨‹
-UINT ThreadComput_MotorData(LPVOID lpParam){
-	while(moter_key){
+
+  //movexhy
+
+  //µç»úÊı¾İ¼ÆËãÏß³Ì
+  UINT ThreadComput_MotorData(LPVOID lpParam)
+{
+	while(moter_key)
+	{
 		//Sleep(200);
 		WaitForSingleObject(wait_motordata,200);
 	//	distance_l = (float)motor.encoder_l*100/1160/27;
 	//	distance_r = (float)motor.encoder_r*100/1160/27;
 
-		distance_l = -(float)motor.encoder_l/1024/26*102*(1-0.23);//(1-0.23)ä¸ºå®é™…æµ‹é‡è·ç¦»ä¸è®¡ç®—è·ç¦»åå·®ä¿®æ­£
+		distance_l = -(float)motor.encoder_l/1024/26*102*(1-0.23);//(1-0.23)ÎªÊµ¼Ê²âÁ¿¾àÀëÓë¼ÆËã¾àÀëÆ«²îĞŞÕı
 		distance_r = -(float)motor.encoder_r/1024/26*102*(1-0.23);
 		distance_z = -(float)motor.encoder_z/1024/26*102*(1-0.23);
 
-		if (distanceold_l != 0){
-			distancedif_l = distance_l - distanceold_l;	//è·ç¦»å·®å€¼è®¡ç®—
+		if (distanceold_l != 0)
+		{
+			distancedif_l = distance_l - distanceold_l;	//¾àÀë²îÖµ¼ÆËã
 		}
-		if (distanceold_r != 0){
+		if (distanceold_r != 0)
+		{
 			distancedif_r = distance_r - distanceold_r;
 		}
-		if (distanceold_z != 0){
+		if (distanceold_z != 0)
+		{
 			distancedif_z = distance_z - distanceold_z;
 		}
 
-		distanceold_l = distance_l;  //æ›´æ–°è®°å½•
+		distanceold_l = distance_l;  //¸üĞÂ¼ÇÂ¼
 		distanceold_r = distance_r;
 		distanceold_z = distance_z;
 
 		motor.RobotPositionCompute(distancedif_l,distancedif_r,distancedif_z,Info_robot);
+		//if (motortest.last_angle == 0.00)
+		//{
+		//	motortest.angle = StarGazer.starAngel;
+		//}
+		//motortest.angle = StarGazer.starAngel;
+
+		//½«Î»×Ë¸üĞÂµ½µØÍ¼ÖĞ
+		//	map_world.Map_update((int)(Info_robot.pointrox/map_world.Scene_scale_x),(int)(Info_robot.pointroy/map_world.Scene_scale_y),4);
+		//	map_world.Map_update((int)(Info_robot.pointrox/map_world.Scene_scale_x),(int)(Info_robot.pointroy/map_world.Scene_scale_y),5);
+		//	Laser_Post_Computer();
+		//	wait_laserpose.SetEvent();
+		//	gps.Location_avg();
 		FILE *allout;
 		allout = fopen("aa.txt","a+");
-		for(int i=0;i<12;++i){
+		for(int i=0;i<12;++i)
+		{
 			fprintf(allout," bbbbb===%d    \n" ,plan.distance_min[i]);
 		}
 		fprintf(allout," ======================   \n" );
 		fclose(allout);
-	}
-	return 0;
-}
-void CRecorder_ExampleDlg::OnBnClickedButton2(){//æš‚åœ
 
-}
-//ç¡®å®šä½ç½®
-UINT ThreadComput_MotorTts(LPVOID lpParam){
-	while(motertts_key){
-		//Sleep(200);
-		WaitForSingleObject(wait_motortts,200);		
+
 	}
 	return 0;
 }
-UINT ThreadComput_Motorautowalk(LPVOID lpParam){
-	while(moterautowalk_key){
-		WaitForSingleObject(wait_motortts,300);
-		if (plan.Range_to_go(plan.target_x,plan.target_z,Info_robot.pointrox,Info_robot.pointroy)){
-			char* tts_motor=zhanpin[objectnow].contect1;
+
+
+
+
+  void CRecorder_ExampleDlg::OnBnClickedButton2()//ÔİÍ£
+  {
+	  
+ }
+  //È·¶¨Î»ÖÃ
+   UINT ThreadComput_MotorTts(LPVOID lpParam)
+{
+	while(motertts_key)
+	{
+		//Sleep(200);
+		WaitForSingleObject(wait_motortts,200);
+	//	distance_l = (float)motor.encoder_l*100/1160/27;
+	//	distance_r = (float)motor.encoder_r*100/1160/27;
+		/*if(motertts_key1&&Info_robot.pointrox<7000&&Info_robot.pointrox>6300){
+			motertts_key1=false;
+
+			char* tts_motor="Ê×ÏÈÎÒÃÇ¿ÉÒÔ¿´µ½Ò»Ğ©Å®ÕæÈËËùÊ¹ÓÃµÄ±øÆ÷£¬±ÈÈçËµÌúİğŞ¼¡£ÌúİğŞ¼ÓĞËÄ¸ùÉì³öµÄÌú´Ì£¬³¤Êı´ç£¬×ÅµØµÄÊ±ºò×ÜÓĞÒ»´Ì³¯ÉÏ¡£´Ì¼âÈç²İ±¾Ö²ÎïİğŞ¼£¬¹ÊÃû¡£ÔÚÕ½ÕùÖĞ£¬½«ÌúİğŞ¼É¢²¼ÔÚµØ£¬¿ÉÒÔÔúÉËµĞ¾ü³à×ã½ÅÕÆ¼°ÂíÌã£¬ÒÔ³ÙÖÍµĞ¾üµÄĞĞ¶¯¡£";
 			unsigned char* pszUTF8 = NULL;
 			HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
+
 			string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+			
+			PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
+		}
+		if(motertts_key2&&Info_robot.pointrox<5000&&Info_robot.pointrox>4200){
+			motertts_key2=false;
+
+			char* tts_motor="ÎÒÃÇÔÙÀ´¿´Ò»ÏÂÅÔ±ßµÄÁ÷ĞÇ´¸¡£Á÷ĞÇ´¸ÊÇÒ»ÖÖ½«½ğÊô´¸Í·ÏµÓÚ³¤ÉşÒ»¶Ë»òÁ½¶ËÖÆ³ÉµÄÈí±øÆ÷£¬ËüÅÔ±ßµÄÅ×Ê¯ÊÇÅäºÏÅ×Ê¯»úÊ¹ÓÃµÄ¡£Õâ¼şÅ×Ê¯µÄ³öÍÁÒ²Ö¤Ã÷ÁË½ğ´úºÚÁú½­µØÇøµÄ¾ü¶ÓÒÑ¾­ÔÚÊ¹ÓÃÅ×Ê¯»úÁË¡£";
+			unsigned char* pszUTF8 = NULL;
+			HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
+
+			string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+			
+			PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
+		}
+		if(motertts_key3&&Info_robot.pointrox<2350&&Info_robot.pointrox>1800){
+			motertts_key3=false;
+
+			char* tts_motor="ÔÙÀ´¿´Õâ¼şÍ­Óñºø´ºÆ¿¡£Óñºø´ºÆ¿ÊÇÓÃÀ´×°¾ÆµÄ£¬²¢ÇÒ²»Ò×ÆÆËé¡£ÔÚËüµÄ¾±²¿ÄØÓĞºÜ¶àÍ¹ÆğµÄÏÒÎÆ£¬ÈËÃÇ¾Í¿ÉÒÔÇáËÉµØ°ÑÉş×ÓË©ÔÚÆ¿×ÓÉÏÃæ¡£";
+			unsigned char* pszUTF8 = NULL;
+			HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
+
+			string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+			
+			PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
+		}
+		if(motertts_key4&&Info_robot.pointrox<-2300&&Info_robot.pointrox>-3300){
+			motertts_key4=false;
+
+			char* tts_motor="ÔÙÀ´¿´ÅÔ±ßÕ¹¹ñÖĞÕâ¼şÒø¹Ç¶ä¡£Òø¹Ç¶äÄØÔ­ÎªÒ»ÖÖ±øÆ÷£¬ÔÚËÎ´úºÍÁÉ´úµÄÊ±ºò½«Ëü×÷ÎªÒ»ÖÖÒÇÕÌ×÷ÎªÈ¨Á¦µÄÏóÕ÷£¬Ë×³Æ¡°½ğ¹Ï¡±¡£½ğ´úÊÜÁÉËÎµÄÓ°ÏìÒ²½ÓÊÜÁËÕâÖÖ¹ÛÄî£¬ËùÒÔÄØ£¬Òø¹Ç¶ä¼ÈÊÇÒ»ÖÖ±øÆ÷£¬Ò²ÊÇÒ»ÖÖÒÇÕÌ¡£";
+			unsigned char* pszUTF8 = NULL;
+			HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
+
+			string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+			
+			PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
+		}
+*/
+/*		if(Info_robot.pointrox<9700&&Info_robot.pointrox>9500){
+			motertts_key1=true;
+			motertts_key2=true;
+		}
+*/		
+
+	}
+	return 0;
+   }
+
+//xhyÂşÓÎ
+UINT ThreadComput_Motorautowalk(LPVOID lpParam)
+{
+
+	while(moterautowalk_key)
+	{
+		WaitForSingleObject(wait_motortts,300);
+	
+		/*if(Info_robot.pointrox_stargazer<100)
+		{
+			motor.VectorMove(1200,0.000000,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+		}
+		else if(Info_robot.pianzhuan_stargazer>=10)
+		{
+			motor.VectorMove(200,1.0,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+		}
+		else if(Info_robot.pianzhuan_stargazer<=10&&Info_robot.pointroy_stargazer<200)
+		{
+			motor.VectorMove(1200,0.000000,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+		}*/
+		if (plan.Range_to_go(plan.target_x,plan.target_z,Info_robot.pointrox,Info_robot.pointroy))
+			{
+				
+				char* tts_motor=zhanpin[objectnow].contect1;
+			unsigned char* pszUTF8 = NULL;
+			HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
+
+			string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+			
 			PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
 //			WaitForSingleObject(wait_motortts,100);
 			Sleep(zhanpin[objectnow].time);
-			if(zhanpin[objectnow].mode==2){
+			
+			if(zhanpin[objectnow].mode==2)
+			{
 				objectnowpos=objectnowpos+1;
-				int nums_oba=0;
-				for(;nums_oba<100;++nums_oba){
-					if(zhanpin[nums_oba].objectnum==objectnums[objectnowpos]){
-						break;
-					}
-				}
-				plan.target_x=zhanpin[nums_oba].objectnum_x;
-				plan.target_z=zhanpin[nums_oba].objectnum_y;//xhyç›®æ ‡ç‚¹
-				plan.speed_line_pos=0;
-				plan.Desired_Angle_ob=zhanpin[nums_oba].direct;
-				objectnow=nums_oba;
-				isbegio=true;
-				plan.SERVEMODE = 2;
-				plan.CtrlMode=2;
-			}
-			else if(abs(plan.pianzhuan*180/PIf-plan.Desired_Angle_ob)<=20.0){
-				wait_motor_timer = 200*10000;
-				plan.speed_line = 0;
-				plan.speed_angle = 0;
-				plan.speed_l = 0;
-				plan.speed_r = 0;
-				plan.SERVEMODE = 4; //åˆ‡æ¢åˆ°ç­‰å¾…æ¨¡å¼
-				motor.stop(); //åœæ­¢
-				Sleep(150);
-				motor.stop(); //åœæ­¢
-				plan.speed_l = 0;
-				plan.speed_r = 0;
-				waittimer = 0;
-			objectnowpos=objectnowpos+1;
 			int nums_oba=0;
-			for(;nums_oba<100;++nums_oba){
+			for(;nums_oba<100;++nums_oba)
+			{
 				if(zhanpin[nums_oba].objectnum==objectnums[objectnowpos])
 				{
 					break;
@@ -1631,56 +2307,211 @@ UINT ThreadComput_Motorautowalk(LPVOID lpParam){
 			}
 
 			plan.target_x=zhanpin[nums_oba].objectnum_x;
-			plan.target_z=zhanpin[nums_oba].objectnum_y;//xhyç›®æ ‡ç‚¹
+			plan.target_z=zhanpin[nums_oba].objectnum_y;//xhyÄ¿±êµã
 			plan.speed_line_pos=0;
 			plan.Desired_Angle_ob=zhanpin[nums_oba].direct;
 			objectnow=nums_oba;
 			isbegio=true;
-			if(nums_oba!=0)
-			{
-				plan.SERVEMODE = 2;
+			plan.SERVEMODE = 2;
+			plan.CtrlMode=2;
 			}
+			else if(abs(plan.pianzhuan*180/PIf-plan.Desired_Angle_ob)<=20.0)
+			{
+				
+
+				wait_motor_timer = 200*10000;
+				plan.speed_line = 0;
+				plan.speed_angle = 0;
+				plan.speed_l = 0;
+				plan.speed_r = 0;
+//				edit_target->SetWindowText("µ½´ïÄ¿±ê");
+				plan.SERVEMODE = 4; //ÇĞ»»µ½µÈ´ıÄ£Ê½
+				motor.stop(); //Í£Ö¹
+				Sleep(150);
+				motor.stop(); //Í£Ö¹
+				plan.speed_l = 0;
+				plan.speed_r = 0;
+			//	plate_wight = PlateData[2]; //¼ÇÂ¼µ±Ç°²ÍÅÌÖØÁ¿
+				waittimer = 0;
+/////////////////////////////////////////////////xhytts
+			
+			objectnowpos=objectnowpos+1;
+			int nums_oba=0;
+			for(;nums_oba<100;++nums_oba)
+			{
+				if(zhanpin[nums_oba].objectnum==objectnums[objectnowpos])
+				{
+					break;
+				}
+			}
+
+			plan.target_x=zhanpin[nums_oba].objectnum_x;
+			plan.target_z=zhanpin[nums_oba].objectnum_y;//xhyÄ¿±êµã
+			plan.speed_line_pos=0;
+			plan.Desired_Angle_ob=zhanpin[nums_oba].direct;
+			objectnow=nums_oba;
+			isbegio=true;
+			plan.SERVEMODE = 2;
 			plan.CtrlMode=2;
 			FILE *alloutXXX;
 		alloutXXX = fopen("alloutdaoda.txt","a+");
 		fprintf(alloutXXX ," %d  %d  %d %d  %f %f  %f \n",objectnowpos,nums_oba,plan.target_x,plan.target_z);
 		fclose(alloutXXX );
+
+////////////////////////////////////////////////
+				//¿ØÖÆ»úÆ÷ÈË×ªÏòÄ¿±ê²Í×À
+			//	plan.Desired_Angle;
+				//if (plan.Desired_Angle<=10)
+				//{
+				//	SetTimer(3,400,NULL); //Æô¶¯È¡²Í¼ì²â
+				//	SetTimer(4,1000,NULL); //Æô¶¯µÈ´ıÈ¡²Í¼ÆÊ±
+				//}
+				//else
+				//{
+				//	motor.Velocity_control(0,plan.Desired_Angle*3.14/180);
+				//}
+					//SetTimer(3,400,NULL); //Æô¶¯È¡²Í¼ì²â
+					//SetTimer(4,1000,NULL); //Æô¶¯µÈ´ıÈ¡²Í¼ÆÊ±
+				
 			}
+			
 		}
 	}
 	return 0;
 }
-//å‰è¿›åé€€å·¦è½¬å³è½¬
- void CRecorder_ExampleDlg::OnBnClickedButton6(){//å¯¼èˆª
+
+   //Ç°½øºóÍË×ó×ªÓÒ×ª
+ void CRecorder_ExampleDlg::OnBnClickedButton6()//µ¼º½
+{
+	
 	plan.speed_line = 0;
 	plan.speed_angle = 0;
 	plan.speed_l = 0;
 	plan.speed_r = 0;
-	gridfastslam_key=true;
-	wait_gridfastslam.SetEvent();
-	wait_motor_timer = 200;
-	speedkey = 1;
-	int nIndex = 0;
-	CString strCBText;
-	int nums_ob=0;
-	for(;nums_ob<100;++nums_ob){
-		if(zhanpin[nums_ob].objectnum==objectnums[0]){
-			break;
+	// TODO: Add your control notification handler code here
+	//	//////////////////////////////////zcs add start
+		gridfastslam_key=true;
+		wait_gridfastslam.SetEvent();
+
+
+
+		///////////////////////////////////////zcs add end
+		wait_motor_timer = 200;
+		speedkey = 1;
+		int nIndex = 0;
+		CString strCBText;
+		//¿ªÊ¼Ö¸¶¨²Í×ÀÄ£Ê½,´Ë´¦Ö»µ÷ÓÃÆô¶¯º¯Êı,²»ÒªĞ´Èë¾ßÌå¹ı³Ì
+		//QueryPerformanceCounter(&start_t);
+		//fprintf(file,"starttime:		%f    \n",1e3*start_t.QuadPart/freq.QuadPart);
+		//nIndex = Combox_Target1.GetCurSel();
+		//if (nIndex>=0)
+		//{
+		//	Combox_Target1.GetLBText( nIndex, strCBText);
+		//	target1 = atoi(strCBText);
+		//}
+		//else
+		//{
+		//	nIndex = 0;
+		//	target1 = 0;
+		//}
+
+		//nIndex = Combox_Target2.GetCurSel();
+		//if (nIndex>=0)
+		//{
+		//	Combox_Target2.GetLBText( nIndex, strCBText);
+		//	target2 = atoi(strCBText);
+		//}
+		//else
+		//{
+		//	nIndex = 0;
+		//	target2 = 0;
+		//}
+
+		//nIndex = Combox_Target3.GetCurSel();
+		//if (nIndex>=0)
+		//{
+		//	Combox_Target3.GetLBText( nIndex, strCBText);
+		//	target3 = atoi(strCBText);
+		//}
+		//else
+		//{
+		//	nIndex = 0;
+		//	target3 = 0;
+		//}
+
+		//if (target1 == 0 && target2 == 0 && target3 == 0)
+		//{
+		//	MessageBox("Î´ÊäÈëÕıÈ·µÄÄ¿±êµã!");
+		//}
+		//else
+		//{
+		////	plate_wight = PlateData[2];
+
+		//	//SystemSet.TableLocation_X[target1];
+		//	//SystemSet.TableLocation_X[target1];
+		//	//SystemSet.TableLocation_X[target1];
+		//	if(target1!=0)
+		//	{
+		////		map_world.Map_update(SystemSet.TableLocation_X[target1],SystemSet.TableLocation_Y[target1],3);
+		//		plan.target1_x = SystemSet.TableLocation_X[target1];
+		//		plan.target1_z = SystemSet.TableLocation_Y[target1];
+		//	}
+		//	if(target2!=0)
+		//	{
+		////		map_world.Map_update(SystemSet.TableLocation_X[target2],SystemSet.TableLocation_Y[target2],3);
+		//		plan.target2_x = SystemSet.TableLocation_X[target2];
+		//		plan.target2_z = SystemSet.TableLocation_Y[target2];
+		//	}
+		//	if(target3!=0)
+		//	{
+		////		map_world.Map_update(SystemSet.TableLocation_X[target3],SystemSet.TableLocation_Y[target3],3);
+		//		plan.target3_x = SystemSet.TableLocation_X[target3];
+		//		plan.target3_z = SystemSet.TableLocation_Y[target3];
+		//	}
+
+		//	if (target1 != 0 )
+		//	{
+		//		plan.target_x = plan.target1_x;    
+		//		plan.target_z = plan.target1_z;
+		//		target_num = 1;
+		//	}
+		//	else if (target2 != 0 )
+		//	{
+		//		plan.target_x = plan.target2_x;    
+		//		plan.target_z = plan.target2_z;
+		//		target_num = 2;
+		//	}
+		//	else if (target3 != 0 )
+		//	{
+		//		plan.target_x = plan.target3_x;    
+		//		plan.target_z = plan.target3_z;
+		//		target_num = 3;
+		//	}
+		//	edit_target->SetWindowText("Ä¿±ê1");
+		///////////////////////////////////////////////xhy³õÊ¼»¯
+		int nums_ob=0;
+		for(;nums_ob<100;++nums_ob)
+		{
+			if(zhanpin[nums_ob].objectnum==objectnums[0])
+			{
+				break;
+			}
 		}
-	}
-	plan.target_x=zhanpin[nums_ob].objectnum_x;
-	plan.target_z=zhanpin[nums_ob].objectnum_y;//xhyç›®æ ‡ç‚¹
+			plan.target_x=zhanpin[nums_ob].objectnum_x;
+			plan.target_z=zhanpin[nums_ob].objectnum_y;//xhyÄ¿±êµã
 			
-	plan.speed_line_pos=0;
-	plan.Desired_Angle_ob=zhanpin[nums_ob].direct;
-	objectnow=nums_ob;
-	objectnowpos=0;
-	plan.SERVEMODE = 2;
-	plan.CtrlMode=2;
-	if (!motor_key){
-		motor_key = true;
-		pThread_MototCtrl = AfxBeginThread(ThreaMotorCtrl,NULL); //ç”µæœºæ§åˆ¶çº¿ç¨‹
-	}
+			plan.speed_line_pos=0;
+			plan.Desired_Angle_ob=zhanpin[nums_ob].direct;
+			objectnow=nums_ob;
+			objectnowpos=0;
+			plan.SERVEMODE = 2;
+			plan.CtrlMode=2;
+			if (!motor_key)
+			{
+				motor_key = true;
+				pThread_MototCtrl = AfxBeginThread(ThreaMotorCtrl,NULL); //µç»ú¿ØÖÆÏß³Ì
+			}
+			
 
 	hci_asr_recorder_cancel();
 	hci_asr_recorder_release();
@@ -1697,38 +2528,63 @@ UINT ThreadComput_Motorautowalk(LPVOID lpParam){
 	string initConfigtts = "initCapkeys=tts.cloud.wangjing";
     initConfigtts += ",dataPath=../../data" ;
 	eReti = hci_tts_player_init( initConfigtts.c_str(), &cb );
-	if (eReti != PLAYER_ERR_NONE){
+	if (eReti != PLAYER_ERR_NONE)
+	{
 		hci_release();
 		CString str;
-		str.Format( "æ’­æ”¾å™¨åˆå§‹åŒ–å¤±è´¥,é”™è¯¯ç %d.", eReti);
+		str.Format( "²¥·ÅÆ÷³õÊ¼»¯Ê§°Ü,´íÎóÂë%d.", eReti);
 		MessageBox( str );
+		
 	}
+
+
+
+//	pThread_Motor_tts = AfxBeginThread(ThreadComput_MotorTts,NULL);
+
 	pThread_Motor_autowalk= AfxBeginThread(ThreadComput_Motorautowalk,NULL);
+		
+
 }
-void CRecorder_ExampleDlg::OnBnClickedButton3(){//åé€€
-	ishand=true;
-	motor.VectorMove(-1200,0.000000,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
-}
-void CRecorder_ExampleDlg::OnBnClickedButton1(){//å‰è¿›
-	ishand=true;
-	motor.VectorMove(1200,0.000000,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
-}
-void CRecorder_ExampleDlg::OnBnClickedButton4(){//å·¦è½¬
-	ishand=true;
-	motor.VectorMove(200,2.0,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
-}
-void CRecorder_ExampleDlg::OnBnClickedButton5(){//å³è½¬
-	ishand=true;
-	motor.VectorMove(200,-2.0,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
-}
-UINT ThreadReadLaser_Data(LPVOID lpParam){
+
+   void CRecorder_ExampleDlg::OnBnClickedButton3()//ºóÍË
+   {
+	   ishand=true;
+	    motor.VectorMove(-1200,0.000000,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+	   // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+   }
+     void CRecorder_ExampleDlg::OnBnClickedButton1()//Ç°½ø
+  {
+	  ishand=true;
+	  // TODO: Add your control notification handler code here
+	  motor.VectorMove(1200,0.000000,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+	 }
+
+	 void CRecorder_ExampleDlg::OnBnClickedButton4()//×ó×ª
+	 {
+		 ishand=true;
+		 // TODO: Add your control notification handler code here
+		 motor.VectorMove(200,2.0,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+	 }
+
+
+	 void CRecorder_ExampleDlg::OnBnClickedButton5()//ÓÒ×ª
+	 {
+		 ishand=true;
+		 // TODO: Add your control notification handler code here
+		  motor.VectorMove(200,-2.0,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
+	 }
+
+//xhyvhf
+UINT ThreadReadLaser_Data(LPVOID lpParam)
+{
 	FILE *allout;
 	allout = fopen("allout2laser.txt","a+");
-	while (lase_key){
+	while (lase_key)
+	{
 		m_cURG.GetDataByGD(0,768,1);
 		WaitForSingleObject(m_cURG.wait_laser,INFINITE);
 
-		//	m_cURG.GetDataByGD(0,768,1);//å‰ä¸¤ä¸ªå‚æ•°å†³å®šæ‰«æè§’åº¦èŒƒå›´ï¼ˆ384æ˜¯æ­£å‰æ–¹çš„çº¿ï¼Œ288çº¿ä¸º90åº¦èŒƒå›´ï¼‰ï¼Œæœ€åä¸€ä¸ªå‚æ•°å†³å®šäº†è§’åº¦åˆ†è¾¨ç‡ã€‚è·å–æ¿€å…‰æµ‹è·èµ·çš„æ•°æ®;
+		//	m_cURG.GetDataByGD(0,768,1);//Ç°Á½¸ö²ÎÊı¾ö¶¨É¨Ãè½Ç¶È·¶Î§£¨384ÊÇÕıÇ°·½µÄÏß£¬288ÏßÎª90¶È·¶Î§£©£¬×îºóÒ»¸ö²ÎÊı¾ö¶¨ÁË½Ç¶È·Ö±æÂÊ¡£»ñÈ¡¼¤¹â²â¾àÆğµÄÊı¾İ;
 		//////////////////////////////////////////
 		Info_laser_data.m_Laser_Data_Point=m_nValPoint_temp;
 
@@ -1736,30 +2592,51 @@ UINT ThreadReadLaser_Data(LPVOID lpParam){
 		//	pReadThread_postpro->m_Laser_Point=m_nValPoint_temp;
 
 		key_laser = !m_cURG.key;
-		for (int i=0;i<Info_laser_data.m_Laser_Data_Point;i++){
+		for (int i=0;i<Info_laser_data.m_Laser_Data_Point;i++)
+		{
 			Info_laser_data.m_Laser_Data_Value[i]=m_cURG.m_distVal_temp_test[key_laser][i];
 			m_laser_data_raw[i]=m_cURG.m_distVal_temp_test[key_laser][i];
 			m_laser_data_postpro[i] = m_cURG.m_distVal_temp_test[key_laser][i];
-			if(i%10==0){
+			if(i%10==0)
+			{
 				fprintf(allout," 0000===%d   \n",m_laser_data_postpro[i]);
 			}
 		}
+
+		//pReadThread_postpro->pm_median_filter();//¼¤¹âÊı¾İµÄÖĞÖµÂË²¨º¯Êı
+		//////////////////////////////////////////////////////////
+		//	plan.MyFtestDanger();
+
 		wait_data.SetEvent();
 		m_cURG.wait_laser.ResetEvent();
 		wait_laserpose.SetEvent();
 	}
 	return 0;
 }
-UINT ThreadDataExchange(LPVOID lpParam){
-	while (dataexchange_key){
+
+UINT ThreadDataExchange(LPVOID lpParam)
+{
+	while (dataexchange_key)
+	{
 		//WaitForSingleObject(waittime,INFINITE);
 		//WaitForSingleObject(waittime,3000);
 		WaitForSingleObject(wait_data,INFINITE);
 		plan.speed_stated = speed_stated;
-		for (int loop = 0;loop<1000;loop++){
+		for (int loop = 0;loop<3;loop++)
+		{
+			//plan.PlateData[loop] = PlateData[loop];
+		}
+		for (int loop = 0;loop<1000;loop++)
+		{
 			plan.m_laser_data_postpro[loop] = m_laser_data_postpro[loop];
 			m_laser_data_postpro_vfh[loop] = m_laser_data_postpro[loop];
 		}
+//		plan.waittimer = waittimer;
+		
+		/*plan.pointrox = Info_robot.pointrox_corrected;
+		plan.pointroy = Info_robot.pointroy_corrected;
+		plan.pianzhuan = Info_robot.pianzhuan_corrected;*/
+
 		plan.pointrox = Info_robot.pointrox;
 		plan.pointroy = Info_robot.pointroy;
 		plan.pianzhuan = Info_robot.pianzhuan;
@@ -1771,16 +2648,23 @@ UINT ThreadDataExchange(LPVOID lpParam){
 	}
 	return 0;
 }
-UINT ThreaVFH(LPVOID lpParam){
+
+UINT ThreaVFH(LPVOID lpParam)
+{
 	plan.Init();
 	algorithm.Init();
 	plan.laser_position = false;
-	while (vfh_key){
+	while (vfh_key)
+	{
 		QueryPerformanceFrequency(&freq1);
 		QueryPerformanceCounter(&start_t1);
 		WaitForSingleObject(wait_vfh,INFINITE);
+		
 		Pathplan();
+		////////////////////////////zcs add start
 		wait_motor.SetEvent();
+		//	wait_gridfastslam.SetEvent();
+		/////////////////////////////zcs add end
 		wait_vfh.ResetEvent();
 		QueryPerformanceCounter(&stop_t1);
 		exe_time1 = 1e3*(stop_t1.QuadPart-start_t1.QuadPart)/freq1.QuadPart;
@@ -1789,35 +2673,116 @@ UINT ThreaVFH(LPVOID lpParam){
 	}
 	return 0;
 }
-void Pathplan(){
-	double mm_x=Info_robot.pointrox;//å°†ä½ç½®çš„æ¯«ç±³å•ä½è½¬æ¢æˆå˜ç±³
+
+void Pathplan()
+{
+	//pp.Init();
+	//	read_target_position_and_settarget();
+	//double mm_x=Info_robot.pointrox_corrected;//½«Î»ÖÃµÄºÁÃ×µ¥Î»×ª»»³ÉÀåÃ×
+	//double mm_y=Info_robot.pointroy_corrected;
+	//double mm_angle=Info_robot.pianzhuan_corrected;
+
+	double mm_x=Info_robot.pointrox;//½«Î»ÖÃµÄºÁÃ×µ¥Î»×ª»»³ÉÀåÃ×
 	double mm_y=Info_robot.pointroy;
 	double mm_angle=Info_robot.pianzhuan;
-	//ä»¤åè½¬è§’å¼§åº¦å§‹ç»ˆä¿æŒåœ¨ä¸€ä¸ªå‘¨æœŸå†…ï¼ˆ0ï½2piï¼‰ï¼›
-	while(mm_angle>=Info_robot.pi*2)	mm_angle -= Info_robot.pi*2;
-	while(mm_angle<0)	mm_angle+= Info_robot.pi*2;
+
+	//////////////////////////////////////////////////////////////////////////hhh
+	//ÁîÆ«×ª½Ç»¡¶ÈÊ¼ÖÕ±£³ÖÔÚÒ»¸öÖÜÆÚÄÚ£¨0¡«2pi£©£»
+	while(mm_angle>=Info_robot.pi*2)
+	{
+		mm_angle -= Info_robot.pi*2;
+	}
+	while(mm_angle<0)
+	{	
+		mm_angle+= Info_robot.pi*2;
+	}
+	//////////////////////////////////////////////////////////////////////////
+
 	plan.PlanPath_vfh(mm_x,mm_y,mm_angle*180/PI);
 }
-UINT ThreaMotorCtrl(LPVOID lpParam){
+
+
+
+UINT ThreaMotorCtrl(LPVOID lpParam)
+{
+
 	FILE *allout;
 	allout = fopen("allout4.txt","a+");
+
 	FILE *alloutxhy;
 	alloutxhy = fopen("alloutxhy.txt","a+");
-	//fprintf(allout,"è§’åº¦ï¼š%f   l:  %f  r:  %f  z:   %f   \n",(double)dtheta, distancedif_l, distancedif_r,distancedif_z);
+	
+
+	//fprintf(allout,"½Ç¶È£º%f   l:  %f  r:  %f  z:   %f   \n",(double)dtheta, distancedif_l, distancedif_r,distancedif_z);
 	//fclose(allout);
-	while(motor_key){
+	while(motor_key)
+	{
 	//	if (plan.danger)
+
 		WaitForSingleObject(wait_motor,wait_motor_timer);
 	//	else
 	//		WaitForSingleObject(wait_motor,200);
+
+
+
 		fprintf(allout,"%f    %f    %f    %f    \n",plan.target_x,plan.target_z,Info_robot.pointrox,Info_robot.pointroy);
-		if (plan.CtrlMode == 1 || plan.CtrlMode == 3){
-			if (CtrlMode_old != 3){
+		if (plan.CtrlMode == 1 || plan.CtrlMode == 3) 
+		{
+			if (CtrlMode_old != 3)
+			{
 			//	SpeedBuffer(0,0,&speed_l_old,&speed_r_old);
 				//motor.gomotor(0,0);
 				CtrlMode_old = 3;
 				//Sleep(300);
-			}							
+			}
+			
+			//	plan.speed_line = 0;
+			//	plan.speed_angle = 0;
+			/*if (plan.speed_l>19)
+			{
+				plan.speed_r-=(plan.speed_l-19);
+				plan.speed_l = 19;
+			}
+			if (plan.speed_r>19)
+			{
+				plan.speed_l-=(plan.speed_r-19);
+				plan.speed_r = 19;
+			}*/
+			//if (plan.speed_l >= 0 && plan.speed_r >= 0)
+			//{
+			//	run_direction = 1;
+			//}
+			//else if (plan.speed_l < 0 && plan.speed_r < 0)
+			//{
+			//	run_direction = -1;
+			//}
+			//if (run_direction_old != run_direction)
+			//{
+			//	SpeedBuffer(0,0,&speed_l_old,&speed_r_old);
+			//	run_direction_old = run_direction;
+			//	//Sleep(350);
+			//}
+			//if ((plan.speed_l-speed_l_old >10 || plan.speed_l-speed_l_old< -10) || (plan.speed_r-speed_r_old >10 || plan.speed_r-speed_r_old< -10))
+			//{
+			//	SpeedBuffer(plan.speed_l,plan.speed_r,&speed_l_old,&speed_r_old);
+			//}
+			/*else
+			{
+				if (plan.speed_l<0 && plan.speed_r<0)
+				{
+					if (plan.speed_l<-5)
+					{
+						plan.speed_l = -5;
+					}
+					if (plan.speed_r<-5)
+					{
+						plan.speed_r = -5;
+					}
+					
+				}*/
+			//	motor.gomotor(plan.speed_l,plan.speed_r);
+			//}
+			
 			motor.gomotor(plan.speed_l,-plan.speed_r,2*(plan.speed_r - plan.speed_l));
 
 			fprintf(allout,"%d    %d    \n",plan.speed_l,plan.speed_r);
@@ -1826,29 +2791,35 @@ UINT ThreaMotorCtrl(LPVOID lpParam){
 			Sleep(100);
 			motor.gomotor(plan.speed_l,plan.speed_r,0);*/
 		}
-		else if(plan.CtrlMode == 2){
+		else if(plan.CtrlMode == 2)
+		{
 			//plan.speed_l = 0;
 			//plan.speed_r = 0;
-			if (CtrlMode_old != 2){
+			if (CtrlMode_old != 2)
+			{
 			//	SpeedBuffer(0,0,&speed_l_old,&speed_r_old);
 				CtrlMode_old = 2;
 				//Sleep(300);
 			}
-			if (plan.speed_line >=0){
+			if (plan.speed_line >=0)
+			{
 				run_direction = 1;
 			}
-			else if (plan.speed_line<0){
+			else if (plan.speed_line<0)
+			{
 				run_direction = -1;
 			}
 			
-			if (run_direction_old != run_direction){
+			if (run_direction_old != run_direction)
+			{
 				SpeedBuffer(0,0,&speed_l_old,&speed_r_old);
 				run_direction_old = run_direction;
 			//	Sleep(350);
 			}
 		//	motor.Velocity_control(plan.speed_line,plan.speed_angle);
-			fprintf(allout," %d  %d %f  %f   line_speedï¼š%f   angle_speed:  %f  Desired_Angle:  %f  pick:   %f   pianzhuan:  %f\n",plan.target1_x,plan.target1_z,Info_robot.pointrox,Info_robot.pointroy,plan.speed_line,plan.speed_angle,plan.Desired_Angle,pick,Info_robot.pianzhuan);
-			if(!ishand){
+			fprintf(allout," %d  %d %f  %f   line_speed£º%f   angle_speed:  %f  Desired_Angle:  %f  pick:   %f   pianzhuan:  %f\n",plan.target1_x,plan.target1_z,Info_robot.pointrox,Info_robot.pointroy,plan.speed_line,plan.speed_angle,plan.Desired_Angle,pick,Info_robot.pianzhuan);
+			if(!ishand)
+			{
 				motor.VectorMove(plan.speed_line*40,plan.speed_angle,Info_robot.pianzhuan,Info_robot.pointrox,Info_robot.pointroy);
 			}
 		//	motor.gomotor(plan.speed_l,-plan.speed_r,2*(plan.speed_r - plan.speed_l));
@@ -1856,49 +2827,66 @@ UINT ThreaMotorCtrl(LPVOID lpParam){
 			plan.speed_r = motor.move_rsp;
 			speed_l_old = plan.speed_l;
 			speed_r_old = plan.speed_r;
+
 			//motor.Velocity_control(plan.speed_line,plan.speed_angle);
 		}
 		//wait_motor.ResetEvent();
 	}
-	fclose(allout);
-	fclose(alloutxhy);
+fclose(allout);
+fclose(alloutxhy);
 	return 0;
 	
 }
-void SpeedBuffer(int speed_l, int speed_r,int *speed_l_old, int *speed_r_old){
-	do{
-		if (!speedkey){
+
+void SpeedBuffer(int speed_l, int speed_r,int *speed_l_old, int *speed_r_old)
+{
+	do 
+	{
+		if (!speedkey)
+		{
 			return;
 		}
-		if (*speed_r_old < speed_r)	{
+		if (*speed_r_old < speed_r)
+		{
 			*speed_r_old +=acceleration;
-			if (*speed_r_old > speed_r){
+			if (*speed_r_old > speed_r)
+			{
 				*speed_r_old = speed_r;
 			}
 		}
-		else if (*speed_r_old > speed_r){
+		else if (*speed_r_old > speed_r)
+		{
 			*speed_r_old -=acceleration;
-			if (*speed_r_old < speed_r){
+			if (*speed_r_old < speed_r)
+			{
 				*speed_r_old = speed_r;
 			}
 		}
-		if (*speed_l_old < speed_l){
+
+		if (*speed_l_old < speed_l)
+		{
 			*speed_l_old +=acceleration;
-			if (*speed_l_old > speed_l){
+			if (*speed_l_old > speed_l)
+			{
 				*speed_l_old = speed_l;
 			}
 		}
-		else if (*speed_l_old > speed_l){
+		else if (*speed_l_old > speed_l)
+		{
 			*speed_l_old -=acceleration;
-			if (*speed_l_old < speed_l){
+			if (*speed_l_old < speed_l)
+			{
 				*speed_l_old = speed_l;
 			}
 		}
-		if (*speed_l_old<-5 && *speed_r_old<-5){
-			if (*speed_l_old <-5){
+		if (*speed_l_old<-5 && *speed_r_old<-5)
+		{
+			if (*speed_l_old <-5)
+			{
 				*speed_l_old = -5;
 			}
-			if (*speed_r_old < -5){
+			if (*speed_r_old < -5)
+			{
 				*speed_r_old = -5;
 			}
 			motor.gomotor((*speed_l_old)*(-1),(*speed_r_old)*(-1),2*((*speed_r_old)*(-1)-(*speed_l_old)*(-1)));
@@ -1910,32 +2898,60 @@ void SpeedBuffer(int speed_l, int speed_r,int *speed_l_old, int *speed_r_old){
 
 	} while ((*speed_r_old != speed_r) || (*speed_l_old != speed_l));
 }
-void CRecorder_ExampleDlg::OnTimer(UINT_PTR nIDEvent){
-	switch (nIDEvent){
-		case 2:{
-			//åˆ¤æ–­æ˜¯å¦åˆ°è¾¾ç›®æ ‡ç‚¹(200ms)
-			if (plan.Range_to_go(plan.target_x,plan.target_z,Info_robot.pointrox,Info_robot.pointroy)){
+
+void CRecorder_ExampleDlg::OnTimer(UINT_PTR nIDEvent)
+{
+
+	switch (nIDEvent)
+	{
+		case 2://ÅĞ¶ÏÊÇ·ñµ½´ïÄ¿±êµã(200ms)
+		{
+		//	if (plan.Range_to_go(plan.target_x,plan.target_z,Info_robot.pointrox_corrected,Info_robot.pointroy_corrected))
+			if (plan.Range_to_go(plan.target_x,plan.target_z,Info_robot.pointrox,Info_robot.pointroy))
+			{
 				KillTimer(2);
+			//	KillTimer(1);
 				wait_motor_timer = 200*10000;
 				plan.speed_line = 0;
 				plan.speed_angle = 0;
 				plan.speed_l = 0;
 				plan.speed_r = 0;
-				plan.SERVEMODE = 4; //åˆ‡æ¢åˆ°ç­‰å¾…æ¨¡å¼
-				motor.stop(); //åœæ­¢
+//				edit_target->SetWindowText("µ½´ïÄ¿±ê");
+				plan.SERVEMODE = 4; //ÇĞ»»µ½µÈ´ıÄ£Ê½
+				motor.stop(); //Í£Ö¹
 				Sleep(150);
-				motor.stop(); //åœæ­¢
+				motor.stop(); //Í£Ö¹
 				plan.speed_l = 0;
 				plan.speed_r = 0;
-				waittimer = 0;	
+			//	plate_wight = PlateData[2]; //¼ÇÂ¼µ±Ç°²ÍÅÌÖØÁ¿
+				waittimer = 0;
+				//¿ØÖÆ»úÆ÷ÈË×ªÏòÄ¿±ê²Í×À
+			//	plan.Desired_Angle;
+				//if (plan.Desired_Angle<=10)
+				//{
+				//	SetTimer(3,400,NULL); //Æô¶¯È¡²Í¼ì²â
+				//	SetTimer(4,1000,NULL); //Æô¶¯µÈ´ıÈ¡²Í¼ÆÊ±
+				//}
+				//else
+				//{
+				//	motor.Velocity_control(0,plan.Desired_Angle*3.14/180);
+				//}
+					//SetTimer(3,400,NULL); //Æô¶¯È¡²Í¼ì²â
+					//SetTimer(4,1000,NULL); //Æô¶¯µÈ´ıÈ¡²Í¼ÆÊ±
+				
 			}
 			break;
+			default:
+				break;
 		}
 		break;
+		
 	}
 }
-void CRecorder_ExampleDlg::OnBnClickedButton7(){//è¯­éŸ³æ’­æ”¾
-	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+void CRecorder_ExampleDlg::OnBnClickedButton7()//ÓïÒô²¥·Å
+{
+	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	char* tts_motor=zhanpin[objectnumshand[objectnowhand]].contect1;
 			unsigned char* pszUTF8 = NULL;
 			HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
@@ -1945,8 +2961,11 @@ void CRecorder_ExampleDlg::OnBnClickedButton7(){//è¯­éŸ³æ’­æ”¾
 			PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
 			++objectnowhand;
 }
-void CRecorder_ExampleDlg::OnBnClickedButton8(){//æ‰‹åŠ¨æ“æ§
-	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+
+void CRecorder_ExampleDlg::OnBnClickedButton8()//ÊÖ¶¯²Ù¿Ø
+{
+	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	hci_asr_recorder_cancel();
 	hci_asr_recorder_release();
 
@@ -1962,78 +2981,258 @@ void CRecorder_ExampleDlg::OnBnClickedButton8(){//æ‰‹åŠ¨æ“æ§
 	string initConfigtts = "initCapkeys=tts.cloud.wangjing";
     initConfigtts += ",dataPath=../../data" ;
 	eReti = hci_tts_player_init( initConfigtts.c_str(), &cb );
-	if (eReti != PLAYER_ERR_NONE){
+	if (eReti != PLAYER_ERR_NONE)
+	{
 		hci_release();
 		CString str;
-		str.Format( "æ’­æ”¾å™¨åˆå§‹åŒ–å¤±è´¥,é”™è¯¯ç %d.", eReti);
+		str.Format( "²¥·ÅÆ÷³õÊ¼»¯Ê§°Ü,´íÎóÂë%d.", eReti);
 		MessageBox( str );
 		
 	}
 }
-void CRecorder_ExampleDlg::OnEnChangeEditWordlist(){
 
+
+void CRecorder_ExampleDlg::OnEnChangeEditWordlist()
+{
+	// TODO:  Èç¹û¸Ã¿Ø¼şÊÇ RICHEDIT ¿Ø¼ş£¬Ëü½«²»
+	// ·¢ËÍ´ËÍ¨Öª£¬³ı·ÇÖØĞ´ CDialog::OnInitDialog()
+	// º¯Êı²¢µ÷ÓÃ CRichEditCtrl().SetEventMask()£¬
+	// Í¬Ê±½« ENM_CHANGE ±êÖ¾¡°»ò¡±ÔËËãµ½ÑÚÂëÖĞ¡£
+
+	// TODO:  ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 }
-HBRUSH CRecorder_ExampleDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor){
+
+//¿É²»ÓÃ
+HBRUSH CRecorder_ExampleDlg::OnCtlColor(CDC* pDC, CWnd* pWnd, UINT nCtlColor)
+{
 	HBRUSH hbr = CDialog::OnCtlColor(pDC, pWnd, nCtlColor);
 	pDC->SetBkMode(OPAQUE);
 	pDC->SetTextColor(RGB(74,37,15));
 	pDC->SetBkColor(RGB(178,136,80));
 	hbr=CreateSolidBrush(RGB(178,136,80));
-	// TODO:  åœ¨æ­¤æ›´æ”¹ DC çš„ä»»ä½•ç‰¹æ€§
+	// TODO:  ÔÚ´Ë¸ü¸Ä DC µÄÈÎºÎÌØĞÔ
 
-	// TODO:  å¦‚æœé»˜è®¤çš„ä¸æ˜¯æ‰€éœ€ç”»ç¬”ï¼Œåˆ™è¿”å›å¦ä¸€ä¸ªç”»ç¬”
+	// TODO:  Èç¹ûÄ¬ÈÏµÄ²»ÊÇËùĞè»­±Ê£¬Ôò·µ»ØÁíÒ»¸ö»­±Ê
 	return hbr;
 }
-void CRecorder_ExampleDlg::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct){
-	// TODO: åœ¨æ­¤æ·»åŠ æ¶ˆæ¯å¤„ç†ç¨‹åºä»£ç å’Œ/æˆ–è°ƒç”¨é»˜è®¤å€¼
-	CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);	
-}
- void CRecorder_ExampleDlg::OnSize(UINT nType, int cx, int cy){
-	CDialog::OnSize(nType, cx, cy);
-	CDialog::OnSize(nType, cx, cy);
-	if(nType==1) return; //æœ€å°åŒ–åˆ™ä»€ä¹ˆéƒ½ä¸åš 
-	CWnd *pWnd; 
-	pWnd = GetDlgItem(IDD_RECORDER_EXAMPLE_DIALOG); //è·å–æ§ä»¶å¥æŸ„
-	ChangeSize(pWnd,cx,cy); //è°ƒç”¨changesize()å‡½æ•°
-	pWnd = GetDlgItem(IDOK ); //è·å–æ§ä»¶å¥æŸ„
-	ChangeSize(pWnd,cx,cy);//è°ƒç”¨changesize()å‡½æ•°
-	pWnd = GetDlgItem(IDC_MFCBUTTON7);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON6);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON2);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON1);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON3);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON4);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON5);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON9);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON10);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON13);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON14);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON15);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON16);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_MFCBUTTON17);	ChangeSize(pWnd,cx,cy);
-	pWnd = GetDlgItem(IDC_STATIC4);	ChangeSize(pWnd,cx,cy);
-	//ChangeSize(pWnd,cx,cy)æ˜¯ä¸€ä¸ªè‡ªå®šä¹‰çš„å‡½æ•°ï¼Œéœ€è¦åœ¨ç±»çš„protectå±æ€§ä¸­è¿›è¡Œæ·»åŠ å£°æ˜afx_msg void ChangeSize(CWnd * pWnd, int cx, int cy); 
-	pWnd = GetDlgItem(IDC_EDIT_STATUS); ChangeSize(pWnd,cx,cy);
-	GetClientRect(&m_rect); //å°†å˜åŒ–åçš„å¯¹è¯æ¡†è®¾ç½®ä¸ºæ—§å¤§å°
-}
-void  CRecorder_ExampleDlg::ChangeSize(CWnd * pWnd, int cx, int cy){
-	if (pWnd){
-		CRect rect; 
-		pWnd->GetWindowRect(&rect); //è·å–æ§ä»¶å˜åŒ–å‰çš„å¤§å°
-		ScreenToClient(&rect);//å°†æ§ä»¶å¤§å°è½¬æ¢ä¸ºåœ¨å¯¹è¯æ¡†ä¸­çš„åŒºåŸŸåæ ‡ 
-		rect.left=rect.left*cx/m_rect.Width();//è°ƒæ•´æ§ä»¶å¤§å° ï¼Œcx/m_rect.Width()ä¸ºå¯¹è¯æ¡†åœ¨æ¨ªå‘çš„å˜åŒ–æ¯”ä¾‹
-		rect.right=rect.right*cx/m_rect.Width(); //cxå­˜å‚¨çš„æ˜¯å˜åŒ–åçš„å®½åº¦ï¼Œcyå­˜å‚¨çš„æ˜¯å˜åŒ–åçš„é«˜åº¦
-		rect.top=rect.top*cy/m_rect.Height(); //m_rect.height()è¡¨ç¤ºçš„æ˜¯å˜åŒ–å‰ä¸»çª—ä½“çš„é«˜åº¦
-		rect.bottom=rect.bottom*cy/m_rect.Height();
-		pWnd->MoveWindow(rect);//è®¾ç½®æ§ä»¶å¤§å°
-	}
-}
-void CRecorder_ExampleDlg::OnStnClickedStatic1(){
-	// TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
-}
-void CRecorder_ExampleDlg::OnBnClickedButton9(){
-	//è¯­éŸ³äº¤äº’
+/*
+void CRecorder_ExampleDlg::DrawItem(int nIDCtl,LPDRAWITEMSTRUCT lpDrawItemStruct)
+
+{
 	
+	if( nIDCtl==IDC_BTN_START_RECORD || nIDCtl==IDC_MFCBUTTON2 || nIDCtl==IDC_MFCBUTTON7 || nIDCtl==IDC_MFCBUTTON1 || nIDCtl==IDC_BTN_CANCEL_RECORD || nIDCtl== IDC_MFCBUTTON6)         //checking for the button 
+	{
+	CDC dc;
+    dc.Attach(lpDrawItemStruct->hDC);//µÃµ½»æÖÆµÄÉè±¸»·¾³CDC
+
+
+   //µÃµ±ButtonÉÏÎÄ×Ö,ÕâÀïµÄ²½ÖèÊÇ:1,ÏÈµÃµ½ÔÚ×ÊÔ´Àï±à¼­µÄ°´Å¥µÄÎÄ×Ö,
+
+   //È»ºó½«´ËÎÄ×ÖÖØĞÂ»æÖÆµ½°´Å¥ÉÏ,
+
+    //Í¬Ê±½«´ËÎÄ×ÖµÄ±³¾°É«ÉèÎªÍ¸Ã÷,ÕâÑù,°´Å¥ÉÏ½ö»áÏÔÊ¾ÎÄ×Ö
+
+    const int bufSize = 512;
+
+    TCHAR buffer[bufSize];
+
+    GetWindowText(buffer, bufSize);
+
+   int size=strlen(buffer);//µÃµ½³¤¶È
+
+   DrawText(lpDrawItemStruct->hDC,buffer,size,&lpDrawItemStruct->rcItem,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_TABSTOP);//»æÖÆÎÄ×Ö
+
+   SetBkMode(lpDrawItemStruct->hDC,TRANSPARENT);//Í¸Ã÷
+
+   if (lpDrawItemStruct->itemState&ODS_SELECTED)//µ±°´ÏÂ°´Å¥Ê±µÄ´¦Àí
+
+   {////ÖØ»æÕû¸ö¿ØÖÆ
+		
+         CBrush brush(m_DownColor);
+
+          dc.FillRect(&(lpDrawItemStruct->rcItem),&brush);//ÀûÓÃ»­Ë¢brush£¬Ìî³ä¾ØĞÎ¿ò
+
+         //ÒòÎªÕâÀï½øĞĞÁËÖØ»æ,ËùÒÔÎÄ×ÖÒ²ÒªÖØ»æ
+
+         DrawText(lpDrawItemStruct->hDC,buffer,size,&lpDrawItemStruct->rcItem,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_TABSTOP);
+
+          SetBkMode(lpDrawItemStruct->hDC,TRANSPARENT);
+
+    }
+
+  else//µ±°´Å¥²»²Ù×÷»òÕßµ¯ÆğÊ±
+
+    {
+
+           CBrush brush(m_UpColor);
+
+            dc.FillRect(&(lpDrawItemStruct->rcItem),&brush);//
+
+            DrawText(lpDrawItemStruct->hDC,buffer,size,&lpDrawItemStruct->rcItem,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_TABSTOP);
+
+            SetBkMode(lpDrawItemStruct->hDC,TRANSPARENT);
+
+     }
+
+    if ((lpDrawItemStruct->itemState&ODS_SELECTED)&&(lpDrawItemStruct->itemAction &(ODA_SELECT|ODA_DRAWENTIRE)))
+
+     {//Ñ¡ÖĞÁË±¾¿Ø¼ş,¸ßÁÁ±ß¿ò
+
+               COLORREF fc=RGB(255-GetRValue(m_UpColor),255-GetGValue(m_UpColor),255-GetBValue(m_UpColor));
+
+             CBrush brush(fc);
+
+            dc.FrameRect(&(lpDrawItemStruct->rcItem),&brush);//ÓÃ»­Ë¢brush£¬Ìî³ä¾ØĞÎ±ß¿ò
+
+       }
+
+     if (!(lpDrawItemStruct->itemState &ODS_SELECTED) &&(lpDrawItemStruct->itemAction & ODA_SELECT))
+
+         {
+
+          CBrush brush(m_UpColor); //¿ØÖÆµÄÑ¡ÖĞ×´Ì¬½áÊø,È¥µô±ß¿ò
+
+         dc.FrameRect(&lpDrawItemStruct->rcItem,&brush);//}
+
+        dc.Detach();
+
+	 }}
+	CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);}*/
+
+void CRecorder_ExampleDlg::OnDrawItem(int nIDCtl, LPDRAWITEMSTRUCT lpDrawItemStruct)
+{
+	// TODO: ÔÚ´ËÌí¼ÓÏûÏ¢´¦Àí³ÌĞò´úÂëºÍ/»òµ÷ÓÃÄ¬ÈÏÖµ
+
+	CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);
+
+	/*if( nIDCtl==IDC_BTN_START_RECORD || nIDCtl==IDC_MFCCOLORBUTTON5 || nIDCtl==IDC_MFCBUTTON7 || nIDCtl==IDC_BUTTON8 || nIDCtl==IDC_BTN_CANCEL_RECORD || nIDCtl== IDC_MFCBUTTON6)         //checking for the button 
+    {
+    CDC dc;
+    RECT rect;
+    dc.Attach(lpDrawItemStruct ->hDC);   // Get the Button DC to CDC
+    
+    rect = lpDrawItemStruct->rcItem;     //Store the Button rect to our local rect.
+    
+
+    dc.Draw3dRect(&rect,RGB(255,255,255),RGB(0,0,0)); 
+	
+	
+
+  
+    dc.FillSolidRect(&rect,RGB(178,136,80));//Here you can define the required color to appear on the Button.
+
+    UINT state=lpDrawItemStruct->itemState; //This defines the state of the Push button either pressed or not. 
+
+    if((state & ODS_SELECTED))
+    {
+        dc.DrawEdge(&rect,EDGE_SUNKEN,BF_RECT);
+	}
+    else
+    {
+        dc.DrawEdge(&rect,EDGE_RAISED,BF_RECT);
+    }
+
+    dc.SetBkColor(RGB(178,136,80));   //Setting the Text Background color
+    dc.SetTextColor(RGB(74,37,15));     //Setting the Text Color
+	
+
+    TCHAR buffer[MAX_PATH];           //To store the Caption of the button.
+    ZeroMemory(buffer,MAX_PATH );     //Intializing the buffer to zero
+        ::GetWindowText(lpDrawItemStruct->hwndItem,buffer,MAX_PATH); //Get the Caption of Button Window 
+    
+    dc.DrawText(buffer,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);//Redraw the Caption of Button Window 
+    
+    dc.Detach(); // Detach the Button DC
+    }                
+    CDialog::OnDrawItem(nIDCtl, lpDrawItemStruct);
+	
+	
+	*/
+
+	
+}
+
+
+
+ void CRecorder_ExampleDlg::OnSize(UINT nType, int cx, int cy)
+	 {
+		 CDialog::OnSize(nType, cx, cy);
+		 CDialog::OnSize(nType, cx, cy);
+
+
+		 
+		if(nType==1) return; //×îĞ¡»¯ÔòÊ²Ã´¶¼²»×ö 
+		CWnd *pWnd; 
+		pWnd = GetDlgItem(IDD_RECORDER_EXAMPLE_DIALOG); //»ñÈ¡¿Ø¼ş¾ä±ú
+		ChangeSize(pWnd,cx,cy); //µ÷ÓÃchangesize()º¯Êı
+		pWnd = GetDlgItem(IDOK ); //»ñÈ¡¿Ø¼ş¾ä±ú
+		ChangeSize(pWnd,cx,cy);//µ÷ÓÃchangesize()º¯Êı
+		pWnd = GetDlgItem(IDC_MFCBUTTON7);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON6);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON2);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON1);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON3);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON4);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON5);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON9);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON10);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON13);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON14);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON15);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON16);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_MFCBUTTON17);
+		ChangeSize(pWnd,cx,cy);
+		pWnd = GetDlgItem(IDC_STATIC4);
+		ChangeSize(pWnd,cx,cy);
+
+		
+
+		//ChangeSize(pWnd,cx,cy)ÊÇÒ»¸ö×Ô¶¨ÒåµÄº¯Êı£¬ĞèÒªÔÚÀàµÄprotectÊôĞÔÖĞ½øĞĞÌí¼ÓÉùÃ÷afx_msg void ChangeSize(CWnd * pWnd, int cx, int cy); 
+		pWnd = GetDlgItem(IDC_EDIT_STATUS); 
+		ChangeSize(pWnd,cx,cy);
+		GetClientRect(&m_rect); //½«±ä»¯ºóµÄ¶Ô»°¿òÉèÖÃÎª¾É´óĞ¡
+		}
+void  CRecorder_ExampleDlg::ChangeSize(CWnd * pWnd, int cx, int cy)
+		{
+		if (pWnd)
+		{
+		CRect rect; 
+		pWnd->GetWindowRect(&rect); //»ñÈ¡¿Ø¼ş±ä»¯Ç°µÄ´óĞ¡
+		ScreenToClient(&rect);//½«¿Ø¼ş´óĞ¡×ª»»ÎªÔÚ¶Ô»°¿òÖĞµÄÇøÓò×ø±ê 
+		rect.left=rect.left*cx/m_rect.Width();//µ÷Õû¿Ø¼ş´óĞ¡ £¬cx/m_rect.Width()Îª¶Ô»°¿òÔÚºáÏòµÄ±ä»¯±ÈÀı
+		rect.right=rect.right*cx/m_rect.Width(); //cx´æ´¢µÄÊÇ±ä»¯ºóµÄ¿í¶È£¬cy´æ´¢µÄÊÇ±ä»¯ºóµÄ¸ß¶È
+		rect.top=rect.top*cy/m_rect.Height(); //m_rect.height()±íÊ¾µÄÊÇ±ä»¯Ç°Ö÷´°ÌåµÄ¸ß¶È
+		rect.bottom=rect.bottom*cy/m_rect.Height();
+		pWnd->MoveWindow(rect);//ÉèÖÃ¿Ø¼ş´óĞ¡
+		}
+		}
+		
+
+
+
+
+void CRecorder_ExampleDlg::OnStnClickedStatic1()
+{
+	// TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+}
+
+
+void CRecorder_ExampleDlg::OnBnClickedButton9()//ÓïÒô½»»¥
+{
+	// TODO: Add your control notification handler code here
 	CString strErrorMessage;
 	hci_tts_player_stop();
 	hci_tts_player_release();
@@ -2054,12 +3253,15 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 
 	string initConfig = "initCapkeys=asr.cloud.dialog";	
 	initConfig        += ",dataPath=../../data";
+	//string initConfig = "dataPath=" + account_info->data_path();
+	//initConfig      += ",encode=speex";
+	//initConfig		+= ",initCapkeys=asr.local.grammar";			      //³õÊ¼»¯±¾µØÒıÇæ
 
 	eRetasr = hci_asr_recorder_init( initConfig.c_str(), &call_back);
 	if (eRetasr != RECORDER_ERR_NONE)
 	{
 		hci_release();
-		strErrorMessage.Format( "å½•éŸ³æœºåˆå§‹åŒ–å¤±è´¥,é”™è¯¯ç %d", eRetasr);
+		strErrorMessage.Format( "Â¼Òô»ú³õÊ¼»¯Ê§°Ü,´íÎóÂë%d", eRetasr);
 		MessageBox( strErrorMessage );
 		return ;
 	}
@@ -2068,7 +3270,9 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 	
 	GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( FALSE );
 	GetDlgItem( IDC_BTN_CANCEL_RECORD )->EnableWindow( TRUE );	
-
+	
+	// Çå¿Õ×´Ì¬¼ÇÂ¼
+	
 	SetDlgItemText(IDC_EDIT1, "" );
 
     AccountInfo *account_info = AccountInfo::GetInstance();
@@ -2078,24 +3282,29 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
      	startConfig += "capkey=" + account_info->cap_key();
 	}
 	startConfig += ",audioformat=pcm16k16bit";
-
-    if (IsDlgButtonChecked( IDC_CONTINUE )){
+	//startConfig += ",domain=qwdz,intention=qwmap;music,needcontent=no";
+	//startConfig     += ",realTime=rt";
+    if (IsDlgButtonChecked( IDC_CONTINUE ))
+    {
         startConfig += ",continuous=yes";
     }
-	if ( m_RecogMode == kRecogModeGrammar ){
+	if ( m_RecogMode == kRecogModeGrammar )
+	{
 		char chTmp[32] = {0};
 		sprintf(chTmp,",grammarid=%d",m_GrammarId);
 		startConfig += chTmp; 
 	}
 
-	if ( m_RecogMode == kRecogModeDialog ){
+	if ( m_RecogMode == kRecogModeDialog )
+	{
 		startConfig +=",intention=weather;joke;story;baike;calendar;translation;news"; 
 	}
 
 	eRet = hci_asr_recorder_start(startConfig.c_str(),"");
-	if (RECORDER_ERR_NONE != eRet){
+	if (RECORDER_ERR_NONE != eRet)
+	{
 		CString strErrMessage;
-		strErrMessage.Format( "å¼€å§‹å½•éŸ³å¤±è´¥,é”™è¯¯ç %d", eRet );
+		strErrMessage.Format( "¿ªÊ¼Â¼ÒôÊ§°Ü,´íÎóÂë%d", eRet );
 		MessageBox( strErrMessage );
 		GetDlgItem( IDC_BTN_START_RECORD )->EnableWindow( TRUE );
 		return;
@@ -2103,16 +3312,26 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 
 	pThread_speak_autotts= AfxBeginThread(ThreadComput_speakautotts,NULL);
 }
- UINT ThreadComput_speakautotts(LPVOID lpParam){
-	while(autotts_key){
-		if(isautotts){
+
+ UINT ThreadComput_speakautotts(LPVOID lpParam)
+{
+	while(autotts_key)
+	{
+		if(isautotts)
+		{
 			isautotts=false;
-			if(p_CR!=NULL){
+//			CRecorder_ExampleDlg dig;
+//			dig.OnBnClickedBtnCancelRecord();
+			if(p_CR!=NULL)
+			{
 				p_CR->OnBnClickedBtnCancelRecord();
-				if(autotts_time_sleep<10){
+
+				if(autotts_time_sleep<10)
+				{
 					autotts_time_sleep=10;
 				}
 				Sleep(autotts_time_sleep*200);
+
 				p_CR->OnBnClickedBtnStartRecord();
 
 			}
@@ -2120,46 +3339,150 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 	}
 	return 0;
  }
- void CRecorder_ExampleDlg::OnBnClickedMfcbutton1(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton1()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
  }
- void CRecorder_ExampleDlg::OnBnClickedMfcbutton3(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton3()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
  }
- void CRecorder_ExampleDlg::OnBnClickedMfcbutton5(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton5()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
  }
- void CRecorder_ExampleDlg::OnBnClickedMfcbutton6(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+
+
+
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton6()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	 zhanting=!zhanting;
 	  ishand=false;
-	  if(zhanting==true){
+	  if(zhanting==true)
+	  {
 		  plan.SERVEMODE = 4;
 //		  motor_key=false;
 	  }
-	  else{
+	  else
+	  {
 //		  motor_key=true;
 		  plan.SERVEMODE = 2;
 	  }
 	  
- }
- void CRecorder_ExampleDlg::OnBnClickedMfcbutton7(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
-	 if(p_CR!=NULL)
-	{
-		p_CR->OnBnClickedButton6();
-	}
- }
- void CRecorder_ExampleDlg::OnBnClickedMfcbutton2(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
-	
-	dlg= new CVoice;
-	dlg->Create(IDD_DIALOG1);
-	dlg->ShowWindow(SW_SHOW);
+/*
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë  
+    MCI_OPEN_PARMS open = {0};//¶¨Òå²¢³õÊ¼»¯½á¹¹Ìå  
+    char szErr[100];//¶¨Òå±£´æ´íÎóÊı×é  
+  
+    open.lpstrElementName = "d:\\a.wav";//Ö¸¶¨²»·ÅÎÄ¼şÂ·¾¶  
+    open.lpstrDeviceType = "mpegvideo";//Ö¸¶¨²¥·ÅÉè±¸  
+  
+    DWORD err;//¶¨Òå´íÎóĞÅÏ¢  
+    err = mciSendCommand(0,MCI_OPEN,MCI_OPEN_TYPE|MCI_OPEN_ELEMENT|MCI_WAIT,(DWORD)(LPVOID)&open);//³õÊ¼»¯ÒôÆµÉè±¸  
+    if (err == 0)  
+	{  
+        MCI_PLAY_PARMS play;  
+        play.dwFrom = 0;  
+        play.dwCallback = NULL;  
+  
+        mciSendCommand(open.wDeviceID,MCI_PLAY,0,(DWORD)&play);  
+    }  
+    else  
+    {  
+        mciGetErrorString(err,(LPSTR)szErr,100);  
+        MessageBox(szErr);  
+    }  
+*/
+//	  PlaySound("d:\\a.wav",NULL,SND_FILENAME|SND_ASYNC);
 
+	//hci_asr_recorder_cancel();
+	//hci_asr_recorder_release();
+
+	//PLAYER_CALLBACK_PARAM cb;
+ //   cb.pfnStateChange = CRecorder_ExampleDlg::CB_EventChange;
+	//cb.pvStateChangeUsrParam = this;
+	//cb.pfnProgressChange = CRecorder_ExampleDlg::CB_ProgressChange;
+	//cb.pvProgressChangeUsrParam = this;
+	//cb.pfnPlayerError = CRecorder_ExampleDlg::CB_SdkErr;
+	//cb.pvPlayerErrorUsrParam = this;
+
+	//PLAYER_ERR_CODE eReti = PLAYER_ERR_NONE;
+	//string initConfigtts = "initCapkeys=tts.cloud.wangjing";
+ //   initConfigtts += ",dataPath=../../data" ;
+	//eReti = hci_tts_player_init( initConfigtts.c_str(), &cb );
+	//if (eReti != PLAYER_ERR_NONE)
+	//{
+	//	hci_release();
+	//	CString str;
+	//	str.Format( "²¥·ÅÆ÷³õÊ¼»¯Ê§°Ü,´íÎóÂë%d.", eReti);
+	//	MessageBox( str );
+	//	
+	//}
+
+
+
+	//pThread_Motor_tts = AfxBeginThread(ThreadComput_MotorTts,NULL);
+
+	//pThread_Motor_autowalk= AfxBeginThread(ThreadComput_Motorautowalk,NULL);
+
+/*
+
+	string startConfig = "property=cn_xiaokun_common,tagmode=none,capkey=tts.cloud.wangjing";
+	char* tts_motor="ÎÒÊÇË­";
+	unsigned char* pszUTF8 = NULL;
+    HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
+
+	PLAYER_ERR_CODE eRetk = hci_tts_player_start( (const char*)pszUTF8, startConfig.c_str() );
+	if(eRetk==PLAYER_ERR_NONE){
+		int a=5;
+
+	}
+*/
+ }
+
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton7()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+	 
+ }
+
+
+
+// INT_PTR CRecorder_ExampleDlg::DoModal()
+// {
+//	 // TODO: ÔÚ´ËÌí¼Ó×¨ÓÃ´úÂëºÍ/»òµ÷ÓÃ»ùÀà
+//
+//	 return CDialog::DoModal();
+// }
+
+
+
+
+ 
+
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton2()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+
+	dlg = new CVoice;
+	dlg->Create(IDD_DIALOG1); //·ÇÄ£Ì¬¶Ô»°¿òIDºÅ
+	dlg->ShowWindow(SW_SHOW);
 	
  }
- void CRecorder_ExampleDlg::OnBnClickedButton11(){
+
+ //ĞŞ¸Ä
+ void CRecorder_ExampleDlg::OnBnClickedButton11()
+ {
 	 hci_asr_recorder_cancel();
 	hci_asr_recorder_release();
 
@@ -2175,93 +3498,39 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 	string initConfigtts = "initCapkeys=tts.cloud.wangjing";
     initConfigtts += ",dataPath=../../data" ;
 			eReti = hci_tts_player_init( initConfigtts.c_str(), &cb );
-
+	/*if (eReti != PLAYER_ERR_NONE)
+	{
+		hci_release();
+		CString str;
+		str.Format( "²¥·ÅÆ÷³õÊ¼»¯Ê§°Ü,´íÎóÂë%d.", eReti);
+		MessageBox( str );
+		
+	}*/
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
+			CString strMessage = "";
+			p_DR->GetDlgItemText( IDC_EDIT1, strMessage );
 	char* p;
 	CString str1;
 	CString strTemp;
+	CString str;
 	p_DR->GetDlgItem(IDC_COMBO1)->GetWindowText(str1);
-	if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†å¼€é—­é¦†æ—¶é—´")){
-		strTemp.Format(_T("æ¯å‘¨äºŒè‡³å‘¨æ—¥å¼€é¦†ï¼Œå‘¨ä¸€å…¨å¤©é—­é¦†ï¼ŒèŠ‚å‡æ—¥é™¤å¤–ã€‚å†¬ä»¤æ—¶ï¼š10æœˆ8æ—¥-3æœˆ31æ—¥ï¼Œ9:00è‡³16:00ï¼Œ15:00åœæ­¢å‘ç¥¨ã€‚å¤ä»¤æ—¶ï¼š4æœˆ1æ—¥-10æœˆ7æ—¥ï¼Œ9:00è‡³16:30ï¼Œ15:30åœæ­¢å‘ç¥¨ã€‚"));
+	if(str1==("ÊÀÊÂÄÑÁÏ")){
+		strTemp.Format(_T("Ã»ÓĞÅ¶"));
 	 p = (char*)(LPCTSTR)strTemp;
 	
 	}
-	if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†æœ‰å‡ å±‚ï¼Œéƒ½æœ‰å“ªäº›å±•å…")){
-		strTemp.Format(_T("é»‘é¾™æ±Ÿçœåšç‰©é¦†å…±æœ‰3å±‚ã€‚äºŒå±‚å±•å…ä¸»è¦æœ‰â€œè‡ªç„¶é™ˆåˆ—â€ã€â€œé»‘é¾™æ±Ÿå†å²æ–‡ç‰©é™ˆåˆ—â€ï¼›ä¸€å±‚ä¸ºâ€œé»‘é¾™æ±Ÿä¿„ä¾¨æ–‡åŒ–æ–‡ç‰©å±•â€ã€â€œé‚“æ•£æœ¨è‰ºæœ¯ä¸“é¢˜é™ˆåˆ—â€ã€â€œæ¯æœˆä¸€æ˜Ÿâ€ï¼›è´Ÿä¸€å±‚ä¸ºâ€œå¯’æš‘å‡ç‰¹å±•â€ã€â€œæ°‘ä¿—å±•è§ˆâ€ã€â€œæ¯æœˆä¸€å¿â€ä¸‰ä¸ªä¸´æ—¶å±•å…ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-	if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†é•‡é¦†ä¹‹å®æœ‰å“ªäº›ï¼Ÿ")){
-		strTemp.Format(_T("é»‘é¾™æ±Ÿçœåšç‰©é¦†é¦†è—ä¸°å¯Œï¼Œ2014å¹´ä¸¾è¡Œäº†â€œåå¤§é•‡é¦†ä¹‹å®è¯„é€‰â€æ´»åŠ¨ï¼Œâ€œåå¤§é•‡é¦†ä¹‹å®â€åˆ†åˆ«æ˜¯ï¼šé‡‘ä»£é“œåé¾™ã€é‡‘ä»£é½å›½ç‹å¢“ä¸ç»‡å“æœé¥°ã€å—å®‹ã€Šèš•ç»‡å›¾ã€‹ã€å”ä»£æ¸¤æµ·å¤©é—¨å†›ä¹‹å°ã€æŠ«æ¯›çŠ€åŒ–çŸ³éª¨æ¶ã€å—å®‹ã€Šå…°äº­åºã€‹å›¾å·ã€é»‘é¾™æ±Ÿæ»¡æ´²é¾™ã€é‡‘ä»£å±±æ°´äººç‰©æ•…äº‹é•œã€æ¾èŠ±æ±ŸçŒ›çŠ¸è±¡åŒ–çŸ³éª¨æ¶ã€æ–°çŸ³å™¨æ—¶ä»£æ¡‚å¶å½¢çŸ³å™¨ã€‚"));
+	if(str1==("ÈË¼äÎŞ³£")){
+	
+	strTemp.Format(_T("ÉúÆøÁËÂğ"));
 	 p = (char*)(LPCTSTR)strTemp;
 	
 	}
-	if(str1==("å…è´¹è®²è§£")){
-		strTemp.Format(_T("ä¸Šåˆ9ï¼š30å¼€è®²ï¼Œä¸‹åˆ14:30å¼€è®²ã€‚å¼€è®²å±•å…åœ°ç‚¹ä¸ºäºŒæ¥¼è‡ªç„¶é™ˆåˆ—å±•å…ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
 
-	}
-		if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†é•‡é¦†ä¹‹å®æœ‰å“ªäº›ï¼Ÿ")){
-		strTemp.Format(_T("é»‘é¾™æ±Ÿçœåšç‰©é¦†é¦†è—ä¸°å¯Œï¼Œ2014å¹´ä¸¾è¡Œäº†â€œåå¤§é•‡é¦†ä¹‹å®è¯„é€‰â€æ´»åŠ¨ï¼Œâ€œåå¤§é•‡é¦†ä¹‹å®â€åˆ†åˆ«æ˜¯ï¼šé‡‘ä»£é“œåé¾™ã€é‡‘ä»£é½å›½ç‹å¢“ä¸ç»‡å“æœé¥°ã€å—å®‹ã€Šèš•ç»‡å›¾ã€‹ã€å”ä»£æ¸¤æµ·å¤©é—¨å†›ä¹‹å°ã€æŠ«æ¯›çŠ€åŒ–çŸ³éª¨æ¶ã€å—å®‹ã€Šå…°äº­åºã€‹å›¾å·ã€é»‘é¾™æ±Ÿæ»¡æ´²é¾™ã€é‡‘ä»£å±±æ°´äººç‰©æ•…äº‹é•œã€æ¾èŠ±æ±ŸçŒ›çŠ¸è±¡åŒ–çŸ³éª¨æ¶ã€æ–°çŸ³å™¨æ—¶ä»£æ¡‚å¶å½¢çŸ³å™¨ã€‚"));
-	 p = (char*)(LPCTSTR)strTemp;
-	
-	}
-	if(str1==("æ´—æ‰‹é—´åœ¨å“ª")){
-		strTemp.Format(_T("å¥³å£«æ´—æ‰‹é—´ä½äºäºŒæ¥¼æ¥¼æ¢¯å£å¤„ï¼Œç”·å£«æ´—æ‰‹é—´ä½äºä¸€æ¥¼æ¥¼æ¢¯å£å¤„ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
+	 str.AppendFormat( "Ğ¡ÁéµÄ´ğ°¸ÊÇ:" );
+	 str =str1+"\r\n"+ str + strTemp;
+    p_DR->SetDlgItemText( IDC_EDIT1,  str );
 
-	}
-	if(str1==("ä¾¿æ°‘æœåŠ¡")){
-		strTemp.Format(_T("é’ˆå¯¹æ®‹éšœäººå£«ï¼Œåœ¨åšç‰©é¦†å†…å‡­èº«ä»½è¯å…è´¹ç§Ÿå€Ÿè½®æ¤…ï¼Œæ–¹ä¾¿å‚è§‚ï¼›ä¸ºè§‚ä¼—æä¾›å…è´¹å¯„å­˜æœåŠ¡ã€‚"));
-	 p = (char*)(LPCTSTR)strTemp;
-	
-	}
-	if(str1==("æ–‡åˆ›å¤©åœ°")){
-		strTemp.Format(_T("é»‘é¾™æ±Ÿçœåšç‰©é¦†è¿˜è®¾æœ‰â€œé¾™åšä¹¦è‹‘â€ï¼Œâ€œæ–‡åŒ–åˆ›æ„ç»è¥ä¸­å¿ƒâ€ã€â€œæ°´å§â€ç­‰ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-		if(str1==("ç¤¾ä¼šæœåŠ¡é¡¹ç›®")){
-		strTemp.Format(_T("æ–‡ç‰©åŠå¤åŠ¨ç‰©åŒ–çŸ³çš„é‰´å®šã€ä¿®å¤ã€å¤åˆ¶ã€å’¨è¯¢ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-	if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†æœ‰å“ªäº›æ´»åŠ¨ï¼Ÿ")){
-		strTemp.Format(_T("çœåšä¸¾åŠè¯¸å¤šä¸°å¯Œå¤šå½©çš„æ´»åŠ¨å†…å®¹ï¼Œæœ‰â€œç›¸çº¦é¾™åšâ€ç§‘æ™®æ•™è‚²æ´»åŠ¨ã€â€œç¯çƒè‡ªç„¶æ—¥â€”â€”é’å°‘å¹´è‡ªç„¶ç§‘å­¦çŸ¥è¯†æŒ‘æˆ˜èµ›â€ã€â€œé’å°‘å¹´ç§‘æ™®ç»˜ç”»å¤§èµ›â€ã€â€œæµåŠ¨åšç‰©é¦†â€ç­‰ã€‚æ‚¨å¯ä»¥æ‰«æå±å¹•ä¸Šæ–¹çš„äºŒç»´ç å®æ—¶å…³æ³¨æˆ‘ä»¬ï¼Œå·¥ä½œäººå‘˜ä¼šåœ¨â€œé»‘é¾™æ±Ÿçœåšç‰©é¦†äº’åŠ¨å¹³å°â€ä¸Šå‘å¸ƒå±•é™ˆä¿¡æ¯åŠæ´»åŠ¨å†…å®¹ã€‚"));
-	 p = (char*)(LPCTSTR)strTemp;
-	
-	}
-	if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†â€œç›¸çº¦é¾™åšâ€è¯¾å ‚ ")){
-		strTemp.Format(_T("â€œç›¸çº¦é¾™åšâ€è¯¾å ‚ï¼Œæ—¨è®©é’å°‘å¹´åœ¨è¯¾ä½™æ—¶é—´èƒ½åœ¨æ„‰å¿«åœ°æ°›å›´ä¸­æ”¶è·çŸ¥è¯†ï¼Œå¢é•¿èƒ½åŠ›ï¼ŒåŸ¹å…»é’å°‘å¹´çš„ç»¼åˆç´ è´¨ã€‚å·¥ä½œäººå‘˜æ ¹æ®çœåšé¦†è—èµ„æºç²¾å¿ƒç­–åˆ’æ´»åŠ¨å†…å®¹ï¼Œå…¶ä¸­åŒ…æ‹¬ï¼šâ€œå†å²çš„è®°å¿†â€ã€â€œåŠ¨ç‰©å¤§è”ç›Ÿâ€ã€â€œèµ°è¿›ä¼ æ‰¿â€ã€â€œç©è‰ºåŠâ€ã€â€œå°èŠ±åŒ çš„æ¤ç‰©ç‹å›½â€ã€â€œç‰©è´¨ä¸–ç•Œçš„çœŸç›¸â€å…­å¤§ç³»åˆ—ã€‚â€œç›¸çº¦é¾™åšâ€è¯¾å ‚è®¾åœ¨äºŒæ¥¼å¤§å…ï¼Œæ¯é€¢å‘¨æœ«åŠèŠ‚å‡æ—¥éƒ½ä¼šç»„ç»‡å¼€å±•ç²¾å½©çš„æ´»åŠ¨å†…å®¹ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-	if(str1==("ç¯çƒè‡ªç„¶æ—¥â€”â€”é’å°‘å¹´è‡ªç„¶ç§‘å­¦çŸ¥è¯†æŒ‘æˆ˜èµ›")){
-		strTemp.Format(_T("â€œç¯çƒè‡ªç„¶æ—¥â€”â€”é’å°‘å¹´è‡ªç„¶ç§‘å­¦çŸ¥è¯†æŒ‘æˆ˜èµ›â€ï¼Œæ˜¯ç”±ç¾å›½è‘—åæ…ˆå–„å®¶è‚¯å°¼æ–¯â€¢å°¤é‡‘â€¢è´æ—åˆ›åŠï¼Œç¯çƒå¥åº·ä¸æ•™è‚²åŸºé‡‘ä¼šå‘èµ·ï¼Œç”¨ä»¥æ¿€å‘ä¸­å°å­¦ç”Ÿå¯¹äºè‡ªç„¶ç§‘å­¦çš„å…´è¶£ï¼Œå¹¶æé«˜å…¶ç ”ç©¶ã€åˆ†æå’Œäº¤å¾€èƒ½åŠ›çš„è¯¾å¤–ç§‘æ™®æ•™è‚²æ´»åŠ¨ã€‚æ­¤é¡¹æ´»åŠ¨äº2012å¹´è¿›å…¥ä¸­å›½ï¼Œ2014å¹´èµ·é»‘é¾™æ±Ÿèµ›åŒºå¯åŠ¨ï¼Œç”±çœåšæ‰¿åŠã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-	if(str1==("ç¯çƒè‡ªç„¶æ—¥â€”â€”é’å°‘å¹´ç§‘æ™®ç»˜ç”»å¤§èµ›")){
-		strTemp.Format(_T("â€œç¯çƒè‡ªç„¶æ—¥â€”â€”é’å°‘å¹´ç§‘æ™®ç»˜ç”»å¤§èµ›â€æ—¨åœ¨å¸¦åŠ¨æ›´å¤šçš„é’å°‘å¹´èµ°è¿›åšç‰©é¦†ï¼Œé€šè¿‡ç»“åˆåšç‰©é¦†çš„èµ„æºä¼˜åŠ¿ï¼Œè®©ä»–ä»¬è¿‘è·ç¦»è§‚å¯Ÿå¹¶ç ”ç©¶ç›¸å…³è‡ªç„¶ç§‘å­¦çŸ¥è¯†ï¼ŒåŒæ—¶ï¼Œå°†è‡ªç„¶å’Œè‰ºæœ¯èåˆï¼Œä½¿ä»–ä»¬åœ¨æ´»åŠ¨è¿‡ç¨‹ä¸­æ„Ÿå—è‡ªç„¶ä¹‹ç¾ï¼Œæ¿€å‘è‡ªç„¶ç§‘å­¦çš„å­¦ä¹ çƒ­æƒ…ã€‚"));
-	 p = (char*)(LPCTSTR)strTemp;
-	
-	}
-	if(str1==("é»‘é¾™æ±Ÿçœåšç‰©é¦†æµåŠ¨åšç‰©é¦†")){
-		strTemp.Format(_T("é»‘é¾™æ±Ÿçœåšç‰©é¦†è‡ª2014å¹´èµ·æˆç«‹æµåŠ¨åšç‰©é¦†ï¼Œå°†å±•è§ˆå¸¦åˆ°å¤§ä¼—èº«è¾¹ï¼Œè¶³ä¸å‡ºæˆ·å°±èƒ½å¤Ÿçœ‹åˆ°å±•è§ˆã€‚æˆªæ­¢ç›®å‰ï¼Œæœ‰â€œè¿œç¦»æ¯’å“ã€è¿œç¦»é‚ªæ•™ã€è¿œç¦»èµŒåšã€å€¡å¯¼ç»¿è‰²ä¸Šç½‘â€ã€â€œæ˜†è™«ä¸–ç•Œä¸­çš„é“ ç”²å‹‡å£«â€”â€”é”¹ç”²â€ã€â€œé»‘é¾™æ±Ÿçœä¸­è¯æç‰¹å±•â€ä¸‰ä¸ªä¸»é¢˜å±•è§ˆï¼Œæ›¾èµ°è¿›å¤šæ‰€é™¢æ ¡ã€ç¤¾åŒºç­‰ï¼Œæ·±å—å¹¿å¤§ç¾¤ä¼—å¥½è¯„ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-	if(str1==("é»‘é¾™æ±Ÿçœæ–‡åšå¿—æ„¿è€…åŸºåœ°")){
-		strTemp.Format(_T("ä¸ºæ›´å¥½çš„å‘æŒ¥åšç‰©é¦†çš„ç¤¾ä¼šæ•™è‚²åŠŸèƒ½ï¼Œæ›´å¥½åœ°ä¸ºç¤¾ä¼šå¤§ä¼—æä¾›æœåŠ¡ï¼Œä¹Ÿä¸ºå„å¤§çƒ­å¿ƒäºåšç‰©é¦†å’Œç¤¾ä¼šæœåŠ¡äº‹ä¸šçš„å¿—æ„¿è€…æä¾›ä¸€ä¸ªå®ç°ç¤¾ä¼šä»·å€¼å’Œä¸ªäººä»·å€¼çš„å¹³å°ï¼Œé»‘é¾™æ±Ÿçœåšç‰©é¦†äº2010å¹´æˆç«‹äº†â€œé»‘é¾™æ±Ÿçœæ–‡åšå¿—æ„¿è€…åŸºåœ°â€ã€‚å¿—æ„¿è€…æœåŠ¡åˆ†ä¸ºå¯¼è§ˆå¿—æ„¿è€…åŠè®²è§£å¿—æ„¿è€…ï¼Œé™¤æ­¤ä¹‹å¤–ï¼Œä»–ä»¬çš„èº«å½±ç»å¸¸å‡ºç°åœ¨å„é¡¹æ´»åŠ¨å½“ä¸­ï¼Œä¸€ç›´ä»¥æ¥æ·±å—å¹¿å¤§è§‚ä¼—çš„å¥½è¯„ã€‚"));
-	 p = (char*)(LPCTSTR)strTemp;
-	
-	}
-	if(str1==("åšç‰©é¦†ç®€ä»‹")){
-		strTemp.Format(_T("é»‘é¾™æ±Ÿçœåšç‰©é¦†æ˜¯çœçº§ç»¼åˆæ€§åšç‰©é¦†ï¼Œ2012å¹´è¢«è¯„ä¸ºå›½å®¶ä¸€çº§åšç‰©é¦†ï¼Œæ˜¯é»‘é¾™æ±Ÿçœæ”¶è—å†å²æ–‡ç‰©ã€è‰ºæœ¯å“å’ŒåŠ¨ã€æ¤ç‰©æ ‡æœ¬çš„ä¸­å¿ƒï¼Œæ˜¯åœ°æ–¹å²å’Œè‡ªç„¶ç”Ÿæ€çš„ç ”ç©¶ä¸­å¿ƒä¹‹ä¸€ï¼Œä¹Ÿæ˜¯å®£ä¼ åœ°æ–¹å†å²æ–‡åŒ–å’Œè‡ªç„¶èµ„æºçš„é‡è¦åœºæ‰€ã€‚"));
-		p = (char*)(LPCTSTR)strTemp;
-
-	}
-
-	char* tts_motor = p;
+	 char* tts_motor = p;
 	unsigned char* pszUTF8 = NULL;
 	HciExampleComon::GBKToUTF8( (unsigned char*)tts_motor, &pszUTF8 );
 
@@ -2271,29 +3540,35 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 	hci_release();		
 
  }
- void CRecorder_ExampleDlg::OnBnClickedButton12(){
-	 // TODO: åœ¨æ­¤æ·»åŠ æ§ä»¶é€šçŸ¥å¤„ç†ç¨‹åºä»£ç 
+
+
+ void CRecorder_ExampleDlg::OnBnClickedButton12()
+ {
+	 // TODO: ÔÚ´ËÌí¼Ó¿Ø¼şÍ¨Öª´¦Àí³ÌĞò´úÂë
 	 CString strCaption = "";
 	GetDlgItemText( IDC_BUTTON12, strCaption );
-	if( strCaption == "æš‚åœ" ){
+	if( strCaption == "ÔİÍ£" )
+	{
 		PLAYER_ERR_CODE eRet = hci_tts_player_pause();
 		if( eRet != PLAYER_ERR_NONE )
 		{
 			CString str;
-			str.Format( "æš‚åœæ’­æ”¾å¤±è´¥,é”™è¯¯ç %d.", eRet);
+			str.Format( "ÔİÍ£²¥·ÅÊ§°Ü,´íÎóÂë%d.", eRet);
 			MessageBox( str );
 			return;
 		}
-		SetDlgItemText( IDC_BUTTON12, "ç»§ç»­" );
+		SetDlgItemText( IDC_BUTTON12, "¼ÌĞø" );
 	}
-	else{
+	else
+	{
 		PLAYER_ERR_CODE eRet = hci_tts_player_resume();
-		if( eRet != PLAYER_ERR_NONE ){
+		if( eRet != PLAYER_ERR_NONE )
+		{
 			CString str;
-			str.Format( "ç»§ç»­æ’­æ”¾å¤±è´¥,é”™è¯¯ç %d.", eRet );
+			str.Format( "¼ÌĞø²¥·ÅÊ§°Ü,´íÎóÂë%d.", eRet );
 			MessageBox( str );
 			return;
 		}
-		SetDlgItemText(IDC_BUTTON12, "æš‚åœ" );
+		SetDlgItemText(IDC_BUTTON12, "ÔİÍ£" );
 	}
  }

@@ -6,11 +6,14 @@
 #include "Voice.h"
 #include "afxdialogex.h"
 #include "ASR_Recorder_ExampleDlg.h"
+#include "Pic.h"
 
 
 //////////////////xhy
 extern CRecorder_ExampleDlg *p_CR;
+extern CPic *p_ER;
 CVoice *p_DR;
+CPic* dlg;
 ////////////////
 // CVoice 对话框
 
@@ -50,6 +53,8 @@ BEGIN_MESSAGE_MAP(CVoice, CDialogEx)
 	
 	ON_CBN_SELCHANGE(IDC_COMBO1, &CVoice::OnCbnSelchangeCombo1)
 	ON_BN_CLICKED(IDC_MFCBUTTON1, &CVoice::OnBnClickedMfcbutton1)
+	ON_BN_CLICKED(IDC_MFCBUTTON5, &CVoice::OnBnClickedMfcbutton5)
+	ON_BN_CLICKED(IDOK, &CVoice::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -122,7 +127,6 @@ BOOL CVoice::OnInitDialog()
 	((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("黑龙江省文博志愿者基地"));
 		((CComboBox*)GetDlgItem(IDC_COMBO1))->AddString(_T("博物馆简介"));
 	
-	// TODO:  在此添加额外的初始化
 
 	//////////////////xhy
 	p_DR=(CVoice*)this;
@@ -136,9 +140,7 @@ BOOL CVoice::OnInitDialog()
 void CVoice::OnBnClickedCancel()
 {
 	// TODO: 在此添加控件通知处理程序代码
-	p_CR->OnBnClickedOk();
 	CDialogEx::OnCancel();
-	
 }
 
 
@@ -151,7 +153,7 @@ void CVoice::OnBnClickedMfcbutton3()
 
 void CVoice::OnBnClickedMfcbutton2()
 {
-	
+	// TODO: Add your control notification handler code here
 	if(p_CR!=NULL)
 	{
 		p_CR->OnBnClickedButton9();
@@ -159,7 +161,7 @@ void CVoice::OnBnClickedMfcbutton2()
 }
 void CVoice::OnBnClickedMfcbutton4()
 {
-	
+	// TODO: Add your control notification handler code here
 	if(p_CR!=NULL)
 	{
 		p_CR->OnBnClickedButton11();
@@ -183,4 +185,22 @@ void CVoice::OnBnClickedMfcbutton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	p_CR->OnBnClickedButton12();
+}
+
+//有修改
+void CVoice::OnBnClickedMfcbutton5()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	
+	dlg = new CPic;
+	dlg->Create(IDD_DIALOG2); //非模态对话框ID号
+	dlg->ShowWindow(SW_SHOW);
+	
+}
+
+
+void CVoice::OnBnClickedOk()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	delete dlg;
 }

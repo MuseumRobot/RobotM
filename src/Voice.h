@@ -42,4 +42,6 @@ public:
 	afx_msg void OnLbnSelchangeList1();
 	afx_msg void OnCbnSelchangeCombo2();
 	afx_msg void OnBnClickedMfcbutton1();
+	afx_msg void OnBnClickedMfcbutton5();
+	afx_msg void OnBnClickedOk();
 };

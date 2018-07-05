@@ -37,8 +37,6 @@ struct StarMark
 
 extern struct StarMark MARK[100];
 
-extern long int whichturn;
-
 CMotor::CMotor(void)
 {
 	m_baudrate=115200;
@@ -473,7 +471,7 @@ void CMotor::VectorMove(float inLV, float inPSpeed,float pianzhuan,float Robot_X
 		inPSpeed=inPSpeed/3+2*wlowchang/3;
 	}
 	wlowchang=inPSpeed;
-	fprintf(alloutmxhy,"2222==%f    %f      %d  \n",inLV,inPSpeed,whichturn);
+	fprintf(alloutmxhy,"2222==%f    %f     \n",inLV,inPSpeed);
 	fclose(alloutmxhy);
 	////////////////////////////////
 	plan.speed_line_pos=(int)inLV;
@@ -529,7 +527,7 @@ void CMotor::VectorMove(float inLV, float inPSpeed,float pianzhuan,float Robot_X
 	//		move_rsp = -5;
 	//	}
 	//}
-	gomotor(-move_lsp,-move_rsp,-move_zsp);//com345:负(如果方向全部相反一般是这里的问题)
+	gomotor(move_lsp,move_rsp,move_zsp);
 ///	speed_l = move_lsp;
 //	speed_r = move_rsp;
 
@@ -651,9 +649,9 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 		}
 	}
 	int isone=1;
-	if((pointrox_stargazer1<0.001&&pointrox_stargazer1>-0.001&&pointroy_stargazer1>-0.001&&pointroy_stargazer1<0.001)||(pointrox_stargazer2<0.001&&pointrox_stargazer2>-0.001&&pointroy_stargazer2>-0.001&&pointroy_stargazer2<0.001))
+	if((StarGazer.starX<0.001&&StarGazer.starX>-0.001&&StarGazer.starY>-0.001&&StarGazer.starY<0.001)||(StarGazer.starX2<0.001&&StarGazer.starX2>-0.001&&StarGazer.starY2>-0.001&&StarGazer.starY2<0.001))
 	{
-		if((pointrox_stargazer1<0.001&&pointrox_stargazer1>-0.001&&pointroy_stargazer1>-0.001&&pointroy_stargazer1<0.001)&&(pointrox_stargazer2<0.001&&pointrox_stargazer2>-0.001&&pointroy_stargazer2>-0.001&&pointroy_stargazer2<0.001))
+		if((StarGazer.starX<0.001&&StarGazer.starX>-0.001&&StarGazer.starY>-0.001&&StarGazer.starY<0.001)&&(StarGazer.starX2<0.001&&StarGazer.starX2>-0.001&&StarGazer.starY2>-0.001&&StarGazer.starY2<0.001))
 		{
 			isone=0;//xhy:没有为0
 		}
@@ -701,13 +699,8 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 		}
 	}
 	///////////////
-	fprintf(alloutsar," 111===%f        %f    \n",StarGazer.starX,StarGazer.starY);
-	fprintf(alloutsar," 222===%f     %f   \n",StarGazer.starX2,StarGazer.starY2);
-
-
 	fprintf(alloutsar," 3333===%f    %f   %f     %f  %f   \n",StarGazer.starAngel,StarGazer.starID,pointrox_stargazer1,pointroy_stargazer1,pointroA_stargazer1);
 	fprintf(alloutsar," 4444===%f    %f   %f     %f  %f   \n",StarGazer.starAngel2,StarGazer.starID2,pointrox_stargazer2,pointroy_stargazer2,pointroA_stargazer2);
-	fprintf(alloutsar," 0000===%d    \n",isone);
 
 
 
@@ -760,8 +753,8 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 	}
 	Info_robot.pianzhuan_stargazer=starAngel360;
 
-	float pointrox_stargazerchange=(10000+862)-Info_robot.pointrox_stargazer*10;
-	float pointroy_stargazerchange=(10000+592)-Info_robot.pointroy_stargazer*10;
+	float pointrox_stargazerchange=(10000+2152)-Info_robot.pointrox_stargazer*10;
+	float pointroy_stargazerchange=(10000+44)-Info_robot.pointroy_stargazer*10;
 	float pointroy_jiaoduchange=360-Info_robot.pianzhuan_stargazer;
 	int isok=0;
 	if(isone!=0)
@@ -793,12 +786,11 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 	if(isok==0)
 	{
 		++starmust;
-		starnew=0;
 	}
 	else
 	{
 		starmust=0;
-		
+		starnew=0;
 	}
 	if(starmust>6)
 	{
@@ -808,10 +800,10 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 			Info_robot.pointrox = pointrox_stargazerchange;
 			Info_robot.pointroy = pointroy_stargazerchange;
 			Info_robot.pianzhuan = pointroy_jiaoduchange*PIf/180;
-		}
-		else
-		{
-//			plan.SERVEMODE=4;//机器人停止,已处于未知地址
+			if(isone==0)
+			{
+				plan.SERVEMODE=4;//机器人停止,已处于未知地址
+			}
 		}
 
 	}
