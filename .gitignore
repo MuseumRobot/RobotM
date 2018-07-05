@@ -4,3 +4,4 @@ Release/
 *.sdf
 *.txt
 !/Museum Locations/
+!/testdata/
