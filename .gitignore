@@ -1,0 +1,5 @@
+/bin/
+Debug/
+Release/
+VC10/*.txt
+*.sdf
