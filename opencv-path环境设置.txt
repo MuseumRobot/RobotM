@@ -1,0 +1,70 @@
+环境变量:
+
+用户的：
+
+Opencv
+
+D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\bin;D:\Program Files\OpenCV2.4.4\opencv\build\include;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv2;D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\lib;
+
+zbar
+
+D:\Program Files\zbar\lib;D:\Program Files\zbar\include;D:\Program Files\zbar\include\zbar;D:\Program Files\zbar\bin;
+
+
+系统的：
+
+PATH
+
+D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\bin;D:\Program Files\OpenCV2.4.4\opencv\build\include;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv;D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv2;D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\lib;
+
+Zbar
+
+D:\Program Files\zbar\lib;D:\Program Files\zbar\include;D:\Program Files\zbar\include\zbar;D:\Program Files\zbar\bin;
+
+
+
+附加依赖项:
+
+opencv_calib3d244d.lib
+opencv_contrib244d.lib
+opencv_core244d.lib
+opencv_features2d244d.lib
+opencv_flann244d.lib
+opencv_gpu244d.lib
+opencv_highgui244d.lib
+opencv_imgproc244d.lib
+opencv_legacy244d.lib
+opencv_ml244d.lib
+opencv_nonfree244d.lib
+opencv_objdetect244d.lib
+opencv_photo244d.lib
+opencv_stitching244d.lib
+opencv_ts244d.lib
+opencv_video244d.lib
+opencv_videostab244d.lib
+libzbar-0.lib
+
+
+
+可执行文件目录:
+D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\bin
+
+包含目录:
+D:\Program Files\OpenCV2.4.4\opencv\build\include
+D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv
+D:\Program Files\OpenCV2.4.4\opencv\build\include\opencv2
+.\DirectShow\Include
+.\libs\videoInput
+D:\Program Files\zbar\include
+D:\Program Files\zbar\include\zbar
+
+引用目录:
+.\libs\videoInput
+.\requiredLibs
+
+库目录:
+.\requiredLibs
+.\DirectShow\Lib
+D:\Program Files\OpenCV2.4.4\opencv\build\x86\vc10\lib
+D:\Program Files\zbar\lib
+

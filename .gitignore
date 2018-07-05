@@ -1,12 +1,5 @@
 /bin/
 Debug/
 Release/
-!/Museum Locations/*
-!/testdata/*
+VC10/*.txt
 *.sdf
-<<<<<<< HEAD
-*.txt
-=======
-/msvc/VC10/Debug/
-/msvc/VC10/Release/
->>>>>>> parent of 4729483... Emergency Measures
