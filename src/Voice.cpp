@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "ASR_Recorder_Example.h"
 #include "Voice.h"
+#include "Picture.h"
 #include "afxdialogex.h"
 #include "ASR_Recorder_ExampleDlg.h"
 
@@ -11,6 +12,7 @@
 //////////////////xhy
 extern CRecorder_ExampleDlg *p_CR;
 CVoice *p_DR;
+CPicture* dlg;
 ////////////////
 // CVoice 对话框
 
@@ -50,6 +52,8 @@ BEGIN_MESSAGE_MAP(CVoice, CDialogEx)
 	
 	ON_CBN_SELCHANGE(IDC_COMBO1, &CVoice::OnCbnSelchangeCombo1)
 	ON_BN_CLICKED(IDC_MFCBUTTON1, &CVoice::OnBnClickedMfcbutton1)
+	ON_BN_CLICKED(IDC_MFCBUTTON5, &CVoice::OnBnClickedMfcbutton5)
+	ON_BN_CLICKED(IDOK, &CVoice::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -169,6 +173,7 @@ void CVoice::OnBnClickedMfcbutton4()
 void CVoice::OnCbnSelchangeCombo1()
 {	CString strTemp;
 	((CComboBox*)GetDlgItem(IDC_COMBO1))->GetWindowText(strTemp);
+	  
 }
 void CVoice::OnCbnSelchangeCombo2()
 {	
@@ -183,4 +188,21 @@ void CVoice::OnBnClickedMfcbutton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	p_CR->OnBnClickedButton12();
+	
+}
+
+
+void CVoice::OnBnClickedMfcbutton5()
+{
+	
+	dlg= new CPicture;
+	dlg->Create(IDD_DIALOG2);
+	dlg->ShowWindow(SW_SHOW);
+}
+
+
+void CVoice::OnBnClickedOk()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	delete dlg;
 }

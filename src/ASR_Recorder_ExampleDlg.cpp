@@ -2191,7 +2191,7 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 
 	}
 	if(str1==("黑龙江省博物馆镇馆之宝有哪些？")){
-		strTemp.Format(_T("黑龙江省博物馆馆藏丰富，2014年举行了“十大镇馆之宝评选”活动，“十大镇馆之宝”分别是：金代铜坐龙、金代齐国王墓丝织品服饰、南宋《蚕织图》、唐代渤海天门军之印、披毛犀化石骨架、南宋《兰亭序》图卷、黑龙江满洲龙、金代山水人物故事镜、松花江猛犸象化石骨架、新石器时代桂叶形石器。"));
+		strTemp.Format(_T("黑龙江省博物馆馆藏丰富，2014年举行了“十大镇馆之宝评选”活动，“十大镇馆之宝”分别是：金代铜坐龙、金代齐国王墓丝织品服饰、南宋《蚕织图》、唐代渤海天门军之印、披毛犀化石骨架、南宋《兰亭序》图卷、黑龙江满洲龙、金代山水人物故事镜、松花江猛犸象化石骨架、新石器时代桂叶形石器。点击“展示图片”按钮查看图片"));
 	 p = (char*)(LPCTSTR)strTemp;
 	
 	}
@@ -2200,16 +2200,16 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 		p = (char*)(LPCTSTR)strTemp;
 
 	}
-		if(str1==("黑龙江省博物馆镇馆之宝有哪些？")){
-		strTemp.Format(_T("黑龙江省博物馆馆藏丰富，2014年举行了“十大镇馆之宝评选”活动，“十大镇馆之宝”分别是：金代铜坐龙、金代齐国王墓丝织品服饰、南宋《蚕织图》、唐代渤海天门军之印、披毛犀化石骨架、南宋《兰亭序》图卷、黑龙江满洲龙、金代山水人物故事镜、松花江猛犸象化石骨架、新石器时代桂叶形石器。"));
+		if(str1==("洗手间位于哪里？")){
+		strTemp.Format(_T("女士洗手间位于二楼楼梯口处，男士洗手间位于一楼楼梯口处。"));
 	 p = (char*)(LPCTSTR)strTemp;
 	
 	}
-	if(str1==("洗手间在哪")){
+	/*if(str1==("洗手间在哪")){
 		strTemp.Format(_T("女士洗手间位于二楼楼梯口处，男士洗手间位于一楼楼梯口处。"));
 		p = (char*)(LPCTSTR)strTemp;
 
-	}
+	}*/
 	if(str1==("便民服务")){
 		strTemp.Format(_T("针对残障人士，在博物馆内凭身份证免费租借轮椅，方便参观；为观众提供免费寄存服务。"));
 	 p = (char*)(LPCTSTR)strTemp;
@@ -2226,7 +2226,7 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 
 	}
 	if(str1==("黑龙江省博物馆有哪些活动？")){
-		strTemp.Format(_T("省博举办诸多丰富多彩的活动内容，有“相约龙博”科普教育活动、“环球自然日——青少年自然科学知识挑战赛”、“青少年科普绘画大赛”、“流动博物馆”等。您可以扫描屏幕上方的二维码实时关注我们，工作人员会在“黑龙江省博物馆互动平台”上发布展陈信息及活动内容。"));
+		strTemp.Format(_T("省博举办诸多丰富多彩的活动内容，有“相约龙博”科普教育活动、“环球自然日——青少年自然科学知识挑战赛”、“青少年科普绘画大赛”、“流动博物馆”等。您可以扫描屏幕上方的二维码实时关注我们，工作人员会在“黑龙江省博物馆互动平台”上发布展陈信息及活动内容。点击“展示图片”按钮查看图片"));
 	 p = (char*)(LPCTSTR)strTemp;
 	
 	}
@@ -2260,6 +2260,10 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 		p = (char*)(LPCTSTR)strTemp;
 
 	}
+
+	CString str;
+    str = "您的问题是:"+ str1 + "\r\n" + strTemp;
+	p_DR->SetDlgItemText( IDC_EDIT1, str );
 
 	char* tts_motor = p;
 	unsigned char* pszUTF8 = NULL;
