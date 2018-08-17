@@ -700,14 +700,11 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 			isone=2;
 		}
 	}
-	///////////////
-	fprintf(alloutsar," 111===%f        %f    \n",StarGazer.starX,StarGazer.starY);
-	fprintf(alloutsar," 222===%f     %f   \n",StarGazer.starX2,StarGazer.starY2);
-
-
-	fprintf(alloutsar," 3333===%f    %f   %f     %f  %f   \n",StarGazer.starAngel,StarGazer.starID,pointrox_stargazer1,pointroy_stargazer1,pointroA_stargazer1);
-	fprintf(alloutsar," 4444===%f    %f   %f     %f  %f   \n",StarGazer.starAngel2,StarGazer.starID2,pointrox_stargazer2,pointroy_stargazer2,pointroA_stargazer2);
-	fprintf(alloutsar," 0000===%d    \n",isone);
+	fprintf(alloutsar," StarGazer.starX=%f\tStarGazer.starY=%f\n",StarGazer.starX,StarGazer.starY);
+	fprintf(alloutsar," StarGazer.starX2=%f\tStarGazer.starY2=%f\n",StarGazer.starX2,StarGazer.starY2);
+	fprintf(alloutsar," StarGazer.starAngel=%f\tStarGazer.starID=%f\tpointrox_stargazer1=%f\tpointroy_stargazer1=%f\tpointroA_stargazer1=%f\n",StarGazer.starAngel,StarGazer.starID,pointrox_stargazer1,pointroy_stargazer1,pointroA_stargazer1);
+	fprintf(alloutsar," StarGazer.starAngel2=%f\tStarGazer.starID2=%f\tpointrox_stargazer2=%f\tpointroy_stargazer2=%f\tpointroA_stargazer2=%f\n",StarGazer.starAngel2,StarGazer.starID2,pointrox_stargazer2,pointroy_stargazer2,pointroA_stargazer2);
+	fprintf(alloutsar," isone=%d\n",isone);
 
 
 
@@ -750,19 +747,26 @@ void CMotor::RobotPositionCompute(float distancedif_l,float distancedif_r,float 
 		
 
 	}
-	if(starAngel360>360)
-	{
+	if(starAngel360>360){
 		starAngel360-=360;
-	}
-	else if(starAngel360<0)
-	{
+	}else if(starAngel360<0){
 		starAngel360+=360;
 	}
-	Info_robot.pianzhuan_stargazer=starAngel360;
-
-	float pointrox_stargazerchange=(10000+862)-Info_robot.pointrox_stargazer*10;
-	float pointroy_stargazerchange=(10000+592)-Info_robot.pointroy_stargazer*10;
+	Info_robot.pianzhuan_stargazer=starAngel360;	//此举确保pointroy_jiaoduchang处于0~360之间
+	//机器人在世界坐标系下把关的坐标与角度
+	float directionflag=-1;//如果星标三角尖指向机器人前方，则directionflag=1，若指向后方，则directionflag=-1;
+	float star2world_x=862;//星标坐标系原点相对于世界坐标系的x位置，或可提前作为宏
+	float star2world_y=592;//星标坐标系原点相对于世界坐标系的y位置
+	float pointrox_stargazerchange=(10000+star2world_x*directionflag)-directionflag*Info_robot.pointrox_stargazer*10;
+	float pointroy_stargazerchange=(10000+star2world_y*directionflag)-directionflag*Info_robot.pointroy_stargazer*10;
 	float pointroy_jiaoduchange=360-Info_robot.pianzhuan_stargazer;
+	if(directionflag==-1){
+		//当directionflag=-1时，还需要修正机器人在世界坐标系下的角度
+		pointroy_jiaoduchange+=180;
+		if(pointroy_jiaoduchange>360){
+			pointroy_jiaoduchange-=360;
+		}
+	}
 	int isok=0;
 	if(isone!=0)
 	{
