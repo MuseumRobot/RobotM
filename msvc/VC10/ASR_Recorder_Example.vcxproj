@@ -40,10 +40,12 @@
     <None Include="..\..\src\res\下.bmp" />
     <None Include="..\..\src\res\交互暂停.bmp" />
     <None Include="..\..\src\res\介绍.bmp" />
+    <None Include="..\..\src\res\加载图片.bmp" />
     <None Include="..\..\src\res\十大镇馆之宝之一：金代铜坐龙.bmp" />
     <None Include="..\..\src\res\博物馆.bmp" />
     <None Include="..\..\src\res\博物馆2.bmp" />
     <None Include="..\..\src\res\右.bmp" />
+    <None Include="..\..\src\res\子界面2.bmp" />
     <None Include="..\..\src\res\子界面暂停.bmp" />
     <None Include="..\..\src\res\左.bmp" />
     <None Include="..\..\src\res\开始说话.bmp" />
@@ -51,6 +53,7 @@
     <None Include="..\..\src\res\暂停.bmp" />
     <None Include="..\..\src\res\最新无水印版二维码.bmp" />
     <None Include="..\..\src\res\未标题-1.bmp" />
+    <None Include="..\..\src\res\查看图片.bmp" />
     <None Include="..\..\src\res\自动导航.bmp" />
     <None Include="..\..\src\res\语音交互.bmp" />
     <None Include="..\..\src\res\路线A.bmp" />
@@ -64,12 +67,15 @@
     <None Include="res\HIT.bmp" />
     <None Include="res\shiyanshi.bmp" />
     <None Include="res\介绍.bmp" />
+    <None Include="res\加载图片.bmp" />
     <None Include="res\十大镇馆之宝之一：金代铜坐龙.bmp" />
+    <None Include="res\子界面2.bmp" />
     <None Include="res\子界面暂停.bmp" />
     <None Include="res\播放.bmp" />
     <None Include="res\暂停.bmp" />
     <None Include="res\最新无水印版二维码.bmp" />
     <None Include="res\未标题-1.bmp" />
+    <None Include="res\查看图片.bmp" />
     <None Include="res\自动导航.bmp" />
     <None Include="res\语音交互.bmp" />
     <None Include="res\路线A.bmp" />

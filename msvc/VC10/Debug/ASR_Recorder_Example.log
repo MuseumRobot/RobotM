@@ -1,10 +1,170 @@
-﻿生成启动时间为 2018/7/5 17:10:11。
+﻿生成启动时间为 2018/8/17 9:48:21。
      1>项目“F:\机器人\RobotM\msvc\VC10\ASR_Recorder_Example.vcxproj”在节点 2 上(build 个目标)。
      1>InitializeBuildStatus:
          正在创建“Debug\ASR_Recorder_Example.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I"C:\curl-7.25.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\Picture.cpp
-         Picture.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I../../include /I"C:\curl-7.25.0\include" /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _MBCS /D _AFXDLL /Gm /EHsc /RTC1 /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\..\src\ASR_Recorder_ExampleDlg.cpp
+         ASR_Recorder_ExampleDlg.cpp
+     1>f:\机器人\robotm\include\hci_tts_player.h(26): warning C4005: “MODULE_NAME”: 宏重定义
+                 f:\机器人\robotm\include\hci_asr_recorder.h(26) : 参见“MODULE_NAME”的前一个定义
+     1>d:\program files\opencv2.4.4\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(63): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(64): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(65): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(66): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(68): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(287): warning C4244: “初始化”: 从“int”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(288): warning C4244: “初始化”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(602): warning C4018: “<”: 有符号/无符号不匹配
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(603): warning C4996: 'stricmp': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _stricmp. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(246) : 参见“stricmp”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(770): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : 参见“sprintf”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(827): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : 参见“sprintf”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(986): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1149): warning C4101: “buff”: 未引用的局部变量
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1169): warning C4101: “iLength”: 未引用的局部变量
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1219): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1259): warning C4018: “<”: 有符号/无符号不匹配
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1276): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1361): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : 参见“sprintf”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1396): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1407): warning C4996: 'strerror': This function or variable may be unsafe. Consider using strerror_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(157) : 参见“strerror”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1445): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1456): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1457): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1458): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1459): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1460): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1461): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1462): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1463): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1464): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1465): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1466): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1467): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1469): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1470): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : 参见“itoa”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1471): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1472): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1473): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1474): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1475): warning C4996: 'itoa': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _itoa. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdlib.h(867) : 参见“itoa”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1476): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1477): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1478): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1482): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1486): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1491): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1501): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1502): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1503): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1504): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1505): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1506): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1507): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1508): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1509): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1510): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1515): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1522): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1523): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1524): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1525): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1526): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(110) : 参见“strcat”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1530): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(105) : 参见“strcpy”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1544): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1545): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1546): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1564): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1587): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1587): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1594): warning C4244: “参数”: 从“float”转换到“DWORD”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1603): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1604): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1634): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1635): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1646): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1672): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1673): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1711): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1715): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1719): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1723): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1727): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1742): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1743): warning C4244: “=”: 从“double”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1800): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1800): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1800): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1804): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1806): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(234) : 参见“fopen”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1853): warning C4244: “参数”: 从“double”转换到“float”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1918): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(1918): warning C4244: “参数”: 从“float”转换到“int”，可能丢失数据
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(2088): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\stdio.h(371) : 参见“sprintf”的声明
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(2251): warning C4566: 由通用字符名称“\u2022”表示的字符不能在当前代码页(936)中表示出来
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(2251): warning C4566: 由通用字符名称“\u2022”表示的字符不能在当前代码页(936)中表示出来
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(2131): warning C4789: 内存复制的目标太小
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(2133): warning C4789: 内存复制的目标太小
+     1>f:\机器人\robotm\src\asr_recorder_exampledlg.cpp(2135): warning C4789: 内存复制的目标太小
        ResourceCompile:
          所有输出均为最新。
        ManifestResourceCompile:
@@ -40,4 +200,4 @@
 
 生成成功。
 
-已用时间 00:00:02.91
+已用时间 00:00:04.22

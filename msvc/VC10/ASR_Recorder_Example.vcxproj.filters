@@ -181,6 +181,24 @@
     <None Include="..\..\src\res\未标题-1.bmp">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="res\查看图片.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\src\res\查看图片.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\子界面2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\src\res\子界面2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\加载图片.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\..\src\res\加载图片.bmp">
+      <Filter>资源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\..\src\ASR_Recorder_Example.rc">

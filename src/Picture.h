@@ -24,4 +24,7 @@ public:
 	afx_msg void OnBnClickedCancel();
 	CStatic m_pic1;
 	virtual BOOL OnInitDialog();
+	afx_msg void OnPaint();
+	afx_msg void OnBnClickedMfcbutton1();
+	afx_msg void OnBnClickedMfcbutton2();
 };

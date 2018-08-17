@@ -144,6 +144,7 @@ public:
 	CEdit m_edit_status;
 	afx_msg void OnBnClickedButton11();
 	afx_msg void OnBnClickedButton12();
+	afx_msg void OnBnClickedMfcbutton4();
 };
 
 

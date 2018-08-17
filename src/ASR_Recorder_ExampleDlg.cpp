@@ -450,12 +450,12 @@ struct object zhanpin[100]={
 	zhanpin[21].contect2="这是第一个展品",
 	zhanpin[21].contect3="这是第一个展品",
 };
-int objectnums1[100]={1,50,2,51,3,52,4,99,53,5,6};//这个记录的是展品号(过时)
-int objectnumshand[100]={0,7,10,8,6};//这个记录的是展品号
-int objectnums[100]={7,81,82,83,84,85,86,87,88,89};//这个记录的是展品号
-int objectnowpos=0;//第几个展品
-int objectnow=0;//展品数组的中展品的数组号
-int objectnowhand=0;
+ int objectnums1[100];//这个记录的是展品号(过时)
+ int objectnumshand[100];//这个记录的是展品号
+ int objectnums[100];//这个记录的是展品号
+ int objectnowpos;//第几个展品
+ int objectnow;//展品数组的中展品的数组号
+ int objectnowhand;
 #define PIf 3.1415926
 extern bool isbegio;
 bool zhanting=false;
@@ -559,6 +559,7 @@ BEGIN_MESSAGE_MAP(CRecorder_ExampleDlg, CDialog)
 	ON_BN_CLICKED(IDC_MFCBUTTON2, &CRecorder_ExampleDlg::OnBnClickedMfcbutton2)
 	ON_BN_CLICKED(IDC_BUTTON11, &CRecorder_ExampleDlg::OnBnClickedButton11)
 	ON_BN_CLICKED(IDC_BUTTON12, &CRecorder_ExampleDlg::OnBnClickedButton12)
+	ON_BN_CLICKED(IDC_MFCBUTTON4, &CRecorder_ExampleDlg::OnBnClickedMfcbutton4)
 END_MESSAGE_MAP()
 
 bool CheckAndUpdataAuth(){
@@ -2125,9 +2126,20 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
  }
  void CRecorder_ExampleDlg::OnBnClickedMfcbutton3(){
 	 // TODO: 在此添加控件通知处理程序代码
+
+	  int objectnums2[100]={1,50,2,51,3,52,4,99,53,5,6};//这个记录的是展品号(过时)
+	objectnums1[100] = objectnums2[100];
+	 int objectnumshand1[100]={0,7,10,8,6};//这个记录的是展品号
+	 objectnumshand[100] = objectnumshand1[100];
+	 int objectnums1[100]={7,81,82,83,84,85,86,87,88,89};//这个记录的是展品号
+	objectnums[100] = objectnums1[100];
+	  objectnowpos=0;//第几个展品
+	  objectnow=0;//展品数组的中展品的数组号
+	 int objectnowhand=0;
  }
  void CRecorder_ExampleDlg::OnBnClickedMfcbutton5(){
 	 // TODO: 在此添加控件通知处理程序代码
+	
  }
  void CRecorder_ExampleDlg::OnBnClickedMfcbutton6(){
 	 // TODO: 在此添加控件通知处理程序代码
@@ -2262,7 +2274,7 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 	}
 
 	CString str;
-    str = "您的问题是:"+ str1 + "\r\n" + strTemp;
+    str = "您的问题是:"+ str1 + "\r\n\n" + strTemp;
 	p_DR->SetDlgItemText( IDC_EDIT1, str );
 
 	char* tts_motor = p;
@@ -2300,4 +2312,10 @@ void CRecorder_ExampleDlg::OnBnClickedButton9(){
 		}
 		SetDlgItemText(IDC_BUTTON12, "暂停" );
 	}
+ }
+
+ void CRecorder_ExampleDlg::OnBnClickedMfcbutton4()
+ {
+	 // TODO: 在此添加控件通知处理程序代码
+	
  }
